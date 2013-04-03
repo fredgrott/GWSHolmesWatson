@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:gravity="center" >
+    
+    <ImageView 
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:adjustViewBounds="true" />
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    
+	    <TextView 
+	        android:id="@+id/description"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="10dp"
+	        android:gravity="center"
+	        android:textSize="17dp"
+  			android:inputType="textMultiLine|textNoSuggestions"
+			android:maxLines="15"
+			android:scrollHorizontally="false" />
+	    
+	    <LinearLayout
+	        android:id="@+id/buttonPanel"
+	        android:orientation="horizontal"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center" >	   
+	        
+	        <Button
+	            android:id="@+id/buttonNoThanks"
+	            android:text="@string/dismiss"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_margin="10dp" />
+
+	        <Button
+	            android:id="@+id/buttonLaunch"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_margin="10dp" />
+	        	        	        	        
+	    </LinearLayout>	 
+	    
+	</LinearLayout>	   
+
+</LinearLayout>

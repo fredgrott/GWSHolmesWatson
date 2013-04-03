@@ -7,9 +7,6 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
-    <application
-        android:allowBackup="true"
-         >
-    </application>
+    
 
 </manifest>
