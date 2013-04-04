@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="AntipodalWallAttrs">
+	    <!--  android attrs -->
+	    <attr name="android:columnCount"/>
+		<attr name="android:fadeScrollbars"/>
+		<attr name="android:horizontalSpacing"/>
+		<attr name="android:isScrollContainer"/>
+		<attr name="android:padding"/>
+		<attr name="android:paddingBottom"/>
+		<attr name="android:paddingLeft"/>
+		<attr name="android:paddingRight"/>
+		<attr name="android:paddingTop"/>
+		<attr name="android:saveEnabled"/>
+		<attr name="android:scrollY"/>
+		<attr name="android:scrollbarFadeDuration"/>
+		<attr name="android:scrollbarSize"/>
+		<attr name="android:scrollbarStyle"/>
+		<attr name="android:scrollbarThumbHorizontal"/>
+		<attr name="android:scrollbarThumbVertical"/>
+		<attr name="android:scrollbarTrackHorizontal"/>
+		<attr name="android:scrollbarTrackVertical"/>
+		<attr name="android:scrollbars"/>
+		<attr name="android:verticalSpacing"/>
+	</declare-styleable>
+</resources>
