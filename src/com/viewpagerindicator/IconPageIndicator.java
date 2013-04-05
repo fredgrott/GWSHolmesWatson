@@ -47,7 +47,8 @@ public class IconPageIndicator extends HorizontalScrollView implements PageIndic
         this(context, null);
     }
 
-    public IconPageIndicator(Context context, AttributeSet attrs) {
+    @SuppressWarnings("deprecation")
+	public IconPageIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
         setHorizontalScrollBarEnabled(false);
 

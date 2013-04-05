@@ -163,7 +163,8 @@ class KeyframeSet {
      * @param fraction The elapsed fraction of the animation
      * @return The animated value.
      */
-    public Object getValue(float fraction) {
+    @SuppressWarnings("unchecked")
+	public Object getValue(float fraction) {
 
         // Special-case optimization for the common case of only two keyframes
         if (mNumKeyframes == 2) {

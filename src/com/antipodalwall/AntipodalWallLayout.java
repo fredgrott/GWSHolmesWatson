@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+@SuppressWarnings("unused")
 public class AntipodalWallLayout extends ViewGroup {
 
 	/**
@@ -31,7 +32,7 @@ public class AntipodalWallLayout extends ViewGroup {
 	/**
 	 * Bottom padding as stablished with android:paddingBottom in the XML layout
 	 */
-	@SuppressWarnings("unused")
+	
 	// TODO Not used right now, but may be useful in the future
 	private int mPaddingB;
 	/** The total visible height assigned to the layout */

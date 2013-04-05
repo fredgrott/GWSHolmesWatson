@@ -36,7 +36,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.InvocationTargetException;
+
 import java.lang.reflect.Method;
 
 /**
@@ -166,7 +166,8 @@ public class GridViewCompat extends GridView {
         /**
          * @return A copy of all keys contained in the sparse array.
          */
-        public long[] getKeys() {
+        @SuppressWarnings("unused")
+		public long[] getKeys() {
             int length = mKeys.length;
             long[] result = new long[length];
             System.arraycopy(mKeys, 0, result, 0, length);
@@ -190,7 +191,8 @@ public class GridViewCompat extends GridView {
          * Gets the Object mapped from the specified key, or <code>null</code> if no such mapping
          * has been made.
          */
-        public E get(long key) {
+        @SuppressWarnings("unused")
+		public E get(long key) {
             return get(key, null);
         }
 
@@ -225,7 +227,8 @@ public class GridViewCompat extends GridView {
         /**
          * Alias for {@link #delete(long)}.
          */
-        public void remove(long key) {
+        @SuppressWarnings("unused")
+		public void remove(long key) {
             delete(key);
         }
 
@@ -359,7 +362,8 @@ public class GridViewCompat extends GridView {
          * Returns the index for which {@link #keyAt} would return the specified key, or a negative
          * number if the specified key is not mapped.
          */
-        public int indexOfKey(long key) {
+        @SuppressWarnings("unused")
+		public int indexOfKey(long key) {
             if (mGarbage) {
                 gc();
             }
@@ -373,7 +377,8 @@ public class GridViewCompat extends GridView {
          * lookups by key, and that multiple keys can map to the same value and this will find only
          * one of them.
          */
-        public int indexOfValue(E value) {
+        @SuppressWarnings("unused")
+		public int indexOfValue(E value) {
             if (mGarbage) {
                 gc();
             }
@@ -404,7 +409,8 @@ public class GridViewCompat extends GridView {
          * Puts a key/value pair into the array, optimizing for the case where the key is greater
          * than all existing keys in the array.
          */
-        public void append(long key, E value) {
+        @SuppressWarnings("unused")
+		public void append(long key, E value) {
             if (mSize != 0 && key <= mKeys[mSize - 1]) {
                 put(key, value);
                 return;
@@ -454,7 +460,8 @@ public class GridViewCompat extends GridView {
                 return ~high;
         }
 
-        private void checkIntegrity() {
+        @SuppressWarnings("unused")
+		private void checkIntegrity() {
             for (int i = 1; i < mSize; i++) {
                 if (mKeys[i] <= mKeys[i - 1]) {
                     for (int j = 0; j < mSize; j++) {
@@ -500,11 +507,13 @@ public class GridViewCompat extends GridView {
             return need;
         }
 
-        public static int idealBooleanArraySize(int need) {
+        @SuppressWarnings("unused")
+		public static int idealBooleanArraySize(int need) {
             return idealByteArraySize(need);
         }
 
-        public static int idealShortArraySize(int need) {
+        @SuppressWarnings("unused")
+		public static int idealShortArraySize(int need) {
             return idealByteArraySize(need * 2) / 2;
         }
 
@@ -516,15 +525,18 @@ public class GridViewCompat extends GridView {
             return idealByteArraySize(need * 4) / 4;
         }
 
-        public static int idealFloatArraySize(int need) {
+        @SuppressWarnings("unused")
+		public static int idealFloatArraySize(int need) {
             return idealByteArraySize(need * 4) / 4;
         }
 
-        public static int idealObjectArraySize(int need) {
+        @SuppressWarnings("unused")
+		public static int idealObjectArraySize(int need) {
             return idealByteArraySize(need * 4) / 4;
         }
 
-        public static int idealLongArraySize(int need) {
+        @SuppressWarnings("unused")
+		public static int idealLongArraySize(int need) {
             return idealByteArraySize(need * 8) / 8;
         }
 
@@ -536,7 +548,8 @@ public class GridViewCompat extends GridView {
          * @param length the number of bytes to check
          * @return true if they're equal, false otherwise
          */
-        public static boolean equals(byte[] array1, byte[] array2, int length) {
+        @SuppressWarnings("unused")
+		public static boolean equals(byte[] array1, byte[] array2, int length) {
             if (array1 == array2) {
                 return true;
             }
@@ -556,7 +569,8 @@ public class GridViewCompat extends GridView {
          * Returns an empty array of the specified type. The intent is that it will return the same
          * empty array every time to avoid reallocation, although this is not guaranteed.
          */
-        public static <T> T[] emptyArray(Class<T> kind) {
+        @SuppressWarnings("unused")
+		public static <T> T[] emptyArray(Class<T> kind) {
             if (kind == Object.class) {
                 return (T[]) EMPTY;
             }
@@ -582,7 +596,8 @@ public class GridViewCompat extends GridView {
          * @param value the value to check for
          * @return true if the value is present in the array
          */
-        public static <T> boolean contains(T[] array, T value) {
+        @SuppressWarnings("unused")
+		public static <T> boolean contains(T[] array, T value) {
             for (T element : array) {
                 if (element == null) {
                     if (value == null)
@@ -595,7 +610,8 @@ public class GridViewCompat extends GridView {
             return false;
         }
 
-        public static boolean contains(int[] array, int value) {
+        @SuppressWarnings("unused")
+		public static boolean contains(int[] array, int value) {
             for (int element : array) {
                 if (element == value) {
                     return true;

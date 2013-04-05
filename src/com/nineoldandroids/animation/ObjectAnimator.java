@@ -38,7 +38,8 @@ import com.nineoldandroids.view.animation.AnimatorProxy;
  */
 public final class ObjectAnimator extends ValueAnimator {
     private static final boolean DBG = false;
-    private static final Map<String, Property> PROXY_PROPERTIES = new HashMap<String, Property>();
+    @SuppressWarnings("rawtypes")
+	private static final Map<String, Property> PROXY_PROPERTIES = new HashMap<String, Property>();
 
     static {
         PROXY_PROPERTIES.put("alpha", PreHoneycombCompat.ALPHA);
@@ -62,7 +63,8 @@ public final class ObjectAnimator extends ValueAnimator {
 
     private String mPropertyName;
 
-    private Property mProperty;
+    @SuppressWarnings("rawtypes")
+	private Property mProperty;
 
     /**
      * Sets the name of the property that will be animated. This name is used to derive
@@ -112,7 +114,7 @@ public final class ObjectAnimator extends ValueAnimator {
      *
      * @param property The property being animated. Should not be null.
      */
-    public void setProperty(Property property) {
+    public void setProperty(@SuppressWarnings("rawtypes") Property property) {
         // mValues could be null if this is being constructed piecemeal. Just record the
         // propertyName to be used later when setValues() is called if so.
         if (mValues != null) {

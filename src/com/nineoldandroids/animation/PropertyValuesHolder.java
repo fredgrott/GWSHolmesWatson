@@ -45,7 +45,8 @@ public class PropertyValuesHolder implements Cloneable {
     /**
      * @hide
      */
-    protected Property mProperty;
+    @SuppressWarnings("rawtypes")
+	protected Property mProperty;
 
     /**
      * The setter function, if needed. ObjectAnimator hands off this functionality to
@@ -68,7 +69,8 @@ public class PropertyValuesHolder implements Cloneable {
      * The type of values supplied. This information is used both in deriving the setter/getter
      * functions and in deriving the type of TypeEvaluator.
      */
-    Class mValueType;
+    @SuppressWarnings("rawtypes")
+	Class mValueType;
 
     /**
      * The set of keyframes (time/value pairs) that define this animation.
@@ -87,19 +89,24 @@ public class PropertyValuesHolder implements Cloneable {
     // of primitive types (Float vs. float). But most likely, the setter/getter functions
     // will take primitive types instead.
     // So we supply an ordered array of other types to try before giving up.
-    private static Class[] FLOAT_VARIANTS = {float.class, Float.class, double.class, int.class,
+    @SuppressWarnings("rawtypes")
+	private static Class[] FLOAT_VARIANTS = {float.class, Float.class, double.class, int.class,
             Double.class, Integer.class};
-    private static Class[] INTEGER_VARIANTS = {int.class, Integer.class, float.class, double.class,
+    @SuppressWarnings("rawtypes")
+	private static Class[] INTEGER_VARIANTS = {int.class, Integer.class, float.class, double.class,
             Float.class, Double.class};
-    private static Class[] DOUBLE_VARIANTS = {double.class, Double.class, float.class, int.class,
+    @SuppressWarnings("rawtypes")
+	private static Class[] DOUBLE_VARIANTS = {double.class, Double.class, float.class, int.class,
             Float.class, Integer.class};
 
     // These maps hold all property entries for a particular class. This map
     // is used to speed up property/setter/getter lookups for a given class/property
     // combination. No need to use reflection on the combination more than once.
-    private static final HashMap<Class, HashMap<String, Method>> sSetterPropertyMap =
+    @SuppressWarnings("rawtypes")
+	private static final HashMap<Class, HashMap<String, Method>> sSetterPropertyMap =
             new HashMap<Class, HashMap<String, Method>>();
-    private static final HashMap<Class, HashMap<String, Method>> sGetterPropertyMap =
+    @SuppressWarnings("rawtypes")
+	private static final HashMap<Class, HashMap<String, Method>> sGetterPropertyMap =
             new HashMap<Class, HashMap<String, Method>>();
 
     // This lock is used to ensure that only one thread is accessing the property maps
@@ -136,7 +143,8 @@ public class PropertyValuesHolder implements Cloneable {
      * Internal utility constructor, used by the factory methods to set the property.
      * @param property The property for this holder.
      */
-    private PropertyValuesHolder(Property property) {
+    @SuppressWarnings("rawtypes")
+	private PropertyValuesHolder(Property property) {
         mProperty = property;
         if (property != null) {
             mPropertyName = property.getName();
@@ -219,7 +227,8 @@ public class PropertyValuesHolder implements Cloneable {
      * @param values The values that the property will animate between.
      * @return PropertyValuesHolder The constructed PropertyValuesHolder object.
      */
-    public static <V> PropertyValuesHolder ofObject(Property property,
+    @SuppressWarnings("rawtypes")
+	public static <V> PropertyValuesHolder ofObject(Property property,
             TypeEvaluator<V> evaluator, V... values) {
         PropertyValuesHolder pvh = new PropertyValuesHolder(property);
         pvh.setObjectValues(values);
@@ -277,7 +286,8 @@ public class PropertyValuesHolder implements Cloneable {
      * @param property The property associated with this set of values. Should not be null.
      * @param values The set of values to animate between.
      */
-    public static PropertyValuesHolder ofKeyframe(Property property, Keyframe... values) {
+    @SuppressWarnings("rawtypes")
+	public static PropertyValuesHolder ofKeyframe(Property property, Keyframe... values) {
         KeyframeSet keyframeSet = KeyframeSet.ofKeyframe(values);
         if (keyframeSet instanceof IntKeyframeSet) {
             return new IntPropertyValuesHolder(property, (IntKeyframeSet) keyframeSet);
@@ -376,7 +386,8 @@ public class PropertyValuesHolder implements Cloneable {
      * value types used on the setter.
      * @return Method the method associated with mPropertyName.
      */
-    private Method getPropertyFunction(Class targetClass, String prefix, Class valueType) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	private Method getPropertyFunction(Class targetClass, String prefix, Class valueType) {
         // TODO: faster implementation...
         Method returnVal = null;
         String methodName = getMethodName(prefix, mPropertyName);
@@ -451,7 +462,8 @@ public class PropertyValuesHolder implements Cloneable {
      * @param valueType The type of parameter passed into the method (null for getter).
      * @return Method the method associated with mPropertyName.
      */
-    private Method setupSetterOrGetter(Class targetClass,
+    @SuppressWarnings("rawtypes")
+	private Method setupSetterOrGetter(Class targetClass,
             HashMap<Class, HashMap<String, Method>> propertyMapMap,
             String prefix, Class valueType) {
         Method setterOrGetter = null;
@@ -482,14 +494,16 @@ public class PropertyValuesHolder implements Cloneable {
      * Utility function to get the setter from targetClass
      * @param targetClass The Class on which the requested method should exist.
      */
-    void setupSetter(Class targetClass) {
+    @SuppressWarnings("rawtypes")
+	void setupSetter(Class targetClass) {
         mSetter = setupSetterOrGetter(targetClass, sSetterPropertyMap, "set", mValueType);
     }
 
     /**
      * Utility function to get the getter from targetClass
      */
-    private void setupGetter(Class targetClass) {
+    @SuppressWarnings("rawtypes")
+	private void setupGetter(Class targetClass) {
         mGetter = setupSetterOrGetter(targetClass, sGetterPropertyMap, "get", null);
     }
 
@@ -503,7 +517,8 @@ public class PropertyValuesHolder implements Cloneable {
      * on the target object.
      * @param target The object on which the setter (and possibly getter) exist.
      */
-    void setupSetterAndGetter(Object target) {
+    @SuppressWarnings("unchecked")
+	void setupSetterAndGetter(Object target) {
         if (mProperty != null) {
             // check to make sure that mProperty is on the class of target
             try {
@@ -547,7 +562,8 @@ public class PropertyValuesHolder implements Cloneable {
      * @param target The target object from which the current value should be extracted.
      * @param kf The keyframe which holds the property name and value.
      */
-    private void setupValue(Object target, Keyframe kf) {
+    @SuppressWarnings("unchecked")
+	private void setupValue(Object target, Keyframe kf) {
         if (mProperty != null) {
             kf.setValue(mProperty.get(target));
         }
@@ -697,7 +713,7 @@ public class PropertyValuesHolder implements Cloneable {
      *
      * @param property The property being animated.
      */
-    public void setProperty(Property property) {
+    public void setProperty(@SuppressWarnings("rawtypes") Property property) {
         mProperty = property;
     }
 
@@ -756,7 +772,8 @@ public class PropertyValuesHolder implements Cloneable {
         //private static final HashMap<Class, HashMap<String, Integer>> sJNISetterPropertyMap =
         //        new HashMap<Class, HashMap<String, Integer>>();
         //int mJniSetter;
-        private IntProperty mIntProperty;
+        @SuppressWarnings("rawtypes")
+		private IntProperty mIntProperty;
 
         IntKeyframeSet mIntKeyframeSet;
         int mIntAnimatedValue;
@@ -768,7 +785,8 @@ public class PropertyValuesHolder implements Cloneable {
             mIntKeyframeSet = (IntKeyframeSet) mKeyframeSet;
         }
 
-        public IntPropertyValuesHolder(Property property, IntKeyframeSet keyframeSet) {
+        @SuppressWarnings("rawtypes")
+		public IntPropertyValuesHolder(Property property, IntKeyframeSet keyframeSet) {
             super(property);
             mValueType = int.class;
             mKeyframeSet = keyframeSet;
@@ -783,7 +801,8 @@ public class PropertyValuesHolder implements Cloneable {
             setIntValues(values);
         }
 
-        public IntPropertyValuesHolder(Property property, int... values) {
+        @SuppressWarnings("rawtypes")
+		public IntPropertyValuesHolder(Property property, int... values) {
             super(property);
             setIntValues(values);
             if (property instanceof  IntProperty) {
@@ -892,7 +911,8 @@ public class PropertyValuesHolder implements Cloneable {
         //private static final HashMap<Class, HashMap<String, Integer>> sJNISetterPropertyMap =
         //        new HashMap<Class, HashMap<String, Integer>>();
         //int mJniSetter;
-        private FloatProperty mFloatProperty;
+        @SuppressWarnings("rawtypes")
+		private FloatProperty mFloatProperty;
 
         FloatKeyframeSet mFloatKeyframeSet;
         float mFloatAnimatedValue;
@@ -904,7 +924,8 @@ public class PropertyValuesHolder implements Cloneable {
             mFloatKeyframeSet = (FloatKeyframeSet) mKeyframeSet;
         }
 
-        public FloatPropertyValuesHolder(Property property, FloatKeyframeSet keyframeSet) {
+        @SuppressWarnings("rawtypes")
+		public FloatPropertyValuesHolder(Property property, FloatKeyframeSet keyframeSet) {
             super(property);
             mValueType = float.class;
             mKeyframeSet = keyframeSet;
@@ -919,7 +940,8 @@ public class PropertyValuesHolder implements Cloneable {
             setFloatValues(values);
         }
 
-        public FloatPropertyValuesHolder(Property property, float... values) {
+        @SuppressWarnings("rawtypes")
+		public FloatPropertyValuesHolder(Property property, float... values) {
             super(property);
             setFloatValues(values);
             if (property instanceof  FloatProperty) {

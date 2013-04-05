@@ -16,6 +16,7 @@
 
 package com.actionbarsherlock.internal.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -37,6 +38,7 @@ import com.actionbarsherlock.internal.nineoldandroids.widget.NineFrameLayout;
  * It applies special styles as needed to help handle animated transitions between them.
  * @hide
  */
+@SuppressLint("InlinedApi")
 public class ActionBarContainer extends NineFrameLayout {
     private boolean mIsTransitioning;
     private View mTabContainer;
@@ -52,7 +54,8 @@ public class ActionBarContainer extends NineFrameLayout {
         this(context, null);
     }
 
-    public ActionBarContainer(Context context, AttributeSet attrs) {
+    @SuppressWarnings("deprecation")
+	public ActionBarContainer(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         setBackgroundDrawable(null);

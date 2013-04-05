@@ -209,7 +209,8 @@ public class MenuPopupHelper implements AdapterView.OnItemClickListener, View.On
     public void onViewAttachedToWindow(View v) {
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void onViewDetachedFromWindow(View v) {
         if (mTreeObserver != null) {
             if (!mTreeObserver.isAlive()) mTreeObserver = v.getViewTreeObserver();

@@ -10,11 +10,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.BaseSavedState;
-import android.view.View.MeasureSpec;
-import android.view.View.OnClickListener;
+
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+
 import android.widget.TextView;
 
 

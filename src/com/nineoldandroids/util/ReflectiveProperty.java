@@ -42,7 +42,8 @@ class ReflectiveProperty<T, V> extends Property<T, V> {
      * "get" and "is to search for the appropriate methods. If the get/is methods are not found,
      * the constructor will search for a field with that exact name.
      */
-    public ReflectiveProperty(Class<T> propertyHolder, Class<V> valueType, String name) {
+    @SuppressWarnings("rawtypes")
+	public ReflectiveProperty(Class<T> propertyHolder, Class<V> valueType, String name) {
          // TODO: cache reflection info for each new class/name pair
         super(valueType, name);
         char firstLetter = Character.toUpperCase(name.charAt(0));
@@ -113,7 +114,7 @@ class ReflectiveProperty<T, V> extends Property<T, V> {
      * method/field will probably be a primitive type instead. Accept float as matching Float,
      * etc.
      */
-    private boolean typesMatch(Class<V> valueType, Class getterType) {
+    private boolean typesMatch(Class<V> valueType, @SuppressWarnings("rawtypes") Class getterType) {
         if (getterType != valueType) {
             if (getterType.isPrimitive()) {
                 return (getterType == float.class && valueType == Float.class) ||

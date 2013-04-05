@@ -62,6 +62,7 @@ public class ScrollingTabsView extends HorizontalScrollView implements OnPageCha
 		this(context, attrs, 0);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public ScrollingTabsView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs);
 		
@@ -187,6 +188,7 @@ public class ScrollingTabsView extends HorizontalScrollView implements OnPageCha
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	private View getSeparator() {
 		View v = new View(mContext);
 		

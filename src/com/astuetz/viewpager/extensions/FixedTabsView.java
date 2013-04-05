@@ -154,6 +154,7 @@ public class FixedTabsView extends LinearLayout implements ViewPager.OnPageChang
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	private View getSeparator() {
 		View v = new View(mContext);
 		

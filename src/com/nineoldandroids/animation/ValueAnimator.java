@@ -145,7 +145,8 @@ public class ValueAnimator extends Animator {
             new AccelerateDecelerateInterpolator();
 
     // type evaluators for the primitive types handled by this implementation
-    private static final TypeEvaluator sIntEvaluator = new IntEvaluator();
+    @SuppressWarnings("unused")
+	private static final TypeEvaluator sIntEvaluator = new IntEvaluator();
     private static final TypeEvaluator sFloatEvaluator = new FloatEvaluator();
 
     /**

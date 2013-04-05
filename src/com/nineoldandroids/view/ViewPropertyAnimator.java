@@ -54,7 +54,8 @@ public abstract class ViewPropertyAnimator {
      * @param view View to animate.
      * @return The ViewPropertyAnimator associated with this View.
      */
-    public static ViewPropertyAnimator animate(View view) {
+    @SuppressWarnings("deprecation")
+	public static ViewPropertyAnimator animate(View view) {
         ViewPropertyAnimator animator = ANIMATORS.get(view);
         if (animator == null) {
             final int version = Integer.valueOf(Build.VERSION.SDK);
