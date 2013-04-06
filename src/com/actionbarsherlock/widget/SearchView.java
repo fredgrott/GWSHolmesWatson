@@ -16,6 +16,7 @@
 
 package com.actionbarsherlock.widget;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
@@ -100,6 +101,7 @@ import static com.actionbarsherlock.widget.SuggestionsAdapter.getColumnString;
  * @attr ref android.R.styleable#SearchView_maxWidth
  * @attr ref android.R.styleable#SearchView_queryHint
  */
+@SuppressLint("NewApi")
 public class SearchView extends LinearLayout implements CollapsibleActionView {
 
     private static final boolean DBG = false;
@@ -1290,7 +1292,8 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         setIconified(false);
     }
 
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
         super.onInitializeAccessibilityEvent(event);
         event.setClassName(SearchView.class.getName());

@@ -200,5 +200,32 @@ Apache License 2.0
 ## TwoWayView
 [TwoWayView-Lucas Rocha]('https://github.com/lucasr/twoway-view')
 
+## GLWallpaperService
+[GLWallpaperService-]('https://github.com/markfguerra/GLWallpaperService')
+
+## ModifiedMultiTouchcontroller
+[ModifiedMultiTouchcontroller-]('https://github.com/wsanville/modified-multitouch-controller')
+
+## RetractiveSvcrollViews
+[RetrctiveScrollViews-]('https://github.com/tmyymmt/Retractive-Scroll-Views-for-Android/')
+
+## SplitView
+[SplitView-]('https://github.com/k9mail/splitview')
+
+## AndroidDeviceCompatibility
+[AndroidDeviceCompatibility-]('https://github.com/mixi-inc/Android-Device-Compatibility')
+
+## ActionsContentView
+[ActionsContentView-]('https://github.com/StevenRudenko/ActionsContentView')
+
+## MergeAdapter
+[MergeAdapter-]('https://github.com/commonsguy/cwac-merge')
+
+## AndroidBitmapCache
+[AndroidBitmapCache-]('https://github.com/chrisbanes/Android-BitmapCache')
+
+## unifiedPreference
+[UnifiedPreference-]('https://github.com/saik0/UnifiedPreference')
+
 # Credits
 
