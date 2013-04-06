@@ -134,5 +134,71 @@ Apache License 2.0
 ## AndroidActivityLifecycleCallbacksCompat
 [AndroidActivitylifecycleCallbacksCompat-Benoit Lubek]('https://github.com/BoD/android-activitylifecyclecallbacks-compat')
 
+## range Seekbar
+[RangeSeekBar-]('https://code.google.com/p/range-seek-bar/')
+
+## Inscription
+[Inscription-MartinvanZ]('https://github.com/MartinvanZ/Inscription')
+
+## IndexableListView
+[indexableListView-woozzu]('https://github.com/woozzu/IndexableListView')
+
+## DragSortListView
+[DragSortListView-Carl A. Bauer]('https://github.com/bauerca/drag-sort-listview')
+
+## Drawer
+[MenuDrawer-Verdigo]('https://bitbucket.org/verdigo/drawer/overview')
+
+## AndroidPullToRefresh
+[AndroidPullToRefresh-Chris Banes]('https://github.com/chrisbanes/Android-PullToRefresh')
+
+## PhotoView
+[PhototView-Chris Banes]('https://github.com/chrisbanes/PhotoView')
+
+## IconicTextView
+[IconicTextView-Artur Termenji]('https://github.com/atermenji/IconicTextView')
+
+## pagedDragDropGrid
+[PagedDragDropGrid-Nicolas Desjardins]('https://github.com/mrKlar/PagedDragDropGrid')
+
+## QuiltViewLib
+[QuiltViewLib-Jacob Moncur]('https://github.com/jacobmoncur/QuiltViewLibrary')
+
+##StaggeredGridView
+[StaggeredGridView-Maurycy Wojtowicz]('https://github.com/maurycyw/StaggeredGridView')
+
+## ArcMenu
+[ArchMenu-daCapricorn]('https://github.com/daCapricorn/ArcMenu')
+
+## SWipeListView
+[SwipeListView-47deg]('https://github.com/47deg/android-swipelistview')
+
+## SwipeToDismissUndoList
+[SwiepToDismissUndoList-]('https://github.com/timroes/SwipeToDismissUndoList')
+
+## RibbonMenu
+[RibbonMenu-David Scott]('https://github.com/darvds/RibbonMenu')
+
+## Crouton
+[Crouton-keyboardsurfer]('https://github.com/keyboardsurfer/Crouton')
+
+## undobar
+[undobar-soarcn]('https://github.com/soarcn/UndoBar')
+
+## standout
+[StandOut-pingpongboss]('https://github.com/pingpongboss/StandOut')
+
+## TabCarousel
+[TabCarosel-adneal]('https://bitbucket.org/adneal/tabcarousellib/overview')
+
+## AndroidSlideExpandableListView
+[AndroidSlideExpandableListView-Tjerk Wolterink]('https://github.com/tjerkw/Android-SlideExpandableListView')
+
+## Smoothie
+[Smoothie-Lucas Rocha]('https://github.com/lucasr/smoothie')
+
+## TwoWayView
+[TwoWayView-Lucas Rocha]('https://github.com/lucasr/twoway-view')
+
 # Credits
 
