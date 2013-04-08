@@ -18,6 +18,7 @@
 
 package com.google.android.apps.tvremote.backport;
 
+import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
@@ -42,6 +43,7 @@ import android.view.ViewConfiguration;
  * </ul>
  *
  */
+@SuppressLint("FloatMath")
 public class ScaleGestureDetectorImpl implements ScaleGestureDetector {
   /**
    * This value is the threshold ratio between our previous combined pressure
@@ -87,7 +89,8 @@ public class ScaleGestureDetectorImpl implements ScaleGestureDetector {
     mEdgeSlop = config.getScaledEdgeSlop();
   }
 
-  public boolean onTouchEvent(MotionEvent event) {
+  @SuppressWarnings("deprecation")
+public boolean onTouchEvent(MotionEvent event) {
     final int action = event.getAction();
     boolean handled = true;
     Rect rect = new Rect();

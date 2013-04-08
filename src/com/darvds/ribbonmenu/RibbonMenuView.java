@@ -23,18 +23,31 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.R;
-import com.darvds.ribbonmenu.RibbonMenuView.SavedState;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RibbonMenuView.
+ */
 public class RibbonMenuView extends LinearLayout {
 
+	/** The rbm list view. */
 	private ListView rbmListView;
+	
+	/** The rbm outside view. */
 	private View rbmOutsideView;
 	
+	/** The callback. */
 	private iRibbonMenuCallback callback;
 	
+	/** The menu items. */
 	private static ArrayList<RibbonMenuItem> menuItems;
 	
 	
+	/**
+	 * Instantiates a new ribbon menu view.
+	 *
+	 * @param context the context
+	 */
 	public RibbonMenuView(Context context) {
 		super(context);
 		
@@ -42,6 +55,12 @@ public class RibbonMenuView extends LinearLayout {
 		load();
 	}
 	
+	/**
+	 * Instantiates a new ribbon menu view.
+	 *
+	 * @param context the context
+	 * @param attrs the attrs
+	 */
 	public RibbonMenuView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
@@ -51,6 +70,9 @@ public class RibbonMenuView extends LinearLayout {
 
 	
 	
+	/**
+	 * Load.
+	 */
 	private void load(){
 		
 		if(isInEditMode()) return;
@@ -64,6 +86,9 @@ public class RibbonMenuView extends LinearLayout {
 	}
 	
 	
+	/**
+	 * Inflate layout.
+	 */
 	private void inflateLayout(){
 		
 		
@@ -78,6 +103,9 @@ public class RibbonMenuView extends LinearLayout {
 		
 	}
 	
+	/**
+	 * Inits the ui.
+	 */
 	private void initUi(){
 		
 		rbmListView = (ListView) findViewById(R.id.rbm_listview);
@@ -111,10 +139,20 @@ public class RibbonMenuView extends LinearLayout {
 	}
 	
 	
+	/**
+	 * Sets the menu click callback.
+	 *
+	 * @param callback the new menu click callback
+	 */
 	public void setMenuClickCallback(iRibbonMenuCallback callback){
 		this.callback = callback;
 	}
 	
+	/**
+	 * Sets the menu items.
+	 *
+	 * @param menu the new menu items
+	 */
 	public void setMenuItems(int menu){
 		
 		parseXml(menu);
@@ -131,6 +169,11 @@ public class RibbonMenuView extends LinearLayout {
 	}
 	
 	
+	/**
+	 * Sets the background resource.
+	 *
+	 * @param resource the new background resource
+	 */
 	public void setBackgroundResource(int resource){
 		rbmListView.setBackgroundResource(resource);
 		
@@ -139,6 +182,9 @@ public class RibbonMenuView extends LinearLayout {
 	
 	
 	
+	/**
+	 * Show menu.
+	 */
 	public void showMenu(){
 		rbmOutsideView.setVisibility(View.VISIBLE);	
 				
@@ -148,6 +194,9 @@ public class RibbonMenuView extends LinearLayout {
 	}
 	
 	
+	/**
+	 * Hide menu.
+	 */
 	public void hideMenu(){
 		
 		rbmOutsideView.setVisibility(View.GONE);
@@ -158,6 +207,9 @@ public class RibbonMenuView extends LinearLayout {
 	}
 	
 	
+	/**
+	 * Toggle menu.
+	 */
 	public void toggleMenu(){
 		
 		if(rbmOutsideView.getVisibility() == View.GONE){
@@ -168,6 +220,11 @@ public class RibbonMenuView extends LinearLayout {
 	}
 	
 	
+	/**
+	 * Parses the xml.
+	 *
+	 * @param menu the menu
+	 */
 	private void parseXml(int menu){
 		
 		menuItems = new ArrayList<RibbonMenuView.RibbonMenuItem>();
@@ -225,6 +282,12 @@ public class RibbonMenuView extends LinearLayout {
 	
 	
 	
+	/**
+	 * Resource id to string.
+	 *
+	 * @param text the text
+	 * @return the string
+	 */
 	private String resourceIdToString(String text){
 		
 		if(!text.contains("@")){
@@ -240,6 +303,11 @@ public class RibbonMenuView extends LinearLayout {
 	}
 	
 	
+	/**
+	 * Checks if is menu visible.
+	 *
+	 * @return true, if is menu visible
+	 */
 	public boolean isMenuVisible(){		
 		return rbmOutsideView.getVisibility() == View.VISIBLE;		
 	}
@@ -247,6 +315,11 @@ public class RibbonMenuView extends LinearLayout {
 		
 	
 	
+	/**
+	 * On restore instance state.
+	 *
+	 * @param state the state
+	 */
 	@Override 
 	protected void onRestoreInstanceState(Parcelable state)	{
 	    SavedState ss = (SavedState)state;
@@ -260,6 +333,11 @@ public class RibbonMenuView extends LinearLayout {
 	
 	
 
+	/**
+	 * On save instance state.
+	 *
+	 * @return the parcelable
+	 */
 	@Override 
 	protected Parcelable onSaveInstanceState()	{
 	    Parcelable superState = super.onSaveInstanceState();
@@ -270,25 +348,44 @@ public class RibbonMenuView extends LinearLayout {
 	    return ss;
 	}
 
+	/**
+	 * The Class SavedState.
+	 */
 	static class SavedState extends BaseSavedState {
-	    boolean bShowMenu;
+	    
+    	/** The b show menu. */
+    	boolean bShowMenu;
 
-	    SavedState(Parcelable superState) {
+	    /**
+    	 * Instantiates a new saved state.
+    	 *
+    	 * @param superState the super state
+    	 */
+    	SavedState(Parcelable superState) {
 	        super(superState);
 	    }
 
-	    private SavedState(Parcel in) {
+	    /**
+    	 * Instantiates a new saved state.
+    	 *
+    	 * @param in the in
+    	 */
+    	private SavedState(Parcel in) {
 	        super(in);
 	        bShowMenu = (in.readInt() == 1);
 	    }
 
-	    @Override
+	    /* (non-Javadoc)
+    	 * @see android.view.AbsSavedState#writeToParcel(android.os.Parcel, int)
+    	 */
+    	@Override
 	    public void writeToParcel(Parcel out, int flags) {
 	        super.writeToParcel(out, flags);
 	        out.writeInt(bShowMenu ? 1 : 0);
 	    }
 
-	    public static final Parcelable.Creator<SavedState> CREATOR
+	    /** The Constant CREATOR. */
+    	public static final Parcelable.Creator<SavedState> CREATOR
 	            = new Parcelable.Creator<SavedState>() {
 	        public SavedState createFromParcel(Parcel in) {
 	            return new SavedState(in);
@@ -302,44 +399,71 @@ public class RibbonMenuView extends LinearLayout {
 	
 	
 	
+	/**
+	 * The Class RibbonMenuItem.
+	 */
 	class RibbonMenuItem{
 		
+		/** The id. */
 		int id;
+		
+		/** The text. */
 		String text;
+		
+		/** The icon. */
 		int icon;
 		
 	}
 	
 	
 	
+	/**
+	 * The Class Adapter.
+	 */
 	private class Adapter extends BaseAdapter {
 
+		/** The inflater. */
 		private LayoutInflater inflater;
 		
+		/**
+		 * Instantiates a new adapter.
+		 */
 		public Adapter(){
 			inflater = LayoutInflater.from(getContext());
 		}
 		
 		
 		
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getCount()
+		 */
 		@Override
 		public int getCount() {
 			
 			return menuItems.size();
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItem(int)
+		 */
 		@Override
 		public Object getItem(int position) {
 			
 			return null;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getItemId(int)
+		 */
 		@Override
 		public long getItemId(int position) {
 			
 			return 0;
 		}
 
+		/* (non-Javadoc)
+		 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+		 */
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			
@@ -367,8 +491,15 @@ public class RibbonMenuView extends LinearLayout {
 		}
 		
 		
+		/**
+		 * The Class ViewHolder.
+		 */
 		class ViewHolder {
+			
+			/** The text. */
 			TextView text;
+			
+			/** The image. */
 			ImageView image;
 		
 		}

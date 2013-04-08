@@ -9,6 +9,7 @@ import android.content.res.TypedArray;
 import android.os.Build.VERSION;
 import android.util.AttributeSet;
 
+@SuppressLint("DefaultLocale")
 public class TextView extends android.widget.TextView {
     private boolean allCaps = false;
     private CharSequence originalText;

@@ -38,7 +38,8 @@ class KeyframeSet {
     Keyframe mLastKeyframe;
     /*Time*/Interpolator mInterpolator; // only used in the 2-keyframe case
     ArrayList<Keyframe> mKeyframes; // only used when there are not 2 keyframes
-    TypeEvaluator mEvaluator;
+    @SuppressWarnings("rawtypes")
+	TypeEvaluator mEvaluator;
 
 
     public KeyframeSet(Keyframe... keyframes) {
@@ -135,7 +136,7 @@ class KeyframeSet {
      *
      * @param evaluator The TypeEvaluator to be used to calculate animated values.
      */
-    public void setEvaluator(TypeEvaluator evaluator) {
+    public void setEvaluator(@SuppressWarnings("rawtypes") TypeEvaluator evaluator) {
         mEvaluator = evaluator;
     }
 

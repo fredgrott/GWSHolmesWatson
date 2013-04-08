@@ -115,7 +115,6 @@ public abstract class MultiThreadedIntentService extends Service {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void onStart(Intent intent, int startId) {
         mHandler.removeCallbacks(mStopSelfRunnable);
         mFutureList.add(mThreadPool.submit(new IntentRunnable(intent)));

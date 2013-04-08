@@ -10,7 +10,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.FloatMath;
+
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +28,7 @@ import com.actionbarsherlock.internal.nineoldandroids.animation.Animator;
 import com.actionbarsherlock.internal.nineoldandroids.animation.Animator.AnimatorListener;
 import com.actionbarsherlock.internal.nineoldandroids.animation.ObjectAnimator;
 
+// TODO: Auto-generated Javadoc
 /**
  * Drawer implementation. TODO create documentation in JavaDoc here.
  * 
@@ -36,81 +37,130 @@ import com.actionbarsherlock.internal.nineoldandroids.animation.ObjectAnimator;
 public abstract class Drawer implements OnClickListener, OnTouchListener
 {
 
+	/** The Constant ORIENTATION_BOTH. */
 	public static final int ORIENTATION_BOTH = 0;
 
+	/** The Constant ORIENTATION_POTRAIT. */
 	public static final int ORIENTATION_POTRAIT = 1;
 
+	/** The Constant ORIENTATION_LANDSCAPE. */
 	public static final int ORIENTATION_LANDSCAPE = 2;
 
+	/** The Constant DRAWER_CONTENT_MOVE_PROPORTION. */
 	protected static final int DRAWER_CONTENT_MOVE_PROPORTION = 5;
 
+	/** The Constant DEFAULT_DURATION. */
 	private static final long DEFAULT_DURATION = 250;
 
+	/** The Constant DRAWER_SHADOW_WIDTH. */
 	private static final int DRAWER_SHADOW_WIDTH = 8;
 
+	/** The m activity width. */
 	protected int mActivityWidth;
 
+	/** The m allow close on touch. */
 	private boolean mAllowCloseOnTouch = true;
 
+	/** The m animation duration. */
 	private long mAnimationDuration = DEFAULT_DURATION;
 
+	/** The m animation enabled. */
 	private boolean mAnimationEnabled = true;
 
+	/** The m context. */
 	private Context mContext;
 
+	/** The m decor view. */
 	private FrameLayout mDecorView;
 
+	/** The m deviation. */
 	protected int mDeviation = 0;
 
+	/** The m drawer. */
 	protected View mDrawer;
 
+	/** The m drawer activity. */
 	protected View mDrawerActivity;
 
+	/** The m drawer clickable. */
 	private ImageView mDrawerClickable;
 
+	/** The m drawer content. */
 	protected LinearLayout mDrawerContent;
 
+	/** The m drawer listener. */
 	private DrawerListener mDrawerListener;
 
+	/** The m drawer shadow. */
 	protected View mDrawerShadow;
 
+	/** The m fade drawer. */
 	protected boolean mFadeDrawer = false;
 
+	/** The m drawer width portrait. */
 	private float mDrawerWidthPortrait = -48;
 
+	/** The m drawer width land. */
 	private float mDrawerWidthLand = -40;
 
+	/** The m layout. */
 	private int mLayout;
 
+	/** The m movable. */
 	protected boolean mMovable = true;
 
+	/** The m moved. */
 	protected boolean mMoved = false;
 
+	/** The m move drawer. */
 	protected boolean mMoveDrawer = false;
 
+	/** The m moved beyond margin. */
 	protected boolean mMovedBeyondMargin = false;
 
+	/** The m moved position. */
 	protected int mMovedPosition = 0;
 
+	/** The m need to reinitialize. */
 	private boolean mNeedToReinitialize = false;
 
+	/** The m parent window. */
 	private Window mParentWindow;
 
+	/** The m reuse. */
 	private boolean mReuse = false;
 
+	/** The m scale drawer. */
 	protected boolean mScaleDrawer = false;
 
+	/** The m shadow width. */
 	protected int mShadowWidth = DRAWER_SHADOW_WIDTH;
 
+	/** The m transform3d drawer. */
 	protected boolean mTransform3dDrawer = false;
 
+	/** The m visible. */
 	private boolean mVisible = false;
 
+	/**
+	 * Creates the left drawer.
+	 *
+	 * @param context the context
+	 * @param layout the layout
+	 * @return the drawer
+	 */
 	public static Drawer createLeftDrawer(Context context, int layout)
 	{
 		return new LeftDrawer(context, layout);
 	}
 
+	/**
+	 * Creates the right drawer.
+	 *
+	 * @param context the context
+	 * @param layout the layout
+	 * @return the drawer
+	 */
 	public static Drawer createRightDrawer(Context context, int layout)
 	{
 		return new RightDrawer(context, layout);
@@ -246,6 +296,11 @@ public abstract class Drawer implements OnClickListener, OnTouchListener
 	 */
 	protected abstract IDrawerProxy createDrawerProxy();
 
+	/**
+	 * Gets the target position.
+	 *
+	 * @return the target position
+	 */
 	protected abstract int getTargetPosition();
 
 	/**
@@ -268,10 +323,15 @@ public abstract class Drawer implements OnClickListener, OnTouchListener
 		{
 			width = (mActivityWidth / density) - Math.abs(width);
 		}
-
-		return (int) FloatMath.ceil(width * density);
+           //FloatMath.ceil 
+		return (int) Math.ceil(width * density);
 	}
 
+	/**
+	 * Checks if is right drawer.
+	 *
+	 * @return true, if is right drawer
+	 */
 	protected abstract boolean isRightDrawer();
 
 	/**
@@ -280,6 +340,7 @@ public abstract class Drawer implements OnClickListener, OnTouchListener
 	 * move {@link ActionBar}. Clickable {@link ImageView} is also created to
 	 * handle click and touch events.
 	 */
+	@SuppressWarnings("deprecation")
 	public void init()
 	{
 		mDecorView = (FrameLayout) mParentWindow.getDecorView();
@@ -483,6 +544,7 @@ public abstract class Drawer implements OnClickListener, OnTouchListener
 	 * 
 	 * @param drawable Drawable
 	 */
+	@SuppressWarnings("deprecation")
 	public void setBackgroundDrawable(Drawable drawable)
 	{
 		mDrawerContent.setBackgroundDrawable(drawable);
@@ -592,8 +654,8 @@ public abstract class Drawer implements OnClickListener, OnTouchListener
 	}
 
 	/**
-	 * Sets shadow width
-	 * 
+	 * Sets shadow width.
+	 *
 	 * @param shadowWidth width
 	 */
 	public void setShadowWidth(int shadowWidth)
@@ -620,8 +682,8 @@ public abstract class Drawer implements OnClickListener, OnTouchListener
 	 * Shows {@link Drawer}. If animation is enabled it will be played.
 	 */
 	public void show()
-	{
-		if (isVisible())
+	{  //isVisible()
+		if (mVisible)
 		{
 			return;
 		}
@@ -640,7 +702,7 @@ public abstract class Drawer implements OnClickListener, OnTouchListener
 		mMovedPosition = 0;
 		mVisible = true;
 
-		if (isAnimationEnabled())
+		if (mAnimationEnabled)
 		{
 			showWithAnimation();
 		}
@@ -656,9 +718,14 @@ public abstract class Drawer implements OnClickListener, OnTouchListener
 		}
 	}
 
+	/**
+	 * Show with touch.
+	 *
+	 * @param deviation the deviation
+	 */
 	void showWithTouch(int deviation)
-	{
-		if (isVisible())
+	{  //isVisible()
+		if (mVisible)
 		{
 			return;
 		}
@@ -728,11 +795,20 @@ public abstract class Drawer implements OnClickListener, OnTouchListener
 		updateDrawerShadow();
 	}
 
+	/**
+	 * Find view by id.
+	 *
+	 * @param viewId the view id
+	 * @return the view
+	 */
 	public View findViewById(int viewId)
 	{
 		return mDrawer.findViewById(viewId);
 	}
 
+	/**
+	 * Finish showing.
+	 */
 	void finishShowing()
 	{
 		if (mDrawerListener != null)
@@ -760,6 +836,7 @@ public abstract class Drawer implements OnClickListener, OnTouchListener
 	/**
 	 * Updates shadow - position and visibility.
 	 */
+	@SuppressWarnings("deprecation")
 	private void updateDrawerShadow()
 	{
 		View shadow = ((LinearLayout) mDrawerShadow).getChildAt(0);

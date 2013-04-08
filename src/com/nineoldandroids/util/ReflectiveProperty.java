@@ -152,7 +152,8 @@ class ReflectiveProperty<T, V> extends Property<T, V> {
         }
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public V get(T object) {
         if (mGetter != null) {
             try {

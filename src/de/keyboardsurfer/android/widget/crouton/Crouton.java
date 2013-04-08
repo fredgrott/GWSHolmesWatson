@@ -17,6 +17,7 @@
 
 package de.keyboardsurfer.android.widget.crouton;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -49,6 +50,7 @@ import android.widget.TextView;
  * Call {@link Crouton#clearCroutonsForActivity(Activity)} within
  * {@link android.app.Activity#onDestroy()} to avoid {@link Context} leaks.
  */
+@SuppressLint("FieldGetter")
 public final class Crouton {
   private static final int IMAGE_ID = 0x100;
   private static final int TEXT_ID = 0x101;
@@ -508,10 +510,11 @@ public final class Crouton {
     Manager.getInstance().add(this);
   }
 
-  public Animation getInAnimation() {
+  @SuppressLint("FieldGetter")
+public Animation getInAnimation() {
     if ((null == this.inAnimation) && (null != this.activity)) {
-      if (getStyle().inAnimationResId > 0) {
-        this.inAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().inAnimationResId);
+      if (style.inAnimationResId > 0) {
+        this.inAnimation = AnimationUtils.loadAnimation(activity, style.inAnimationResId);
       } else {
         this.inAnimation = DefaultAnimationsBuilder.buildDefaultSlideInDownAnimation();
       }
@@ -520,10 +523,11 @@ public final class Crouton {
     return inAnimation;
   }
 
-  public Animation getOutAnimation() {
+  @SuppressLint("FieldGetter")
+public Animation getOutAnimation() {
     if ((null == this.outAnimation) && (null != this.activity)) {
-      if (getStyle().outAnimationResId > 0) {
-        this.outAnimation = AnimationUtils.loadAnimation(getActivity(), getStyle().outAnimationResId);
+      if (style.outAnimationResId > 0) {
+        this.outAnimation = AnimationUtils.loadAnimation(activity, style.outAnimationResId);
       } else {
         this.outAnimation = DefaultAnimationsBuilder.buildDefaultSlideOutUpAnimation();
       }
@@ -664,7 +668,8 @@ public final class Crouton {
     this.croutonView.addView(contentView);
   }
 
-  private FrameLayout initializeCroutonViewGroup(Resources resources) {
+  @SuppressWarnings("deprecation")
+private FrameLayout initializeCroutonViewGroup(Resources resources) {
     FrameLayout croutonView = new FrameLayout(this.activity);
 
     if(null != onClickListener)

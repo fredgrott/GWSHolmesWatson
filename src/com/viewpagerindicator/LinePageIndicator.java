@@ -29,7 +29,7 @@ import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewConfigurationCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.FloatMath;
+
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -64,7 +64,8 @@ public class LinePageIndicator extends View implements PageIndicator {
         this(context, attrs, R.attr.vpiLinePageIndicatorStyle);
     }
 
-    public LinePageIndicator(Context context, AttributeSet attrs, int defStyle) {
+    @SuppressWarnings("deprecation")
+	public LinePageIndicator(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         if (isInEditMode()) return;
 
@@ -371,7 +372,7 @@ public class LinePageIndicator extends View implements PageIndicator {
                 result = Math.min(result, specSize);
             }
         }
-        return (int)FloatMath.ceil(result);
+        return (int) Math.ceil(result);
     }
 
     /**
@@ -397,7 +398,7 @@ public class LinePageIndicator extends View implements PageIndicator {
                 result = Math.min(result, specSize);
             }
         }
-        return (int)FloatMath.ceil(result);
+        return (int)Math.ceil(result);
     }
 
     @Override
@@ -434,7 +435,6 @@ public class LinePageIndicator extends View implements PageIndicator {
             dest.writeInt(currentPage);
         }
 
-        @SuppressWarnings("UnusedDeclaration")
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
             @Override
             public SavedState createFromParcel(Parcel in) {

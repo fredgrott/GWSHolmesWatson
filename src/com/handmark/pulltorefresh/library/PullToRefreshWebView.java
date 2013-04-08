@@ -17,6 +17,7 @@ package com.handmark.pulltorefresh.library;
 
 import com.actionbarsherlock.R;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build.VERSION;
@@ -27,8 +28,14 @@ import android.util.FloatMath;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PullToRefreshWebView.
+ */
+@SuppressLint("FloatMath")
 public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 
+	/** The Constant defaultOnRefreshListener. */
 	private static final OnRefreshListener<WebView> defaultOnRefreshListener = new OnRefreshListener<WebView>() {
 
 		@Override
@@ -38,6 +45,7 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 
 	};
 
+	/** The default web chrome client. */
 	private final WebChromeClient defaultWebChromeClient = new WebChromeClient() {
 
 		@Override
@@ -49,6 +57,11 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 
 	};
 
+	/**
+	 * Instantiates a new pull to refresh web view.
+	 *
+	 * @param context the context
+	 */
 	public PullToRefreshWebView(Context context) {
 		super(context);
 
@@ -59,6 +72,12 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 		mRefreshableView.setWebChromeClient(defaultWebChromeClient);
 	}
 
+	/**
+	 * Instantiates a new pull to refresh web view.
+	 *
+	 * @param context the context
+	 * @param attrs the attrs
+	 */
 	public PullToRefreshWebView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 
@@ -69,6 +88,12 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 		mRefreshableView.setWebChromeClient(defaultWebChromeClient);
 	}
 
+	/**
+	 * Instantiates a new pull to refresh web view.
+	 *
+	 * @param context the context
+	 * @param mode the mode
+	 */
 	public PullToRefreshWebView(Context context, Mode mode) {
 		super(context, mode);
 
@@ -79,6 +104,13 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 		mRefreshableView.setWebChromeClient(defaultWebChromeClient);
 	}
 
+	/**
+	 * Instantiates a new pull to refresh web view.
+	 *
+	 * @param context the context
+	 * @param mode the mode
+	 * @param style the style
+	 */
 	public PullToRefreshWebView(Context context, Mode mode, AnimationStyle style) {
 		super(context, mode, style);
 
@@ -89,11 +121,17 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 		mRefreshableView.setWebChromeClient(defaultWebChromeClient);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.handmark.pulltorefresh.library.PullToRefreshBase#getPullToRefreshScrollDirection()
+	 */
 	@Override
 	public final Orientation getPullToRefreshScrollDirection() {
 		return Orientation.VERTICAL;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.handmark.pulltorefresh.library.PullToRefreshBase#createRefreshableView(android.content.Context, android.util.AttributeSet)
+	 */
 	@Override
 	protected WebView createRefreshableView(Context context, AttributeSet attrs) {
 		WebView webView;
@@ -107,44 +145,71 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 		return webView;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.handmark.pulltorefresh.library.PullToRefreshBase#isReadyForPullStart()
+	 */
 	@Override
 	protected boolean isReadyForPullStart() {
 		return mRefreshableView.getScrollY() == 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.handmark.pulltorefresh.library.PullToRefreshBase#isReadyForPullEnd()
+	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	protected boolean isReadyForPullEnd() {
 		float exactContentHeight = FloatMath.floor(mRefreshableView.getContentHeight() * mRefreshableView.getScale());
 		return mRefreshableView.getScrollY() >= (exactContentHeight - mRefreshableView.getHeight());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.handmark.pulltorefresh.library.PullToRefreshBase#onPtrRestoreInstanceState(android.os.Bundle)
+	 */
 	@Override
 	protected void onPtrRestoreInstanceState(Bundle savedInstanceState) {
 		super.onPtrRestoreInstanceState(savedInstanceState);
 		mRefreshableView.restoreState(savedInstanceState);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.handmark.pulltorefresh.library.PullToRefreshBase#onPtrSaveInstanceState(android.os.Bundle)
+	 */
 	@Override
 	protected void onPtrSaveInstanceState(Bundle saveState) {
 		super.onPtrSaveInstanceState(saveState);
 		mRefreshableView.saveState(saveState);
 	}
 
+	/**
+	 * The Class InternalWebViewSDK9.
+	 */
 	@TargetApi(9)
 	final class InternalWebViewSDK9 extends WebView {
 
 		// WebView doesn't always scroll back to it's edge so we add some
 		// fuzziness
+		/** The Constant OVERSCROLL_FUZZY_THRESHOLD. */
 		static final int OVERSCROLL_FUZZY_THRESHOLD = 2;
 
 		// WebView seems quite reluctant to overscroll so we use the scale
 		// factor to scale it's value
+		/** The Constant OVERSCROLL_SCALE_FACTOR. */
 		static final float OVERSCROLL_SCALE_FACTOR = 1.5f;
 
+		/**
+		 * Instantiates a new internal web view sd k9.
+		 *
+		 * @param context the context
+		 * @param attrs the attrs
+		 */
 		public InternalWebViewSDK9(Context context, AttributeSet attrs) {
 			super(context, attrs);
 		}
 
+		/* (non-Javadoc)
+		 * @see android.view.View#overScrollBy(int, int, int, int, int, int, int, int, boolean)
+		 */
 		@Override
 		protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX,
 				int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
@@ -159,6 +224,12 @@ public class PullToRefreshWebView extends PullToRefreshBase<WebView> {
 			return returnValue;
 		}
 
+		/**
+		 * Gets the scroll range.
+		 *
+		 * @return the scroll range
+		 */
+		@SuppressWarnings("deprecation")
 		private int getScrollRange() {
 			return (int) Math.max(0, FloatMath.floor(mRefreshableView.getContentHeight() * mRefreshableView.getScale())
 					- (getHeight() - getPaddingBottom() - getPaddingTop()));

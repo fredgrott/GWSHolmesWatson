@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="BackButton" severity="warning" />
+    <issue id="DisableBaselineAlignment">
+        <ignore path="res/layout/he_prefs_preference_list_content.xml" />
+    </issue>
     <issue id="EasterEgg" severity="warning" />
     <issue id="FieldGetter" severity="warning" />
     <issue id="IconExpectedSize" severity="warning" />
+    <issue id="NestedWeights">
+        <ignore path="res/layout/he_prefs_preference_list_content.xml" />
+    </issue>
     <issue id="NewApi">
         <ignore path="res/values/he_dialogs.xml" />
         <ignore path="res/values/he_styles.xml" />
     </issue>
     <issue id="StopShip" severity="warning" />
-    <issue id="TypographyQuotes" severity="warning" />
+    <issue id="TypographyEllipsis">
+        <ignore path="res/values-et/he_strings.xml" />
+        <ignore path="res/values-fa/he_strings.xml" />
+        <ignore path="res/values-hi/he_strings.xml" />
+        <ignore path="res/values-hu/he_strings.xml" />
+        <ignore path="res/values-in/he_strings.xml" />
+        <ignore path="res/values-it/he_strings.xml" />
+        <ignore path="res/values-iw/he_strings.xml" />
+        <ignore path="res/values-ja/he_strings.xml" />
+        <ignore path="res/values-lt/he_strings.xml" />
+        <ignore path="res/values-lv/he_strings.xml" />
+        <ignore path="res/values-nl/he_strings.xml" />
+        <ignore path="res/values-sk/he_strings.xml" />
+        <ignore path="res/values-th/he_strings.xml" />
+        <ignore path="res/values-tr/he_strings.xml" />
+        <ignore path="res/values-uk/he_strings.xml" />
+        <ignore path="res/values-zh-rCN/he_strings.xml" />
+        <ignore path="res/values-zh-rTW/he_strings.xml" />
+    </issue>
+    <issue id="TypographyQuotes" severity="warning">
+        <ignore path="res/values-ko/he_strings.xml" />
+        <ignore path="res/values-nb/he_strings.xml" />
+        <ignore path="res/values-uk/he_strings.xml" />
+    </issue>
     <issue id="UnusedIds" severity="warning" />
 </lint>

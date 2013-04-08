@@ -16,6 +16,7 @@
 
 package com.actionbarsherlock.internal.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -182,6 +183,7 @@ import android.widget.RemoteViews.RemoteView;
  * @attr ref android.R.styleable#ProgressBar_progressDrawable
  * @attr ref android.R.styleable#ProgressBar_secondaryProgress
  */
+@SuppressLint("NewApi")
 @RemoteView
 public class IcsProgressBar extends View {
     private static final boolean IS_HONEYCOMB = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
@@ -189,7 +191,8 @@ public class IcsProgressBar extends View {
     private static final int ANIMATION_RESOLUTION = 200;
     private static final int TIMEOUT_SEND_ACCESSIBILITY_EVENT = 200;
 
-    private static final int[] ProgressBar = new int[] {
+    @SuppressWarnings("deprecation")
+	private static final int[] ProgressBar = new int[] {
         android.R.attr.maxWidth,
         android.R.attr.maxHeight,
         android.R.attr.max,

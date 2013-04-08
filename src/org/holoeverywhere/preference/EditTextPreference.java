@@ -81,7 +81,7 @@ public class EditTextPreference extends DialogPreference {
         super.onBindDialogView(view);
 
         EditText editText = mEditText;
-        editText.setText(getText());
+        editText.setText(mText);
 
         ViewParent oldParent = editText.getParent();
         if (oldParent != view) {
@@ -128,7 +128,7 @@ public class EditTextPreference extends DialogPreference {
             return superState;
         }
         final SavedState myState = new SavedState(superState);
-        myState.text = getText();
+        myState.text = mText;
         return myState;
     }
 

@@ -17,6 +17,7 @@ package shared.ui.actionscontentview;
 
 import com.actionbarsherlock.R;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
@@ -34,6 +35,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
 
+@SuppressLint("DrawAllocation")
 public class ActionsContentView extends ViewGroup {
   private static final String TAG = ActionsContentView.class.getSimpleName();
   private static final boolean DEBUG = false;
@@ -327,17 +329,18 @@ public class ActionsContentView extends ViewGroup {
     final Parcelable superState = super.onSaveInstanceState();
     final SavedState ss = new SavedState(superState);
     ss.isContentShown = isContentShown();
-    ss.mSpacingType = getSpacingType();
-    ss.mSpacing = getSpacingWidth();
-    ss.mActionsSpacing = getActionsSpacingWidth();
+    ss.mSpacingType = mSpacingType;
+    ss.mSpacing = mSpacing;
+    ss.mActionsSpacing = mActionsSpacing;
     ss.isShadowVisible  = isShadowVisible();
-    ss.mShadowWidth = getShadowWidth();
-    ss.isSwipingEnabled = isSwipingEnabled();
-    ss.mFlingDuration = getFlingDuration();
-    ss.mFadeType = getFadeType();
-    ss.mFadeValue = getFadeValue();
-    ss.mSwipeType = getSwipingType();
-    ss.mSwipeEdgeWidth = getSwipingEdgeWidth();
+    ss.mShadowWidth = mShadowWidth;
+    //isSwipingEnabled()
+    ss.isSwipingEnabled = isSwipingEnabled;
+    ss.mFlingDuration = mFlingDuration;
+    ss.mFadeType = mFadeType;
+    ss.mFadeValue = mFadeValue;
+    ss.mSwipeType = mSwipeType;
+    ss.mSwipeEdgeWidth = mSwipeEdgeWidth;
     return ss;
   }
 
@@ -885,8 +888,8 @@ public class ActionsContentView extends ViewGroup {
           // it content shown and there is edge mode we should check start
           // swiping area first
           if (mSwipeType == SWIPING_ALL
-              || (isContentShown() && firstTouchX <= mSwipeEdgeWidth
-              || (!isContentShown() && firstTouchX >= contentLeftBound))) {
+              || (isContentShown && firstTouchX <= mSwipeEdgeWidth
+              || (!isContentShown && firstTouchX >= contentLeftBound))) {
             // handle all events of scrolling by X axis
             mHandleEvent = Boolean.TRUE;
             scrollBy((int) distanceX);

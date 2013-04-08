@@ -872,7 +872,8 @@ public class GlowPadView extends View {
         }
     }
 
-    private void handleCancel(MotionEvent event) {
+    @SuppressWarnings("unused")
+	private void handleCancel(MotionEvent event) {
         if (DEBUG && mDragging) Log.v(TAG, "** Handle CANCEL");
 
         // Drop the active target if canceled.

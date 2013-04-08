@@ -1,5 +1,6 @@
 package com.jakewharton.salvage;
 
+import android.annotation.SuppressLint;
 import android.util.SparseArray;
 import android.view.View;
 
@@ -13,6 +14,7 @@ import android.view.View;
  * This class was taken from Android's implementation of {@link android.widget.AbsListView} which
  * is copyrighted 2006 The Android Open Source Project.
  */
+@SuppressLint("NewApi")
 public class RecycleBin {
   /**
    * Views that were on screen at the start of layout. This array is populated at the start of
@@ -30,7 +32,8 @@ public class RecycleBin {
 
   private SparseArray<View> currentScrapViews;
 
-  public void setViewTypeCount(int viewTypeCount) {
+  @SuppressWarnings("unchecked")
+public void setViewTypeCount(int viewTypeCount) {
     if (viewTypeCount < 1) {
       throw new IllegalArgumentException("Can't have a viewTypeCount < 1");
     }

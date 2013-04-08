@@ -9,6 +9,7 @@ import android.content.res.TypedArray;
 import android.os.Build.VERSION;
 import android.util.AttributeSet;
 
+@SuppressLint("DefaultLocale")
 public class CheckedTextView extends android.widget.CheckedTextView {
     private boolean allCaps = false;
     private CharSequence originalText;

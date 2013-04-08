@@ -290,7 +290,8 @@ class ViewPropertyAnimatorPreHC extends ViewPropertyAnimator {
         startAnimation();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void cancel() {
         if (mAnimatorMap.size() > 0) {
             HashMap<Animator, PropertyBundle> mAnimatorMapCopy =
@@ -434,7 +435,8 @@ class ViewPropertyAnimatorPreHC extends ViewPropertyAnimator {
      */
     private void startAnimation() {
         ValueAnimator animator = ValueAnimator.ofFloat(1.0f);
-        ArrayList<NameValuesHolder> nameValueList =
+        @SuppressWarnings("unchecked")
+		ArrayList<NameValuesHolder> nameValueList =
                 (ArrayList<NameValuesHolder>) mPendingAnimations.clone();
         mPendingAnimations.clear();
         int propertyMask = 0;

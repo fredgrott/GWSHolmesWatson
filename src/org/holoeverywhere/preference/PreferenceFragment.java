@@ -7,6 +7,7 @@ import org.holoeverywhere.widget.ListView;
 
 import com.actionbarsherlock.R;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 
+@SuppressLint("HandlerLeak")
 public abstract class PreferenceFragment extends Fragment implements
         PreferenceManager.OnPreferenceTreeClickListener {
     public interface OnPreferenceStartFragmentCallback {

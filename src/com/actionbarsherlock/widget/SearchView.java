@@ -380,7 +380,7 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
             // TODO: use imeOptions to disable voice input when the new API will be available
             mQueryTextView.setPrivateImeOptions(IME_OPTION_NO_MICROPHONE);
         }
-        updateViewsVisibility(isIconified());
+        updateViewsVisibility(mIconified);
     }
 
     /**
@@ -445,7 +445,8 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         // Check if SearchView is focusable.
         if (!isFocusable()) return false;
         // If it is not iconified, then give the focus to the text field
-        if (!isIconified()) {
+        //isIconified()
+        if (!mIconified) {
             boolean result = mQueryTextView.requestFocus(direction, previouslyFocusedRect);
             if (result) {
                 updateViewsVisibility(false);
@@ -645,7 +646,7 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
      */
     public void setSubmitButtonEnabled(boolean enabled) {
         mSubmitButtonEnabled = enabled;
-        updateViewsVisibility(isIconified());
+        updateViewsVisibility(mIconified);
     }
 
     /**
@@ -729,10 +730,11 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         return mMaxWidth;
     }
 
-    @Override
+    @SuppressLint("FieldGetter")
+	@Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // Let the standard measurements take effect in iconified state.
-        if (isIconified()) {
+        if (mIconified) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
         }
@@ -802,8 +804,9 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
         return false;
     }
 
-    private boolean isSubmitAreaEnabled() {
-        return (mSubmitButtonEnabled || mVoiceButtonEnabled) && !isIconified();
+    @SuppressLint("FieldGetter")
+	private boolean isSubmitAreaEnabled() {
+        return (mSubmitButtonEnabled || mVoiceButtonEnabled) && !mIconified;
     }
 
     private void updateSubmitButton(boolean hasText) {
@@ -1148,7 +1151,7 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
      */
     private void updateVoiceButton(boolean empty) {
         int visibility = GONE;
-        if (mVoiceButtonEnabled && !isIconified() && empty) {
+        if (mVoiceButtonEnabled && !mIconified && empty) {
             visibility = VISIBLE;
             mSubmitButton.setVisibility(GONE);
         }
@@ -1251,7 +1254,7 @@ public class SearchView extends LinearLayout implements CollapsibleActionView {
     }
 
     void onTextFocusChanged() {
-        updateViewsVisibility(isIconified());
+        updateViewsVisibility(mIconified);
         // Delayed update to make sure that the focus has settled down and window focus changes
         // don't affect it. A synchronous update was not working.
         postUpdateFocusedState();

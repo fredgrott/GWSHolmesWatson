@@ -312,7 +312,8 @@ public final class AnimatorSet extends Animator {
      * <p>Note that ending a <code>AnimatorSet</code> also ends all of the animations that it is
      * responsible for.</p>
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void end() {
         mTerminated = true;
         if (isStarted()) {

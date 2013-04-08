@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Queue;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Scroller;
 
+@SuppressLint("DrawAllocation")
 public class IteratorListView extends ViewGroup {
 	
 	public static abstract class ViewAdapter<T extends Object> {
@@ -54,6 +56,7 @@ public class IteratorListView extends ViewGroup {
 		mScrollGestureDetector = new GestureDetector(getContext(), mOnGesture);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T> void setIteratorAdapter(ListIterator<T> iterator, ViewAdapter<T> adapter) {
 		mIterator = iterator;
 		mAdapter = (ViewAdapter<Object>) adapter;

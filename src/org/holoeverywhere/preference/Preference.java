@@ -250,11 +250,11 @@ public class Preference implements Comparable<Preference>,
 
     StringBuilder getFilterableStringBuilder() {
         StringBuilder sb = new StringBuilder();
-        CharSequence title = getTitle();
+        CharSequence title = mTitle;
         if (!TextUtils.isEmpty(title)) {
             sb.append(title).append(' ');
         }
-        CharSequence summary = getSummary();
+        CharSequence summary = mSummary;
         if (!TextUtils.isEmpty(summary)) {
             sb.append(summary).append(' ');
         }
@@ -497,7 +497,7 @@ public class Preference implements Comparable<Preference>,
     protected void onBindView(View view) {
         final TextView titleView = (TextView) view.findViewById(R.id.title);
         if (titleView != null) {
-            final CharSequence title = getTitle();
+            final CharSequence title = mTitle;
             if (!TextUtils.isEmpty(title)) {
                 titleView.setText(title);
                 titleView.setVisibility(View.VISIBLE);
@@ -507,7 +507,7 @@ public class Preference implements Comparable<Preference>,
         }
         final TextView summaryView = (TextView) view.findViewById(R.id.summary);
         if (summaryView != null) {
-            final CharSequence summary = getSummary();
+            final CharSequence summary = mSummary;
             if (!TextUtils.isEmpty(summary)) {
                 summaryView.setText(summary);
                 summaryView.setVisibility(View.VISIBLE);
@@ -519,7 +519,7 @@ public class Preference implements Comparable<Preference>,
         if (imageView != null) {
             if (mIconResId != 0 || mIcon != null) {
                 if (mIcon == null) {
-                    mIcon = getContext().getResources().getDrawable(mIconResId);
+                    mIcon = mContext.getResources().getDrawable(mIconResId);
                 }
                 if (mIcon != null) {
                     imageView.setImageDrawable(mIcon);
@@ -606,7 +606,7 @@ public class Preference implements Comparable<Preference>,
             return;
         }
 
-        PreferenceManager preferenceManager = getPreferenceManager();
+        PreferenceManager preferenceManager = mPreferenceManager;
         if (preferenceManager != null) {
             PreferenceManager.OnPreferenceTreeClickListener listener = preferenceManager
                     .getOnPreferenceTreeClickListener();
@@ -617,7 +617,7 @@ public class Preference implements Comparable<Preference>,
         }
 
         if (mIntent != null) {
-            Context context = getContext();
+            Context context = mContext;
             context.startActivity(mIntent);
         }
     }
@@ -994,7 +994,8 @@ public class Preference implements Comparable<Preference>,
     }
 
     protected boolean shouldPersist() {
-        return mPreferenceManager != null && isPersistent() && hasKey();
+    	//isPersistent()
+        return mPreferenceManager != null && mPersistent && hasKey();
     }
 
     @Override

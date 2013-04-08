@@ -2,26 +2,51 @@ package com.jake.quiltview;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import android.util.DisplayMetrics;
-import android.view.Display;
+
 import android.view.View;
 
 import android.widget.FrameLayout;
 import com.gridlayout.*;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class QuiltViewBase.
+ */
+@SuppressLint("ViewConstructor")
 public class QuiltViewBase extends GridLayout {
 	
+	/** The size. */
 	public int[] size;
+	
+	/** The columns. */
 	public int columns;
+	
+	/** The rows. */
 	public int rows;
+	
+	/** The view_width. */
 	public int view_width = -1;
+	
+	/** The view_height. */
 	public int view_height = -1;
+	
+	/** The is vertical. */
 	public boolean isVertical = true;
+	
+	/** The views. */
 	public ArrayList<View> views;
 	
+	/**
+	 * Instantiates a new quilt view base.
+	 *
+	 * @param context the context
+	 * @param isVertical the is vertical
+	 */
 	public QuiltViewBase(Context context, boolean isVertical) {
 		super(context);
 		this.isVertical = isVertical;
@@ -36,6 +61,9 @@ public class QuiltViewBase extends GridLayout {
 		setup();
 	}
 	
+	/**
+	 * Setup.
+	 */
 	public void setup(){
 		if(isVertical){
 			setupVertical();
@@ -44,6 +72,10 @@ public class QuiltViewBase extends GridLayout {
 		}
 	}
 	
+	/**
+	 * Setup vertical.
+	 */
+	@SuppressWarnings("static-access")
 	public void setupVertical(){
 		size = getBaseSizeVertical();
 		this.setColumnCount(columns);
@@ -53,6 +85,10 @@ public class QuiltViewBase extends GridLayout {
 		this.setLayoutParams(params);
 	}
 	
+	/**
+	 * Setup horizontal.
+	 */
+	@SuppressWarnings("static-access")
 	public void setupHorizontal(){
 		size = getBaseSizeHorizontal();
 		this.setRowCount(rows);
@@ -62,6 +98,11 @@ public class QuiltViewBase extends GridLayout {
 		this.setLayoutParams(params);
 	}
 	
+	/**
+	 * Adds the patch.
+	 *
+	 * @param view the view
+	 */
 	public void addPatch(View view){
 		
 		int count = this.getChildCount();
@@ -78,6 +119,9 @@ public class QuiltViewBase extends GridLayout {
 		views.add(view);
 	}
 	
+	/**
+	 * Refresh.
+	 */
 	public void refresh(){
 		this.removeAllViewsInLayout();
 		setup();
@@ -86,6 +130,11 @@ public class QuiltViewBase extends GridLayout {
 		}
 	}
 	
+	/**
+	 * Gets the base size.
+	 *
+	 * @return the base size
+	 */
 	public int[] getBaseSize(){
 		int[] size = new int[2];
 		
@@ -99,6 +148,11 @@ public class QuiltViewBase extends GridLayout {
 		return size;
 	}
 	
+	/**
+	 * Gets the base size vertical.
+	 *
+	 * @return the base size vertical
+	 */
 	public int[] getBaseSizeVertical(){
 		int[] size = new int[2];
 		
@@ -112,6 +166,11 @@ public class QuiltViewBase extends GridLayout {
 		return size;
 	}
 	
+	/**
+	 * Gets the base size horizontal.
+	 *
+	 * @return the base size horizontal
+	 */
 	public int[] getBaseSizeHorizontal(){
 		int[] size = new int[2];
 		
@@ -125,6 +184,11 @@ public class QuiltViewBase extends GridLayout {
 		return size;
 	}
 	
+	/**
+	 * Gets the base width.
+	 *
+	 * @return the base width
+	 */
 	public int getBaseWidth(){
 		if(view_width < 500){
 			columns = 2;
@@ -140,6 +204,11 @@ public class QuiltViewBase extends GridLayout {
 		return (view_width / columns);
 	}
 	
+	/**
+	 * Gets the base height.
+	 *
+	 * @return the base height
+	 */
 	public int getBaseHeight(){
 		if(view_height < 350){
 			rows = 2;
@@ -167,7 +236,10 @@ public class QuiltViewBase extends GridLayout {
         setup(isVertical);
 	 }*/
 	
-	@Override
+	/* (non-Javadoc)
+ 	 * @see android.view.View#onSizeChanged(int, int, int, int)
+ 	 */
+ 	@Override
     protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld){
             super.onSizeChanged(xNew, yNew, xOld, yOld);
             view_width = xNew;

@@ -36,16 +36,55 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CalendarView.
+ */
+@SuppressLint("SimpleDateFormat")
 public class CalendarView extends FrameLayout {
+    
+    /**
+     * The listener interface for receiving onDateChange events.
+     * The class that is interested in processing a onDateChange
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addOnDateChangeListener<code> method. When
+     * the onDateChange event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see OnDateChangeEvent
+     */
     public interface OnDateChangeListener {
+        
+        /**
+         * On selected day change.
+         *
+         * @param view the view
+         * @param year the year
+         * @param month the month
+         * @param dayOfMonth the day of month
+         */
         public void onSelectedDayChange(CalendarView view, int year, int month,
                 int dayOfMonth);
     }
 
+    /**
+     * The Class ScrollStateRunnable.
+     */
     private class ScrollStateRunnable implements Runnable {
+        
+        /** The m new state. */
         private int mNewState;
+        
+        /** The m view. */
         private AbsListView mView;
 
+        /**
+         * Do scroll state change.
+         *
+         * @param view the view
+         * @param scrollState the scroll state
+         */
         public void doScrollStateChange(AbsListView view, int scrollState) {
             mView = view;
             mNewState = scrollState;
@@ -53,6 +92,9 @@ public class CalendarView extends FrameLayout {
             postDelayed(this, CalendarView.SCROLL_CHANGE_DELAY);
         }
 
+        /* (non-Javadoc)
+         * @see java.lang.Runnable#run()
+         */
         @Override
         @SuppressLint("NewApi")
         public void run() {
@@ -78,22 +120,57 @@ public class CalendarView extends FrameLayout {
         }
     }
 
+    /**
+     * The Class WeeksAdapter.
+     */
     private class WeeksAdapter extends BaseAdapter implements OnTouchListener {
+        
+        /**
+         * The listener interface for receiving calendarGesture events.
+         * The class that is interested in processing a calendarGesture
+         * event implements this interface, and the object created
+         * with that class is registered with a component using the
+         * component's <code>addCalendarGestureListener<code> method. When
+         * the calendarGesture event occurs, that object's appropriate
+         * method is invoked.
+         *
+         * @see CalendarGestureEvent
+         */
         class CalendarGestureListener extends
                 GestureDetector.SimpleOnGestureListener {
+            
+            /* (non-Javadoc)
+             * @see android.view.GestureDetector.SimpleOnGestureListener#onSingleTapUp(android.view.MotionEvent)
+             */
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
                 return true;
             }
         }
 
+        /** The context. */
         private Context context;
+        
+        /** The m focused month. */
         private int mFocusedMonth;
+        
+        /** The m gesture detector. */
         private GestureDetector mGestureDetector;
+        
+        /** The m selected date. */
         private final Calendar mSelectedDate = Calendar.getInstance();
+        
+        /** The m selected week. */
         private int mSelectedWeek;
+        
+        /** The m total week count. */
         private int mTotalWeekCount;
 
+        /**
+         * Instantiates a new weeks adapter.
+         *
+         * @param context the context
+         */
         public WeeksAdapter(Context context) {
             this.context = context;
             mGestureDetector = new GestureDetector(context,
@@ -101,25 +178,42 @@ public class CalendarView extends FrameLayout {
             init();
         }
 
+        /* (non-Javadoc)
+         * @see android.widget.Adapter#getCount()
+         */
         @Override
         public int getCount() {
             return mTotalWeekCount;
         }
 
+        /* (non-Javadoc)
+         * @see android.widget.Adapter#getItem(int)
+         */
         @Override
         public Object getItem(int position) {
             return null;
         }
 
+        /* (non-Javadoc)
+         * @see android.widget.Adapter#getItemId(int)
+         */
         @Override
         public long getItemId(int position) {
             return position;
         }
 
+        /**
+         * Gets the selected day.
+         *
+         * @return the selected day
+         */
         public Calendar getSelectedDay() {
             return mSelectedDate;
         }
 
+        /* (non-Javadoc)
+         * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+         */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             WeekView weekView = null;
@@ -142,6 +236,9 @@ public class CalendarView extends FrameLayout {
             return weekView;
         }
 
+        /**
+         * Inits the.
+         */
         private void init() {
             mSelectedWeek = getWeeksSinceMinDate(mSelectedDate);
             mTotalWeekCount = getWeeksSinceMinDate(mMaxDate);
@@ -151,11 +248,19 @@ public class CalendarView extends FrameLayout {
             }
         }
 
+        /**
+         * On date tapped.
+         *
+         * @param day the day
+         */
         private void onDateTapped(Calendar day) {
             setSelectedDay(day);
             setMonthDisplayed(day);
         }
 
+        /* (non-Javadoc)
+         * @see android.view.View.OnTouchListener#onTouch(android.view.View, android.view.MotionEvent)
+         */
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (mListView.isEnabled() && mGestureDetector.onTouchEvent(event)) {
@@ -172,6 +277,11 @@ public class CalendarView extends FrameLayout {
             return false;
         }
 
+        /**
+         * Sets the focus month.
+         *
+         * @param month the new focus month
+         */
         public void setFocusMonth(int month) {
             if (mFocusedMonth == month) {
                 return;
@@ -180,6 +290,11 @@ public class CalendarView extends FrameLayout {
             notifyDataSetChanged();
         }
 
+        /**
+         * Sets the selected day.
+         *
+         * @param selectedDay the new selected day
+         */
         public void setSelectedDay(Calendar selectedDay) {
             if (selectedDay.get(Calendar.DAY_OF_YEAR) == mSelectedDate
                     .get(Calendar.DAY_OF_YEAR)
@@ -194,24 +309,64 @@ public class CalendarView extends FrameLayout {
         }
     }
 
+    /**
+     * The Class WeekView.
+     */
     private class WeekView extends View {
+        
+        /** The m day numbers. */
         private String[] mDayNumbers;
+        
+        /** The m draw paint. */
         private final Paint mDrawPaint = new Paint();
+        
+        /** The m first day. */
         private Calendar mFirstDay;
+        
+        /** The m focus day. */
         private boolean[] mFocusDay;
+        
+        /** The m has selected day. */
         private boolean mHasSelectedDay = false;
+        
+        /** The m height. */
         private int mHeight;
+        
+        /** The m last week day month. */
         private int mLastWeekDayMonth = -1;
+        
+        /** The m month num draw paint. */
         private final Paint mMonthNumDrawPaint = new Paint();
+        
+        /** The m month of first week day. */
         private int mMonthOfFirstWeekDay = -1;
+        
+        /** The m num cells. */
         private int mNumCells;
+        
+        /** The m selected day. */
         private int mSelectedDay = -1;
+        
+        /** The m selected left. */
         private int mSelectedLeft = -1;
+        
+        /** The m selected right. */
         private int mSelectedRight = -1;
+        
+        /** The m temp rect. */
         private final Rect mTempRect = new Rect();
+        
+        /** The m week. */
         private int mWeek = -1;
+        
+        /** The m width. */
         private int mWidth;
 
+        /**
+         * Instantiates a new week view.
+         *
+         * @param context the context
+         */
         public WeekView(Context context) {
             super(context);
 
@@ -220,6 +375,11 @@ public class CalendarView extends FrameLayout {
             setPaintProperties();
         }
 
+        /**
+         * Draw background.
+         *
+         * @param canvas the canvas
+         */
         private void drawBackground(Canvas canvas) {
             if (!mHasSelectedDay) {
                 return;
@@ -235,6 +395,11 @@ public class CalendarView extends FrameLayout {
             canvas.drawRect(mTempRect, mDrawPaint);
         }
 
+        /**
+         * Draw selected date vertical bars.
+         *
+         * @param canvas the canvas
+         */
         private void drawSelectedDateVerticalBars(Canvas canvas) {
             if (!mHasSelectedDay) {
                 return;
@@ -251,6 +416,11 @@ public class CalendarView extends FrameLayout {
             mSelectedDateVerticalBar.draw(canvas);
         }
 
+        /**
+         * Draw week numbers.
+         *
+         * @param canvas the canvas
+         */
         private void drawWeekNumbers(Canvas canvas) {
             float textHeight = mDrawPaint.getTextSize();
             int y = (int) ((mHeight + textHeight) / 2)
@@ -275,6 +445,11 @@ public class CalendarView extends FrameLayout {
             }
         }
 
+        /**
+         * Draw week separators.
+         *
+         * @param canvas the canvas
+         */
         private void drawWeekSeparators(Canvas canvas) {
             int firstFullyVisiblePosition = mListView.getFirstVisiblePosition();
             if (mListView.getChildAt(0).getTop() < 0) {
@@ -289,6 +464,13 @@ public class CalendarView extends FrameLayout {
             canvas.drawLine(x, 0, mWidth, 0, mDrawPaint);
         }
 
+        /**
+         * Gets the day from location.
+         *
+         * @param x the x
+         * @param outCalendar the out calendar
+         * @return the day from location
+         */
         public boolean getDayFromLocation(float x, Calendar outCalendar) {
             int dayStart = mShowWeekNumber ? mWidth / mNumCells : 0;
             if (x < dayStart || x > mWidth) {
@@ -301,18 +483,40 @@ public class CalendarView extends FrameLayout {
             return true;
         }
 
+        /**
+         * Gets the first day.
+         *
+         * @return the first day
+         */
         public Calendar getFirstDay() {
             return mFirstDay;
         }
 
+        /**
+         * Gets the month of first week day.
+         *
+         * @return the month of first week day
+         */
         public int getMonthOfFirstWeekDay() {
             return mMonthOfFirstWeekDay;
         }
 
+        /**
+         * Gets the month of last week day.
+         *
+         * @return the month of last week day
+         */
         public int getMonthOfLastWeekDay() {
             return mLastWeekDayMonth;
         }
 
+        /**
+         * Inits the.
+         *
+         * @param weekNumber the week number
+         * @param selectedWeekDay the selected week day
+         * @param focusedMonth the focused month
+         */
         public void init(int weekNumber, int selectedWeekDay, int focusedMonth) {
             mSelectedDay = selectedWeekDay;
             mHasSelectedDay = mSelectedDay != -1;
@@ -350,6 +554,9 @@ public class CalendarView extends FrameLayout {
             updateSelectionPositions();
         }
 
+        /* (non-Javadoc)
+         * @see android.view.View#onDraw(android.graphics.Canvas)
+         */
         @Override
         protected void onDraw(Canvas canvas) {
             drawBackground(canvas);
@@ -358,17 +565,26 @@ public class CalendarView extends FrameLayout {
             drawSelectedDateVerticalBars(canvas);
         }
 
+        /* (non-Javadoc)
+         * @see android.view.View#onMeasure(int, int)
+         */
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), mHeight);
         }
 
+        /* (non-Javadoc)
+         * @see android.view.View#onSizeChanged(int, int, int, int)
+         */
         @Override
         protected void onSizeChanged(int w, int h, int oldw, int oldh) {
             mWidth = w;
             updateSelectionPositions();
         }
 
+        /**
+         * Sets the paint properties.
+         */
         private void setPaintProperties() {
             mDrawPaint.setFakeBoldText(false);
             mDrawPaint.setAntiAlias(true);
@@ -383,6 +599,9 @@ public class CalendarView extends FrameLayout {
             mMonthNumDrawPaint.setTextAlign(Align.CENTER);
         }
 
+        /**
+         * Update selection positions.
+         */
         private void updateSelectionPositions() {
             if (mHasSelectedDay) {
                 int selectedPosition = mSelectedDay - mFirstDayOfWeek;
@@ -398,73 +617,202 @@ public class CalendarView extends FrameLayout {
         }
     }
 
+    /** The Constant ADJUSTMENT_SCROLL_DURATION. */
     private static final int ADJUSTMENT_SCROLL_DURATION = 500;
+    
+    /** The Constant DATE_FORMAT. */
     private static final String DATE_FORMAT = "MM/dd/yyyy";
+    
+    /** The Constant DAYS_PER_WEEK. */
     private static final int DAYS_PER_WEEK = 7;
+    
+    /** The Constant DEFAULT_MAX_DATE. */
     private static final String DEFAULT_MAX_DATE = "01/01/2100";
+    
+    /** The Constant DEFAULT_MIN_DATE. */
     private static final String DEFAULT_MIN_DATE = "01/01/1900";
+    
+    /** The Constant DEFAULT_SHOW_WEEK_NUMBER. */
     private static final boolean DEFAULT_SHOW_WEEK_NUMBER = true;
+    
+    /** The Constant DEFAULT_SHOWN_WEEK_COUNT. */
     private static final int DEFAULT_SHOWN_WEEK_COUNT = 6;
+    
+    /** The Constant DEFAULT_WEEK_DAY_TEXT_APPEARANCE_RES_ID. */
     private static final int DEFAULT_WEEK_DAY_TEXT_APPEARANCE_RES_ID = -1;
+    
+    /** The Constant GOTO_SCROLL_DURATION. */
     private static final int GOTO_SCROLL_DURATION = 1000;
+    
+    /** The Constant LOG_TAG. */
     private static final String LOG_TAG = CalendarView.class.getSimpleName();
+    
+    /** The Constant MILLIS_IN_DAY. */
     private static final long MILLIS_IN_DAY = 86400000L;
+    
+    /** The Constant MILLIS_IN_WEEK. */
     private static final long MILLIS_IN_WEEK = CalendarView.DAYS_PER_WEEK
             * CalendarView.MILLIS_IN_DAY;
+    
+    /** The Constant SCROLL_CHANGE_DELAY. */
     private static final int SCROLL_CHANGE_DELAY = 40;
+    
+    /** The Constant SCROLL_HYST_WEEKS. */
     private static final int SCROLL_HYST_WEEKS = 2;
+    
+    /** The Constant UNSCALED_BOTTOM_BUFFER. */
     private static final int UNSCALED_BOTTOM_BUFFER = 20;
+    
+    /** The Constant UNSCALED_LIST_SCROLL_TOP_OFFSET. */
     private static final int UNSCALED_LIST_SCROLL_TOP_OFFSET = 2;
+    
+    /** The Constant UNSCALED_SELECTED_DATE_VERTICAL_BAR_WIDTH. */
     private static final int UNSCALED_SELECTED_DATE_VERTICAL_BAR_WIDTH = 6;
+    
+    /** The Constant UNSCALED_WEEK_MIN_VISIBLE_HEIGHT. */
     private static final int UNSCALED_WEEK_MIN_VISIBLE_HEIGHT = 12;
+    
+    /** The Constant UNSCALED_WEEK_SEPARATOR_LINE_WIDTH. */
     private static final int UNSCALED_WEEK_SEPARATOR_LINE_WIDTH = 1;
+    
+    /** The m adapter. */
     private WeeksAdapter mAdapter;
+    
+    /** The m bottom buffer. */
     private int mBottomBuffer = 20;
+    
+    /** The m current locale. */
     private Locale mCurrentLocale;
+    
+    /** The m current month displayed. */
     private int mCurrentMonthDisplayed;
+    
+    /** The m current scroll state. */
     private int mCurrentScrollState = OnScrollListener.SCROLL_STATE_IDLE;
+    
+    /** The m current year displayed. */
     private int mCurrentYearDisplayed;
+    
+    /** The m date format. */
     private final java.text.DateFormat mDateFormat = new SimpleDateFormat(
             CalendarView.DATE_FORMAT);
+    
+    /** The m date text size. */
     private final int mDateTextSize;
+    
+    /** The m day labels. */
     private String[] mDayLabels;
+    
+    /** The m day names header. */
     private ViewGroup mDayNamesHeader;
+    
+    /** The m days per week. */
     private int mDaysPerWeek = 7;
+    
+    /** The m first day of month. */
     private Calendar mFirstDayOfMonth;
+    
+    /** The m first day of week. */
     private int mFirstDayOfWeek;
+    
+    /** The m focused month date color. */
     private final int mFocusedMonthDateColor;
+    
+    /** The m friction. */
     private float mFriction = .05f;
+    
+    /** The m is scrolling up. */
     private boolean mIsScrollingUp = false;
+    
+    /** The m list scroll top offset. */
     private int mListScrollTopOffset = 2;
+    
+    /** The m list view. */
     private ListView mListView;
+    
+    /** The m max date. */
     private Calendar mMaxDate;
+    
+    /** The m min date. */
     private Calendar mMinDate;
+    
+    /** The m month name. */
     private TextView mMonthName;
+    
+    /** The m on date change listener. */
     private OnDateChangeListener mOnDateChangeListener;
+    
+    /** The m previous scroll position. */
     private long mPreviousScrollPosition;
+    
+    /** The m previous scroll state. */
     private int mPreviousScrollState = OnScrollListener.SCROLL_STATE_IDLE;
+    
+    /** The m scroll state changed runnable. */
     private ScrollStateRunnable mScrollStateChangedRunnable = new ScrollStateRunnable();
+    
+    /** The m selected date vertical bar. */
     private final Drawable mSelectedDateVerticalBar;
+    
+    /** The m selected date vertical bar width. */
     private final int mSelectedDateVerticalBarWidth;
+    
+    /** The m selected week background color. */
     private final int mSelectedWeekBackgroundColor;
+    
+    /** The m shown week count. */
     private int mShownWeekCount;
+    
+    /** The m show week number. */
     private boolean mShowWeekNumber;
+    
+    /** The m temp date. */
     private Calendar mTempDate;
+    
+    /** The m unfocused month date color. */
     private final int mUnfocusedMonthDateColor;
+    
+    /** The m velocity scale. */
     private float mVelocityScale = 0.333f;
+    
+    /** The m week min visible height. */
     private int mWeekMinVisibleHeight = 12;
+    
+    /** The m week number color. */
     private final int mWeekNumberColor;
+    
+    /** The m week separator line color. */
     private final int mWeekSeparatorLineColor;
+    
+    /** The m week seperator line width. */
     private final int mWeekSeperatorLineWidth;
 
+    /**
+     * Instantiates a new calendar view.
+     *
+     * @param context the context
+     */
     public CalendarView(Context context) {
         this(context, null);
     }
 
+    /**
+     * Instantiates a new calendar view.
+     *
+     * @param context the context
+     * @param attrs the attrs
+     */
     public CalendarView(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.calendarViewStyle);
     }
 
+    /**
+     * Instantiates a new calendar view.
+     *
+     * @param context the context
+     * @param attrs the attrs
+     * @param defStyle the def style
+     */
     public CalendarView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setCurrentLocale(Locale.getDefault());
@@ -550,6 +898,13 @@ public class CalendarView extends FrameLayout {
         invalidate();
     }
 
+    /**
+     * Gets the calendar for locale.
+     *
+     * @param oldCalendar the old calendar
+     * @param locale the locale
+     * @return the calendar for locale
+     */
     private Calendar getCalendarForLocale(Calendar oldCalendar, Locale locale) {
         if (oldCalendar == null) {
             return Calendar.getInstance(locale);
@@ -561,26 +916,57 @@ public class CalendarView extends FrameLayout {
         }
     }
 
+    /**
+     * Gets the date.
+     *
+     * @return the date
+     */
     public long getDate() {
         return mAdapter.mSelectedDate.getTimeInMillis();
     }
 
+    /**
+     * Gets the first day of week.
+     *
+     * @return the first day of week
+     */
     public int getFirstDayOfWeek() {
         return mFirstDayOfWeek;
     }
 
+    /**
+     * Gets the max date.
+     *
+     * @return the max date
+     */
     public long getMaxDate() {
         return mMaxDate.getTimeInMillis();
     }
 
+    /**
+     * Gets the min date.
+     *
+     * @return the min date
+     */
     public long getMinDate() {
         return mMinDate.getTimeInMillis();
     }
 
+    /**
+     * Gets the show week number.
+     *
+     * @return the show week number
+     */
     public boolean getShowWeekNumber() {
         return mShowWeekNumber;
     }
 
+    /**
+     * Gets the weeks since min date.
+     *
+     * @param date the date
+     * @return the weeks since min date
+     */
     private int getWeeksSinceMinDate(Calendar date) {
         if (date.before(mMinDate)) {
             throw new IllegalArgumentException("fromDate: "
@@ -596,6 +982,14 @@ public class CalendarView extends FrameLayout {
         return (int) ((endTimeMillis - startTimeMillis + dayOffsetMillis) / CalendarView.MILLIS_IN_WEEK);
     }
 
+    /**
+     * Go to.
+     *
+     * @param date the date
+     * @param animate the animate
+     * @param setSelected the set selected
+     * @param forceScroll the force scroll
+     */
     @SuppressLint("NewApi")
     private void goTo(Calendar date, boolean animate, boolean setSelected,
             boolean forceScroll) {
@@ -643,11 +1037,21 @@ public class CalendarView extends FrameLayout {
         }
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#isEnabled()
+     */
     @Override
     public boolean isEnabled() {
         return mListView.isEnabled();
     }
 
+    /**
+     * Checks if is same date.
+     *
+     * @param firstDate the first date
+     * @param secondDate the second date
+     * @return true, if is same date
+     */
     private boolean isSameDate(Calendar firstDate, Calendar secondDate) {
         return firstDate.get(Calendar.DAY_OF_YEAR) == secondDate
                 .get(Calendar.DAY_OF_YEAR)
@@ -655,6 +1059,9 @@ public class CalendarView extends FrameLayout {
                         .get(Calendar.YEAR);
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#onConfigurationChanged(android.content.res.Configuration)
+     */
     @SuppressLint("NewApi")
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
@@ -662,6 +1069,14 @@ public class CalendarView extends FrameLayout {
         setCurrentLocale(newConfig.locale);
     }
 
+    /**
+     * On scroll.
+     *
+     * @param view the view
+     * @param firstVisibleItem the first visible item
+     * @param visibleItemCount the visible item count
+     * @param totalItemCount the total item count
+     */
     private void onScroll(AbsListView view, int firstVisibleItem,
             int visibleItemCount, int totalItemCount) {
         WeekView child = (WeekView) view.getChildAt(0);
@@ -711,10 +1126,23 @@ public class CalendarView extends FrameLayout {
         mPreviousScrollState = mCurrentScrollState;
     }
 
+    /**
+     * On scroll state changed.
+     *
+     * @param view the view
+     * @param scrollState the scroll state
+     */
     private void onScrollStateChanged(AbsListView view, int scrollState) {
         mScrollStateChangedRunnable.doScrollStateChange(view, scrollState);
     }
 
+    /**
+     * Parses the date.
+     *
+     * @param date the date
+     * @param outDate the out date
+     * @return true, if successful
+     */
     private boolean parseDate(String date, Calendar outDate) {
         try {
             outDate.setTime(mDateFormat.parse(date));
@@ -726,6 +1154,11 @@ public class CalendarView extends FrameLayout {
         }
     }
 
+    /**
+     * Sets the current locale.
+     *
+     * @param locale the new current locale
+     */
     private void setCurrentLocale(Locale locale) {
         if (locale.equals(mCurrentLocale)) {
             return;
@@ -738,10 +1171,22 @@ public class CalendarView extends FrameLayout {
         mMaxDate = getCalendarForLocale(mMaxDate, locale);
     }
 
+    /**
+     * Sets the date.
+     *
+     * @param date the new date
+     */
     public void setDate(long date) {
         setDate(date, false, false);
     }
 
+    /**
+     * Sets the date.
+     *
+     * @param date the date
+     * @param animate the animate
+     * @param center the center
+     */
     public void setDate(long date, boolean animate, boolean center) {
         mTempDate.setTimeInMillis(date);
         if (isSameDate(mTempDate, mAdapter.mSelectedDate)) {
@@ -750,11 +1195,19 @@ public class CalendarView extends FrameLayout {
         goTo(mTempDate, animate, true, center);
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#setEnabled(boolean)
+     */
     @Override
     public void setEnabled(boolean enabled) {
         mListView.setEnabled(enabled);
     }
 
+    /**
+     * Sets the first day of week.
+     *
+     * @param firstDayOfWeek the new first day of week
+     */
     public void setFirstDayOfWeek(int firstDayOfWeek) {
         if (mFirstDayOfWeek == firstDayOfWeek) {
             return;
@@ -765,6 +1218,11 @@ public class CalendarView extends FrameLayout {
         setUpHeader(CalendarView.DEFAULT_WEEK_DAY_TEXT_APPEARANCE_RES_ID);
     }
 
+    /**
+     * Sets the max date.
+     *
+     * @param maxDate the new max date
+     */
     public void setMaxDate(long maxDate) {
         mTempDate.setTimeInMillis(maxDate);
         if (isSameDate(mTempDate, mMaxDate)) {
@@ -780,6 +1238,11 @@ public class CalendarView extends FrameLayout {
         }
     }
 
+    /**
+     * Sets the min date.
+     *
+     * @param minDate the new min date
+     */
     public void setMinDate(long minDate) {
         mTempDate.setTimeInMillis(minDate);
         if (isSameDate(mTempDate, mMinDate)) {
@@ -798,6 +1261,11 @@ public class CalendarView extends FrameLayout {
         }
     }
 
+    /**
+     * Sets the month displayed.
+     *
+     * @param calendar the new month displayed
+     */
     private void setMonthDisplayed(Calendar calendar) {
         final int newMonthDisplayed = calendar.get(Calendar.MONTH);
         final int newYearDisplayed = calendar.get(Calendar.YEAR);
@@ -817,10 +1285,20 @@ public class CalendarView extends FrameLayout {
         }
     }
 
+    /**
+     * Sets the on date change listener.
+     *
+     * @param listener the new on date change listener
+     */
     public void setOnDateChangeListener(OnDateChangeListener listener) {
         mOnDateChangeListener = listener;
     }
 
+    /**
+     * Sets the show week number.
+     *
+     * @param showWeekNumber the new show week number
+     */
     public void setShowWeekNumber(boolean showWeekNumber) {
         if (mShowWeekNumber == showWeekNumber) {
             return;
@@ -830,6 +1308,9 @@ public class CalendarView extends FrameLayout {
         setUpHeader(CalendarView.DEFAULT_WEEK_DAY_TEXT_APPEARANCE_RES_ID);
     }
 
+    /**
+     * Sets the up adapter.
+     */
     private void setUpAdapter() {
         if (mAdapter == null) {
             mAdapter = new WeeksAdapter(getContext());
@@ -851,7 +1332,13 @@ public class CalendarView extends FrameLayout {
         mAdapter.notifyDataSetChanged();
     }
 
-    private void setUpHeader(int weekDayTextAppearanceResId) {
+    /**
+     * Sets the up header.
+     *
+     * @param weekDayTextAppearanceResId the new up header
+     */
+    @SuppressWarnings("deprecation")
+	private void setUpHeader(int weekDayTextAppearanceResId) {
         mDayLabels = new String[mDaysPerWeek];
         for (int i = mFirstDayOfWeek, count = mFirstDayOfWeek + mDaysPerWeek; i < count; i++) {
             int calendarDay = i > Calendar.SATURDAY ? i - Calendar.SATURDAY : i;
@@ -880,6 +1367,9 @@ public class CalendarView extends FrameLayout {
         mDayNamesHeader.invalidate();
     }
 
+    /**
+     * Sets the up list view.
+     */
     @SuppressLint("NewApi")
     private void setUpListView() {
         mListView.setDivider(null);

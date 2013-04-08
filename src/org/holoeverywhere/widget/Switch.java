@@ -29,7 +29,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CompoundButton;
 
-@SuppressLint("NewApi")
+@SuppressLint({ "NewApi", "Recycle" })
 public class Switch extends CompoundButton {
     private static final int[] CHECKED_STATE_SET = {
             android.R.attr.state_checked

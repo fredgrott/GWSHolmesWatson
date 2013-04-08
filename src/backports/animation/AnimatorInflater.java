@@ -46,15 +46,19 @@ public class AnimatorInflater {
      * These flags are used when parsing AnimatorSet objects
      */
     private static final int TOGETHER = 0;
-    private static final int SEQUENTIALLY = 1;
+    @SuppressWarnings("unused")
+	private static final int SEQUENTIALLY = 1;
 
     /**
      * Enum values used in XML attributes to indicate the value for mValueType
      */
     private static final int VALUE_TYPE_FLOAT       = 0;
-    private static final int VALUE_TYPE_INT         = 1;
-    private static final int VALUE_TYPE_COLOR       = 4;
-    private static final int VALUE_TYPE_CUSTOM      = 5;
+    @SuppressWarnings("unused")
+	private static final int VALUE_TYPE_INT         = 1;
+    @SuppressWarnings("unused")
+	private static final int VALUE_TYPE_COLOR       = 4;
+    @SuppressWarnings("unused")
+	private static final int VALUE_TYPE_CUSTOM      = 5;
 
     /**
      * Loads an {@link Animator} object from a resource
@@ -180,7 +184,7 @@ public class AnimatorInflater {
      * @param context the application environment
      * @param attrs the set of attributes holding the animation parameters
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({ "unused", "rawtypes" })
 	private static ValueAnimator loadAnimator(Context context, AttributeSet attrs, ValueAnimator anim)
             throws NotFoundException {
 

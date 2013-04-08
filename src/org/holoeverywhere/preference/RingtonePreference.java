@@ -84,7 +84,7 @@ public class RingtonePreference extends DialogPreference implements
         if (mShowDefault) {
             ringtonePickerIntent.putExtra(
                     RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
-                    RingtoneManager.getDefaultUri(getRingtoneType()));
+                    RingtoneManager.getDefaultUri(mRingtoneType));
         }
         ringtonePickerIntent.putExtra(
                 RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, mShowSilent);

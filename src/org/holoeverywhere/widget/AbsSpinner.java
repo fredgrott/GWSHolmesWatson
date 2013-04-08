@@ -136,7 +136,8 @@ public abstract class AbsSpinner extends AdapterView<SpinnerAdapter> {
                 ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
-    @Override
+    @SuppressLint("FieldGetter")
+	@Override
     public SpinnerAdapter getAdapter() {
         return mAdapter;
     }

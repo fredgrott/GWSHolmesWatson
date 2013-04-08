@@ -36,7 +36,8 @@ public abstract class DragSortCursorAdapter extends CursorAdapter implements Dra
 
     private ArrayList<Integer> mRemovedCursorPositions = new ArrayList<Integer>();
     
-    public DragSortCursorAdapter(Context context, Cursor c) {
+    @SuppressWarnings("deprecation")
+	public DragSortCursorAdapter(Context context, Cursor c) {
         super(context, c);
     }
 

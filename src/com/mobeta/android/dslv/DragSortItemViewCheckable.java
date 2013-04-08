@@ -1,14 +1,13 @@
 package com.mobeta.android.dslv;
 
 import android.content.Context;
-import android.view.Gravity;
-import android.view.View;
-import android.view.View.MeasureSpec;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.Checkable;
-import android.util.Log;
 
+import android.view.View;
+
+import android.widget.Checkable;
+
+
+// TODO: Auto-generated Javadoc
 /**
  * Lightweight ViewGroup that wraps list items obtained from user's
  * ListAdapter. ItemView expects a single child that has a definite
@@ -26,10 +25,18 @@ import android.util.Log;
  */
 public class DragSortItemViewCheckable extends DragSortItemView implements Checkable {
 
+    /**
+     * Instantiates a new drag sort item view checkable.
+     *
+     * @param context the context
+     */
     public DragSortItemViewCheckable(Context context) {
         super(context);
     }
 
+    /* (non-Javadoc)
+     * @see android.widget.Checkable#isChecked()
+     */
     @Override
     public boolean isChecked() {
         View child = getChildAt(0);
@@ -39,6 +46,9 @@ public class DragSortItemViewCheckable extends DragSortItemView implements Check
             return false;
     }
 
+    /* (non-Javadoc)
+     * @see android.widget.Checkable#setChecked(boolean)
+     */
     @Override
     public void setChecked(boolean checked) {
         View child = getChildAt(0);
@@ -46,6 +56,9 @@ public class DragSortItemViewCheckable extends DragSortItemView implements Check
             ((Checkable) child).setChecked(checked);
     }
 
+    /* (non-Javadoc)
+     * @see android.widget.Checkable#toggle()
+     */
     @Override
     public void toggle() {
         View child = getChildAt(0);

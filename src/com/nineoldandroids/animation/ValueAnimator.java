@@ -145,9 +145,10 @@ public class ValueAnimator extends Animator {
             new AccelerateDecelerateInterpolator();
 
     // type evaluators for the primitive types handled by this implementation
-    @SuppressWarnings("unused")
+    @SuppressWarnings({ "unused", "rawtypes" })
 	private static final TypeEvaluator sIntEvaluator = new IntEvaluator();
-    private static final TypeEvaluator sFloatEvaluator = new FloatEvaluator();
+    @SuppressWarnings({ "rawtypes", "unused" })
+	private static final TypeEvaluator sFloatEvaluator = new FloatEvaluator();
 
     /**
      * Used to indicate whether the animation is currently playing in reverse. This causes the
@@ -349,7 +350,8 @@ public class ValueAnimator extends Animator {
      * @param values A set of values that the animation will animate between over time.
      * @return A ValueAnimator object that is set up to animate between the given values.
      */
-    public static ValueAnimator ofObject(TypeEvaluator evaluator, Object... values) {
+    @SuppressWarnings("rawtypes")
+	public static ValueAnimator ofObject(TypeEvaluator evaluator, Object... values) {
         ValueAnimator anim = new ValueAnimator();
         anim.setObjectValues(values);
         anim.setEvaluator(evaluator);
@@ -430,7 +432,8 @@ public class ValueAnimator extends Animator {
      *
      * @param values The set of values to animate between.
      */
-    public void setObjectValues(Object... values) {
+    @SuppressWarnings("rawtypes")
+	public void setObjectValues(Object... values) {
         if (values == null || values.length == 0) {
             return;
         }
@@ -581,7 +584,8 @@ public class ValueAnimator extends Animator {
          * The FRAME message is the one that is sent over and over while there are any
          * active animations to process.
          */
-        @Override
+        @SuppressWarnings("unchecked")
+		@Override
         public void handleMessage(Message msg) {
             boolean callAgain = true;
             ArrayList<ValueAnimator> animations = sAnimations.get();
@@ -895,7 +899,8 @@ public class ValueAnimator extends Animator {
      *
      * @param value the evaluator to be used this animation
      */
-    public void setEvaluator(TypeEvaluator value) {
+    @SuppressWarnings("rawtypes")
+	public void setEvaluator(TypeEvaluator value) {
         if (value != null && mValues != null && mValues.length > 0) {
             mValues[0].setEvaluator(value);
         }
@@ -914,7 +919,8 @@ public class ValueAnimator extends Animator {
      *
      * @param playBackwards Whether the ValueAnimator should start playing in reverse.
      */
-    private void start(boolean playBackwards) {
+    @SuppressWarnings("unchecked")
+	private void start(boolean playBackwards) {
         if (Looper.myLooper() == null) {
             throw new AndroidRuntimeException("Animators may only be run on Looper threads");
         }
@@ -952,7 +958,8 @@ public class ValueAnimator extends Animator {
         start(false);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void cancel() {
         // Only cancel if the animation is actually running or has been started and is about
         // to run
@@ -1022,7 +1029,8 @@ public class ValueAnimator extends Animator {
      * Called internally to end an animation by removing it from the animations list. Must be
      * called on the UI thread.
      */
-    private void endAnimation() {
+    @SuppressWarnings("unchecked")
+	private void endAnimation() {
         sAnimations.get().remove(this);
         sPendingAnimations.get().remove(this);
         sDelayedAnims.get().remove(this);
@@ -1043,7 +1051,8 @@ public class ValueAnimator extends Animator {
      * Called internally to start an animation by adding it to the active animations list. Must be
      * called on the UI thread.
      */
-    private void startAnimation() {
+    @SuppressWarnings("unchecked")
+	private void startAnimation() {
         initAnimation();
         sAnimations.get().add(this);
         if (mStartDelay > 0 && mListeners != null) {

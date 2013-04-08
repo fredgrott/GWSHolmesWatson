@@ -18,21 +18,45 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RayMenu.
+ */
 public class RayMenu extends RelativeLayout {
+	
+	/** The m ray layout. */
 	private RayLayout mRayLayout;
 
+	/** The m hint view. */
 	private ImageView mHintView;
 
+	/**
+	 * Instantiates a new ray menu.
+	 *
+	 * @param context the context
+	 */
 	public RayMenu(Context context) {
 		super(context);
 		init(context);
 	}
 
+	/**
+	 * Instantiates a new ray menu.
+	 *
+	 * @param context the context
+	 * @param attrs the attrs
+	 */
 	public RayMenu(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
 	}
 
+	/**
+	 * Inits the.
+	 *
+	 * @param context the context
+	 */
+	@SuppressWarnings("deprecation")
 	private void init(Context context) {
 		setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		setClipChildren(false);
@@ -60,11 +84,23 @@ public class RayMenu extends RelativeLayout {
 		mHintView = (ImageView) findViewById(R.id.control_hint);
 	}
 
+	/**
+	 * Adds the item.
+	 *
+	 * @param item the item
+	 * @param listener the listener
+	 */
 	public void addItem(View item, OnClickListener listener) {
 		mRayLayout.addView(item);
 		item.setOnClickListener(getItemClickListener(listener));
 	}
 
+	/**
+	 * Gets the item click listener.
+	 *
+	 * @param listener the listener
+	 * @return the item click listener
+	 */
 	private OnClickListener getItemClickListener(final OnClickListener listener) {
 		return new OnClickListener() {
 
@@ -113,6 +149,14 @@ public class RayMenu extends RelativeLayout {
 		};
 	}
 
+	/**
+	 * Bind item animation.
+	 *
+	 * @param child the child
+	 * @param isClicked the is clicked
+	 * @param duration the duration
+	 * @return the animation
+	 */
 	private Animation bindItemAnimation(final View child, final boolean isClicked, final long duration) {
 		Animation animation = createItemDisapperAnimation(duration, isClicked);
 		child.setAnimation(animation);
@@ -120,6 +164,9 @@ public class RayMenu extends RelativeLayout {
 		return animation;
 	}
 
+	/**
+	 * Item did disappear.
+	 */
 	private void itemDidDisappear() {
 		final int itemCount = mRayLayout.getChildCount();
 		for (int i = 0; i < itemCount; i++) {
@@ -130,6 +177,13 @@ public class RayMenu extends RelativeLayout {
 		mRayLayout.switchState(false);
 	}
 
+	/**
+	 * Creates the item disapper animation.
+	 *
+	 * @param duration the duration
+	 * @param isClicked the is clicked
+	 * @return the animation
+	 */
 	private static Animation createItemDisapperAnimation(final long duration, final boolean isClicked) {
 		AnimationSet animationSet = new AnimationSet(true);
 		animationSet.addAnimation(new ScaleAnimation(1.0f, isClicked ? 2.0f : 0.0f, 1.0f, isClicked ? 2.0f : 0.0f,
@@ -143,6 +197,12 @@ public class RayMenu extends RelativeLayout {
 		return animationSet;
 	}
 
+	/**
+	 * Creates the hint switch animation.
+	 *
+	 * @param expanded the expanded
+	 * @return the animation
+	 */
 	private static Animation createHintSwitchAnimation(final boolean expanded) {
 		Animation animation = new RotateAnimation(expanded ? 45 : 0, expanded ? 0 : 45, Animation.RELATIVE_TO_SELF,
 				0.5f, Animation.RELATIVE_TO_SELF, 0.5f);

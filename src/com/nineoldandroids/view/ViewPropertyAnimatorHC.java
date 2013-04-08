@@ -20,11 +20,13 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+import android.annotation.SuppressLint;
 import android.view.View;
 import android.view.animation.Interpolator;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ValueAnimator;
 
+@SuppressLint("NewApi")
 class ViewPropertyAnimatorHC extends ViewPropertyAnimator {
 
     /**
@@ -283,7 +285,8 @@ class ViewPropertyAnimatorHC extends ViewPropertyAnimator {
         startAnimation();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void cancel() {
         if (mAnimatorMap.size() > 0) {
             HashMap<Animator, PropertyBundle> mAnimatorMapCopy =
@@ -425,7 +428,8 @@ class ViewPropertyAnimatorHC extends ViewPropertyAnimator {
      * simply runs from 0 to 1, and then use that fractional value to set each property
      * value accordingly.
      */
-    private void startAnimation() {
+    @SuppressWarnings({ "unchecked" })
+	private void startAnimation() {
         ValueAnimator animator = ValueAnimator.ofFloat(1.0f);
         ArrayList<NameValuesHolder> nameValueList =
                 (ArrayList<NameValuesHolder>) mPendingAnimations.clone();
@@ -531,7 +535,8 @@ class ViewPropertyAnimatorHC extends ViewPropertyAnimator {
      * @param propertyConstant The property to be set
      * @param value The value to set the property to
      */
-    private void setValue(int propertyConstant, float value) {
+    @SuppressLint("NewApi")
+	private void setValue(int propertyConstant, float value) {
         //final View.TransformationInfo info = mView.mTransformationInfo;
         View v = mView.get();
         if (v != null) {
@@ -586,7 +591,8 @@ class ViewPropertyAnimatorHC extends ViewPropertyAnimator {
      * @param propertyConstant The property whose value should be returned
      * @return float The value of the named property
      */
-    private float getValue(int propertyConstant) {
+    @SuppressLint("NewApi")
+	private float getValue(int propertyConstant) {
         //final View.TransformationInfo info = mView.mTransformationInfo;
         View v = mView.get();
         if (v != null) {

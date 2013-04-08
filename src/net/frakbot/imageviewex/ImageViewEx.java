@@ -607,7 +607,8 @@ public class ImageViewEx extends ImageView {
     }
 
     /** Pause playing the GIF, if it has started. */
-    public void pause() {
+    @SuppressWarnings("deprecation")
+	public void pause() {
         // If the animation has started
         if (mUpdater != null && mUpdater.isAlive()) {
             mUpdater.suspend();

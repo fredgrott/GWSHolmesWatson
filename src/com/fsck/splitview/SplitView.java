@@ -5,39 +5,73 @@ import com.actionbarsherlock.R;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.SystemClock;
-import android.util.Log;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
+
 import android.view.ViewGroup;
 import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SplitView.
+ */
 public class SplitView extends LinearLayout implements OnTouchListener {
 
+    /** The m handle id. */
     private int mHandleId;
+    
+    /** The m handle. */
     private View mHandle;
 
+    /** The m primary content id. */
     private int mPrimaryContentId;
+    
+    /** The m primary content. */
     private View mPrimaryContent;
 
+    /** The m secondary content id. */
     private int mSecondaryContentId;
+    
+    /** The m secondary content. */
     private View mSecondaryContent;
 
+    /** The m last primary content size. */
     private int mLastPrimaryContentSize;
 
-    private boolean mDragging;
+    /** The m dragging. */
+    @SuppressWarnings("unused")
+	private boolean mDragging;
+    
+    /** The m dragging started. */
     private long mDraggingStarted;
+    
+    /** The m drag start x. */
     private float mDragStartX;
+    
+    /** The m drag start y. */
     private float mDragStartY;
 
+    /** The m pointer offset. */
     private float mPointerOffset;
 
+    /** The Constant MAXIMIZED_VIEW_TOLERANCE_DIP. */
     final static private int MAXIMIZED_VIEW_TOLERANCE_DIP = 30;
+    
+    /** The Constant TAP_DRIFT_TOLERANCE. */
     final static private int TAP_DRIFT_TOLERANCE = 3;
+    
+    /** The Constant SINGLE_TAP_MAX_TIME. */
     final static private int SINGLE_TAP_MAX_TIME = 175;
 
+    /**
+     * Instantiates a new split view.
+     *
+     * @param context the context
+     * @param attrs the attrs
+     */
     public SplitView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -70,6 +104,9 @@ public class SplitView extends LinearLayout implements OnTouchListener {
         }
     }
 
+    /**
+     * On finish inflate.
+     */
     @Override
     public void onFinishInflate() {
         super.onFinishInflate();
@@ -98,7 +135,16 @@ public class SplitView extends LinearLayout implements OnTouchListener {
         mHandle.setOnTouchListener(this);
 
     }
-    @Override
+    
+    /**
+     * On touch.
+     *
+     * @param view the view
+     * @param me the me
+     * @return true, if successful
+     */
+    @SuppressWarnings("unused")
+	@Override
     public boolean onTouch(View view, MotionEvent me) {
         ViewGroup.LayoutParams thisParams = getLayoutParams();
         // Only capture drag events if we start
@@ -144,10 +190,20 @@ public class SplitView extends LinearLayout implements OnTouchListener {
     }
 
     
+    /**
+     * Gets the handle.
+     *
+     * @return the handle
+     */
     public View getHandle() {
         return mHandle;
     }
 
+    /**
+     * Gets the primary content size.
+     *
+     * @return the primary content size
+     */
     public int getPrimaryContentSize() {
             if (getOrientation() == VERTICAL) {
                 return mPrimaryContent.getMeasuredHeight();
@@ -157,6 +213,12 @@ public class SplitView extends LinearLayout implements OnTouchListener {
 
     }
 
+    /**
+     * Sets the primary content size.
+     *
+     * @param newSize the new size
+     * @return true, if successful
+     */
     public boolean setPrimaryContentSize(int newSize) {
         if (getOrientation() == VERTICAL) {
             return setPrimaryContentHeight(newSize);
@@ -166,6 +228,12 @@ public class SplitView extends LinearLayout implements OnTouchListener {
     }
 
 
+    /**
+     * Sets the primary content height.
+     *
+     * @param newHeight the new height
+     * @return true, if successful
+     */
     private boolean setPrimaryContentHeight(int newHeight) {
         ViewGroup.LayoutParams params = mPrimaryContent.getLayoutParams();
         if (mSecondaryContent.getMeasuredHeight() < 1 && newHeight > params.height) {
@@ -180,6 +248,12 @@ public class SplitView extends LinearLayout implements OnTouchListener {
 
     }
 
+    /**
+     * Sets the primary content width.
+     *
+     * @param newWidth the new width
+     * @return true, if successful
+     */
     private boolean setPrimaryContentWidth(int newWidth) {
         ViewGroup.LayoutParams params = mPrimaryContent.getLayoutParams();
 
@@ -194,6 +268,12 @@ public class SplitView extends LinearLayout implements OnTouchListener {
         mPrimaryContent.setLayoutParams(params);
         return true;
     }
+    
+    /**
+     * Checks if is primary content maximized.
+     *
+     * @return true, if is primary content maximized
+     */
     public boolean isPrimaryContentMaximized() {
         if ( (getOrientation() == VERTICAL && (mSecondaryContent.getMeasuredHeight() < MAXIMIZED_VIEW_TOLERANCE_DIP) ) ||
                 (getOrientation() == HORIZONTAL && (mSecondaryContent.getMeasuredWidth() < MAXIMIZED_VIEW_TOLERANCE_DIP) )) {
@@ -205,6 +285,11 @@ public class SplitView extends LinearLayout implements OnTouchListener {
     }
 
 
+    /**
+     * Checks if is secondary content maximized.
+     *
+     * @return true, if is secondary content maximized
+     */
     public boolean isSecondaryContentMaximized() {
         if ( (getOrientation() == VERTICAL && (mPrimaryContent.getMeasuredHeight() < MAXIMIZED_VIEW_TOLERANCE_DIP) ) ||
                 (getOrientation() == HORIZONTAL && (mPrimaryContent.getMeasuredWidth() < MAXIMIZED_VIEW_TOLERANCE_DIP) )) {
@@ -214,17 +299,30 @@ public class SplitView extends LinearLayout implements OnTouchListener {
         }
     }
 
+    /**
+     * Maximize primary content.
+     */
     public void maximizePrimaryContent() {
         maximizeContentPane(mPrimaryContent, mSecondaryContent);
     }
 
+    /**
+     * Maximize secondary content.
+     */
     public void maximizeSecondaryContent() {
         maximizeContentPane(mSecondaryContent, mPrimaryContent);
     }
 
 
 
-    private void maximizeContentPane(View toMaximize, View toUnMaximize) {
+    /**
+     * Maximize content pane.
+     *
+     * @param toMaximize the to maximize
+     * @param toUnMaximize the to un maximize
+     */
+    @SuppressWarnings({ "deprecation" })
+	private void maximizeContentPane(View toMaximize, View toUnMaximize) {
         mLastPrimaryContentSize = getPrimaryContentSize();
 
         ViewGroup.LayoutParams params = toUnMaximize.getLayoutParams();
@@ -243,7 +341,11 @@ public class SplitView extends LinearLayout implements OnTouchListener {
 
     }
 
-    private void unMinimizeSecondaryContent() {
+    /**
+     * Un minimize secondary content.
+     */
+    @SuppressWarnings("deprecation")
+	private void unMinimizeSecondaryContent() {
         ViewGroup.LayoutParams secondaryParams = mSecondaryContent.getLayoutParams();
         if (getOrientation() == VERTICAL) {
             secondaryParams.height = LayoutParams.FILL_PARENT;

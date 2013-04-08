@@ -21,6 +21,7 @@ package backports.property;
  *
  * @see Property#of(java.lang.Class, java.lang.Class, java.lang.String)
  */
+@SuppressWarnings("serial")
 public class NoSuchPropertyException extends RuntimeException {
 
     public NoSuchPropertyException(String s) {

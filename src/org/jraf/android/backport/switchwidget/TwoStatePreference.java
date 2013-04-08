@@ -68,7 +68,7 @@ public abstract class TwoStatePreference extends Preference {
     protected void onClick() {
         super.onClick();
 
-        boolean newValue = !isChecked();
+        boolean newValue = !mChecked;
 
 //        mSendClickAccessibilityEvent = true;
 
@@ -115,7 +115,7 @@ public abstract class TwoStatePreference extends Preference {
      */
     public void setSummaryOn(CharSequence summary) {
         mSummaryOn = summary;
-        if (isChecked()) {
+        if (mChecked) {
             notifyChanged();
         }
     }
@@ -143,7 +143,7 @@ public abstract class TwoStatePreference extends Preference {
      */
     public void setSummaryOff(CharSequence summary) {
         mSummaryOff = summary;
-        if (!isChecked()) {
+        if (!mChecked) {
             notifyChanged();
         }
     }
@@ -256,7 +256,7 @@ public abstract class TwoStatePreference extends Preference {
         }
 
         final SavedState myState = new SavedState(superState);
-        myState.checked = isChecked();
+        myState.checked = mChecked;
         return myState;
     }
 
@@ -291,7 +291,6 @@ public abstract class TwoStatePreference extends Preference {
             super(superState);
         }
 
-        @SuppressWarnings("hiding")
         public static final Parcelable.Creator<SavedState> CREATOR =
                 new Parcelable.Creator<SavedState>() {
             public SavedState createFromParcel(Parcel in) {

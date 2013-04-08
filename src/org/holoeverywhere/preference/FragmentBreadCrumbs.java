@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+@SuppressLint("InlinedApi")
 public class FragmentBreadCrumbs extends ViewGroup implements
         FragmentManager.OnBackStackChangedListener {
     public interface OnBreadCrumbClickListener {

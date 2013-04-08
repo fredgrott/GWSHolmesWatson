@@ -282,7 +282,8 @@ public final class AnimatorSet extends Animator {
     @Override
     public void cancel() {
         mTerminated = true;
-        if (isStarted()) {
+        //isStarted()
+        if (mStarted) {
             ArrayList<AnimatorListener> tmpListeners = null;
             if (mListeners != null) {
                 tmpListeners = (ArrayList<AnimatorListener>) mListeners.clone();
@@ -314,10 +315,12 @@ public final class AnimatorSet extends Animator {
      * <p>Note that ending a <code>AnimatorSet</code> also ends all of the animations that it is
      * responsible for.</p>
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void end() {
         mTerminated = true;
-        if (isStarted()) {
+        //isStarted()
+        if (mStarted) {
             if (mSortedNodes.size() != mNodes.size()) {
                 // hasn't been started yet - sort the nodes now, then end them
                 sortNodes();

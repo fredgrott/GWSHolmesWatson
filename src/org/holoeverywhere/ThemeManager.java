@@ -131,6 +131,7 @@ import android.util.SparseIntArray;
  * 
  * @author prok (prototypegamez@gmail.com)
  */
+@SuppressLint("InlinedApi")
 public final class ThemeManager {
     /**
      * System interface for calling super.startActivity in the activities.

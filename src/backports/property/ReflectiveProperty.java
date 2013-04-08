@@ -95,7 +95,8 @@ class ReflectiveProperty<T, V> extends Property<T, V> {
      * method/field will probably be a primitive type instead. Accept float as matching Float,
      * etc.
      */
-    private boolean typesMatch(Class<V> valueType, Class getterType) {
+    @SuppressWarnings("rawtypes")
+	private boolean typesMatch(Class<V> valueType, Class getterType) {
         if (getterType != valueType) {
             if (getterType.isPrimitive()) {
                 return (getterType == float.class && valueType == Float.class) ||
@@ -133,7 +134,8 @@ class ReflectiveProperty<T, V> extends Property<T, V> {
         }
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public V get(T object) {
         if (mGetter != null) {
             try {

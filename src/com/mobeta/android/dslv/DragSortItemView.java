@@ -3,11 +3,12 @@ package com.mobeta.android.dslv;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
-import android.view.View.MeasureSpec;
+
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.util.Log;
 
+
+// TODO: Auto-generated Javadoc
 /**
  * Lightweight ViewGroup that wraps list items obtained from user's
  * ListAdapter. ItemView expects a single child that has a definite
@@ -25,9 +26,16 @@ import android.util.Log;
  */
 public class DragSortItemView extends ViewGroup {
 
+    /** The m gravity. */
     private int mGravity = Gravity.TOP;
 
-    public DragSortItemView(Context context) {
+    /**
+     * Instantiates a new drag sort item view.
+     *
+     * @param context the context
+     */
+    @SuppressWarnings("deprecation")
+	public DragSortItemView(Context context) {
         super(context);
 
         // always init with standard ListView layout params
@@ -38,14 +46,27 @@ public class DragSortItemView extends ViewGroup {
         //setClipChildren(true);
     }
 
+    /**
+     * Sets the gravity.
+     *
+     * @param gravity the new gravity
+     */
     public void setGravity(int gravity) {
         mGravity = gravity;
     }
 
+    /**
+     * Gets the gravity.
+     *
+     * @return the gravity
+     */
     public int getGravity() {
         return mGravity;
     }
 
+    /* (non-Javadoc)
+     * @see android.view.ViewGroup#onLayout(boolean, int, int, int, int)
+     */
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         final View child = getChildAt(0);
@@ -61,8 +82,8 @@ public class DragSortItemView extends ViewGroup {
         }
     }
 
-    /**
-     * 
+    /* (non-Javadoc)
+     * @see android.view.View#onMeasure(int, int)
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

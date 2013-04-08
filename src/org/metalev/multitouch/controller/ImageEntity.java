@@ -8,37 +8,51 @@
 package org.metalev.multitouch.controller;
 
 import android.graphics.drawable.Drawable;
-import android.graphics.Paint;
-import android.graphics.Rect;
+
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap;
+
 
 import android.content.res.Resources;
 import android.content.Context;
 
-import java.io.ObjectOutputStream;
-import java.io.ObjectInputStream;
-import java.io.IOException;
 
-import org.metalev.multitouch.controller.MultiTouchController.PositionAndScale;
 
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ImageEntity.
+ */
+@SuppressWarnings("serial")
 public class ImageEntity extends MultiTouchEntity {
 
+    /** The Constant INITIAL_SCALE_FACTOR. */
     private static final double INITIAL_SCALE_FACTOR = 0.50;
 
+    /** The m drawable. */
     private transient Drawable mDrawable;
 
+    /** The m resource id. */
     private int mResourceId;
 
+    /**
+     * Instantiates a new image entity.
+     *
+     * @param resourceId the resource id
+     * @param res the res
+     */
     public ImageEntity(int resourceId, Resources res)  {
         super(res);
 
         mResourceId = resourceId;
     }
 
+    /**
+     * Instantiates a new image entity.
+     *
+     * @param e the e
+     * @param res the res
+     */
     public ImageEntity(ImageEntity e, Resources res) {
         super(res);
 
@@ -51,6 +65,9 @@ public class ImageEntity extends MultiTouchEntity {
         mAngle = e.mAngle;
     }
 
+    /* (non-Javadoc)
+     * @see org.metalev.multitouch.controller.MultiTouchEntity#draw(android.graphics.Canvas)
+     */
     public void draw(Canvas canvas) {
         canvas.save();
 
@@ -69,15 +86,22 @@ public class ImageEntity extends MultiTouchEntity {
     }
 
     /**
-     * Called by activity's onPause() method to free memory used for loading the images
+     * Called by activity's onPause() method to free memory used for loading the images.
      */
     @Override
     public void unload() {
         this.mDrawable = null;
     }
 
-    /** Called by activity's onResume() method to load the images */
-    @Override
+    /**
+     * Called by activity's onResume() method to load the images.
+     *
+     * @param context the context
+     * @param startMidX the start mid x
+     * @param startMidY the start mid y
+     */
+    @SuppressWarnings("unused")
+	@Override
     public void load(Context context, float startMidX, float startMidY) {
         Resources res = context.getResources();
         getMetrics(res);

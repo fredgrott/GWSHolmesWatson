@@ -78,12 +78,17 @@ public class GridViewCompat extends GridView {
     private static Method gridView_getCheckedItemIds;
     private static Method gridView_isItemChecked;
     private static Method gridView_getCheckedItemPosition;
-    private static Method gridView_getCheckedItemPositions;
-    private static Method gridView_clearChoices;
-    private static Method gridView_setItemChecked;
-    private static Method gridView_setChoiceMode;
+    @SuppressWarnings("unused")
+	private static Method gridView_getCheckedItemPositions;
+    @SuppressWarnings("unused")
+	private static Method gridView_clearChoices;
+    @SuppressWarnings("unused")
+	private static Method gridView_setItemChecked;
+    @SuppressWarnings("unused")
+	private static Method gridView_setChoiceMode;
     private static Method gridView_getChoiceMode;
-    private static Method gridView_getCheckedItemCount;
+    @SuppressWarnings("unused")
+	private static Method gridView_getCheckedItemCount;
 
     static {
         try {
@@ -180,7 +185,8 @@ public class GridViewCompat extends GridView {
          * @param keys Keys to set
          * @param uniqueValue Value to set all supplied keys to
          */
-        public void setValues(long[] keys, E uniqueValue) {
+        @SuppressWarnings("unused")
+		public void setValues(long[] keys, E uniqueValue) {
             int length = keys.length;
             for (int i = 0; i < length; i++) {
                 put(keys[i], uniqueValue);
@@ -200,7 +206,8 @@ public class GridViewCompat extends GridView {
          * Gets the Object mapped from the specified key, or the specified Object if no such mapping
          * has been made.
          */
-        public E get(long key, E valueIfKeyNotFound) {
+        @SuppressWarnings("unchecked")
+		public E get(long key, E valueIfKeyNotFound) {
             int i = binarySearch(mKeys, 0, mSize, key);
 
             if (i < 0 || mValues[i] == DELETED) {
@@ -338,7 +345,8 @@ public class GridViewCompat extends GridView {
          * Given an index in the range <code>0...size()-1</code>, returns the value from the
          * <code>index</code>th key-value mapping that this SparseArray stores.
          */
-        public E valueAt(int index) {
+        @SuppressWarnings("unchecked")
+		public E valueAt(int index) {
             if (mGarbage) {
                 gc();
             }
@@ -350,7 +358,8 @@ public class GridViewCompat extends GridView {
          * Given an index in the range <code>0...size()-1</code>, sets a new value for the
          * <code>index</code>th key-value mapping that this SparseArray stores.
          */
-        public void setValueAt(int index, E value) {
+        @SuppressWarnings("unused")
+		public void setValueAt(int index, E value) {
             if (mGarbage) {
                 gc();
             }
@@ -517,7 +526,8 @@ public class GridViewCompat extends GridView {
             return idealByteArraySize(need * 2) / 2;
         }
 
-        public static int idealCharArraySize(int need) {
+        @SuppressWarnings("unused")
+		public static int idealCharArraySize(int need) {
             return idealByteArraySize(need * 2) / 2;
         }
 
@@ -569,7 +579,7 @@ public class GridViewCompat extends GridView {
          * Returns an empty array of the specified type. The intent is that it will return the same
          * empty array every time to avoid reallocation, although this is not guaranteed.
          */
-        @SuppressWarnings("unused")
+        @SuppressWarnings({ "unused", "unchecked" })
 		public static <T> T[] emptyArray(Class<T> kind) {
             if (kind == Object.class) {
                 return (T[]) EMPTY;

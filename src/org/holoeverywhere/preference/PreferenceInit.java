@@ -9,10 +9,12 @@ import org.holoeverywhere.app.Activity;
 
 import com.actionbarsherlock.R;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 
+@SuppressLint("Recycle")
 public class PreferenceInit {
     public static final String PACKAGE;
     public static final int THEME_FLAG;

@@ -60,6 +60,7 @@ public class OrientationUtil implements SensorEventListener {
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
+		@SuppressWarnings("unused")
 		float azimuth = event.values[0];     // azimuth
 		float pitch = event.values[1];     // pitch
 		float roll = event.values[2];        // roll

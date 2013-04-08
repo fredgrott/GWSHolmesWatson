@@ -78,8 +78,10 @@ public class PropertyValuesHolder implements Cloneable {
 
 
     // type evaluators for the primitive types handled by this implementation
-    private static final TypeEvaluator sIntEvaluator = new IntEvaluator();
-    private static final TypeEvaluator sFloatEvaluator = new FloatEvaluator();
+    @SuppressWarnings("rawtypes")
+	private static final TypeEvaluator sIntEvaluator = new IntEvaluator();
+    @SuppressWarnings("rawtypes")
+	private static final TypeEvaluator sFloatEvaluator = new FloatEvaluator();
 
     // We try several different types when searching for appropriate setter/getter functions.
     // The caller may have supplied values in a type that does not match the setter/getter
@@ -121,7 +123,8 @@ public class PropertyValuesHolder implements Cloneable {
      * but the system only knows about the primitive types int and float. Any other
      * type will need to set the evaluator to a custom evaluator for that type.
      */
-    private TypeEvaluator mEvaluator;
+    @SuppressWarnings("rawtypes")
+	private TypeEvaluator mEvaluator;
 
     /**
      * The value most recently calculated by calculateValue(). This is set during
@@ -206,7 +209,8 @@ public class PropertyValuesHolder implements Cloneable {
      * @param values The values that the named property will animate between.
      * @return PropertyValuesHolder The constructed PropertyValuesHolder object.
      */
-    public static PropertyValuesHolder ofObject(String propertyName, TypeEvaluator evaluator,
+    @SuppressWarnings("rawtypes")
+	public static PropertyValuesHolder ofObject(String propertyName, TypeEvaluator evaluator,
             Object... values) {
         PropertyValuesHolder pvh = new PropertyValuesHolder(propertyName);
         pvh.setObjectValues(values);
@@ -444,7 +448,7 @@ public class PropertyValuesHolder implements Cloneable {
      */
     @SuppressWarnings("rawtypes")
 	private Method setupSetterOrGetter(Class targetClass,
-            @SuppressWarnings("rawtypes") HashMap<Class, HashMap<String, Method>> propertyMapMap,
+            HashMap<Class, HashMap<String, Method>> propertyMapMap,
             String prefix, Class valueType) {
         Method setterOrGetter = null;
         try {
@@ -497,7 +501,7 @@ public class PropertyValuesHolder implements Cloneable {
      * on the target object.
      * @param target The object on which the setter (and possibly getter) exist.
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	void setupSetterAndGetter(Object target) {
         if (mProperty != null) {
             // check to make sure that mProperty is on the class of target
@@ -609,11 +613,11 @@ public class PropertyValuesHolder implements Cloneable {
     @SuppressWarnings("unchecked")
 	void setAnimatedValue(Object target) {
         if (mProperty != null) {
-            mProperty.set(target, getAnimatedValue());
+            mProperty.set(target, mAnimatedValue);
         }
         if (mSetter != null) {
             try {
-                mTmpValueArray[0] = getAnimatedValue();
+                mTmpValueArray[0] = mAnimatedValue;
                 mSetter.invoke(target, mTmpValueArray);
             } catch (InvocationTargetException e) {
                 Log.e("PropertyValuesHolder", e.toString());
@@ -652,7 +656,7 @@ public class PropertyValuesHolder implements Cloneable {
      * and Integer) are  correctly interpolated; all other types require setting a TypeEvaluator.
      * @param evaluator
      */
-    public void setEvaluator(TypeEvaluator evaluator) {
+    public void setEvaluator(@SuppressWarnings("rawtypes") TypeEvaluator evaluator) {
         mEvaluator = evaluator;
         mKeyframeSet.setEvaluator(evaluator);
     }
@@ -822,7 +826,8 @@ public class PropertyValuesHolder implements Cloneable {
          * according to the name of the property.
          * @param target The target object on which the value is set
          */
-        @Override
+        @SuppressWarnings("unchecked")
+		@Override
         void setAnimatedValue(Object target) {
             if (mIntProperty != null) {
                 mIntProperty.setValue(target, mIntAnimatedValue);
@@ -963,7 +968,8 @@ public class PropertyValuesHolder implements Cloneable {
          * according to the name of the property.
          * @param target The target object on which the value is set
          */
-        @Override
+        @SuppressWarnings("unchecked")
+		@Override
         void setAnimatedValue(Object target) {
             if (mFloatProperty != null) {
                 mFloatProperty.setValue(target, mFloatAnimatedValue);

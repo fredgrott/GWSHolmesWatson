@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.SpinnerAdapter;
 
+// TODO: Auto-generated Javadoc
 /**
  * A window feature at the top of the activity that may display the activity title, navigation
  * modes, and other interactive items.
@@ -285,10 +286,9 @@ public abstract class ActionBar {
 
     /**
      * Set the action bar's title. This will only be displayed if
-     * {@link #DISPLAY_SHOW_TITLE} is set.
      *
      * @param title Title to set
-     *
+     * {@link #DISPLAY_SHOW_TITLE} is set.
      * @see #setTitle(int)
      * @see #setDisplayOptions(int, int)
      */
@@ -296,10 +296,9 @@ public abstract class ActionBar {
 
     /**
      * Set the action bar's title. This will only be displayed if
-     * {@link #DISPLAY_SHOW_TITLE} is set.
      *
      * @param resId Resource ID of title string to set
-     *
+     * {@link #DISPLAY_SHOW_TITLE} is set.
      * @see #setTitle(CharSequence)
      * @see #setDisplayOptions(int, int)
      */
@@ -307,11 +306,10 @@ public abstract class ActionBar {
 
     /**
      * Set the action bar's subtitle. This will only be displayed if
-     * {@link #DISPLAY_SHOW_TITLE} is set. Set to null to disable the
-     * subtitle entirely.
      *
      * @param subtitle Subtitle to set
-     *
+     * {@link #DISPLAY_SHOW_TITLE} is set. Set to null to disable the
+     * subtitle entirely.
      * @see #setSubtitle(int)
      * @see #setDisplayOptions(int, int)
      */
@@ -319,10 +317,9 @@ public abstract class ActionBar {
 
     /**
      * Set the action bar's subtitle. This will only be displayed if
-     * {@link #DISPLAY_SHOW_TITLE} is set.
      *
      * @param resId Resource ID of subtitle string to set
-     *
+     * {@link #DISPLAY_SHOW_TITLE} is set.
      * @see #setSubtitle(CharSequence)
      * @see #setDisplayOptions(int, int)
      */
@@ -340,15 +337,15 @@ public abstract class ActionBar {
     /**
      * Set selected display options. Only the options specified by mask will be changed.
      * To change all display option bits at once, see {@link #setDisplayOptions(int)}.
-     *
+     * 
      * <p>Example: setDisplayOptions(0, DISPLAY_SHOW_HOME) will disable the
+     *
+     * @param options A combination of the bits defined by the DISPLAY_ constants
+     * defined in ActionBar.
+     * @param mask A bit mask declaring which display options should be changed.
      * {@link #DISPLAY_SHOW_HOME} option.
      * setDisplayOptions(DISPLAY_SHOW_HOME, DISPLAY_SHOW_HOME | DISPLAY_USE_LOGO)
      * will enable {@link #DISPLAY_SHOW_HOME} and disable {@link #DISPLAY_USE_LOGO}.
-     *
-     * @param options A combination of the bits defined by the DISPLAY_ constants
-     *                defined in ActionBar.
-     * @param mask A bit mask declaring which display options should be changed.
      */
     public abstract void setDisplayOptions(int options, int mask);
 
@@ -446,6 +443,8 @@ public abstract class ActionBar {
     public void setSplitBackgroundDrawable(Drawable d) { }
 
     /**
+     * Gets the custom view.
+     *
      * @return The current custom view.
      */
     public abstract View getCustomView();
@@ -453,18 +452,18 @@ public abstract class ActionBar {
     /**
      * Returns the current ActionBar title in standard mode.
      * Returns null if {@link #getNavigationMode()} would not return
-     * {@link #NAVIGATION_MODE_STANDARD}.
      *
      * @return The current ActionBar title or null.
+     * {@link #NAVIGATION_MODE_STANDARD}.
      */
     public abstract CharSequence getTitle();
 
     /**
      * Returns the current ActionBar subtitle in standard mode.
      * Returns null if {@link #getNavigationMode()} would not return
-     * {@link #NAVIGATION_MODE_STANDARD}.
      *
      * @return The current ActionBar subtitle or null.
+     * {@link #NAVIGATION_MODE_STANDARD}.
      */
     public abstract CharSequence getSubtitle();
 
@@ -491,6 +490,8 @@ public abstract class ActionBar {
     public abstract void setNavigationMode(int mode);
 
     /**
+     * Gets the display options.
+     *
      * @return The current set of display options.
      */
     public abstract int getDisplayOptions();
@@ -498,15 +499,13 @@ public abstract class ActionBar {
     /**
      * Create and return a new {@link Tab}.
      * This tab will not be included in the action bar until it is added.
-     *
+     * 
      * <p>Very often tabs will be used to switch between {@link Fragment}
      * objects.  Here is a typical implementation of such tabs:</p>
      *
-     * {@sample development/samples/ApiDemos/src/com/example/android/apis/app/FragmentTabs.java
-     *      complete}
-     *
      * @return A new Tab
-     *
+     * {@sample development/samples/ApiDemos/src/com/example/android/apis/app/FragmentTabs.java
+     * complete}
      * @see #addTab(Tab)
      */
     public abstract Tab newTab();
@@ -589,7 +588,7 @@ public abstract class ActionBar {
      * Returns the tab at the specified index.
      *
      * @param index Index value in the range 0-get
-     * @return
+     * @return the tab at
      */
     public abstract Tab getTabAt(int index);
 
@@ -623,6 +622,8 @@ public abstract class ActionBar {
     public abstract void hide();
 
     /**
+     * Checks if is showing.
+     *
      * @return <code>true</code> if the ActionBar is showing, <code>false</code> otherwise.
      */
     public abstract boolean isShowing();
@@ -671,6 +672,8 @@ public abstract class ActionBar {
 
     /**
      * Listener interface for ActionBar navigation events.
+     *
+     * @see OnNavigationEvent
      */
     public interface OnNavigationListener {
         /**
@@ -686,6 +689,8 @@ public abstract class ActionBar {
 
     /**
      * Listener for receiving events when action bar menus are shown or hidden.
+     *
+     * @see OnMenuVisibilityEvent
      */
     public interface OnMenuVisibilityListener {
         /**
@@ -770,19 +775,19 @@ public abstract class ActionBar {
 
         /**
          * Set a custom view to be used for this tab. This overrides values set by
-         * {@link #setText(CharSequence)} and {@link #setIcon(Drawable)}.
          *
          * @param view Custom view to be used as a tab.
          * @return The current instance for call chaining
+         * {@link #setText(CharSequence)} and {@link #setIcon(Drawable)}.
          */
         public abstract Tab setCustomView(View view);
 
         /**
          * Set a custom view to be used for this tab. This overrides values set by
-         * {@link #setText(CharSequence)} and {@link #setIcon(Drawable)}.
          *
          * @param layoutResId A layout resource to inflate and use as a custom tab view
          * @return The current instance for call chaining
+         * {@link #setText(CharSequence)} and {@link #setIcon(Drawable)}.
          */
         public abstract Tab setCustomView(int layoutResId);
 
@@ -802,6 +807,8 @@ public abstract class ActionBar {
         public abstract Tab setTag(Object obj);
 
         /**
+         * Gets the tag.
+         *
          * @return This Tab's tag object.
          */
         public abstract Object getTag();
@@ -854,6 +861,8 @@ public abstract class ActionBar {
 
     /**
      * Callback interface invoked when a tab is focused, unfocused, added, or removed.
+     *
+     * @see TabEvent
      */
     public interface TabListener {
         /**
@@ -896,6 +905,8 @@ public abstract class ActionBar {
      * @attr ref android.R.styleable#ActionBar_LayoutParams_layout_gravity
      */
     public static class LayoutParams extends MarginLayoutParams {
+        
+        /** The Constant ATTRS. */
         private static final int[] ATTRS = new int[] {
                 android.R.attr.layout_gravity
         };
@@ -921,6 +932,12 @@ public abstract class ActionBar {
         })
         public int gravity = -1;
 
+        /**
+         * Instantiates a new layout params.
+         *
+         * @param c the c
+         * @param attrs the attrs
+         */
         public LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
 
@@ -929,26 +946,55 @@ public abstract class ActionBar {
             a.recycle();
         }
 
+        /**
+         * Instantiates a new layout params.
+         *
+         * @param width the width
+         * @param height the height
+         */
         public LayoutParams(int width, int height) {
             super(width, height);
             this.gravity = Gravity.CENTER_VERTICAL | Gravity.LEFT;
         }
 
+        /**
+         * Instantiates a new layout params.
+         *
+         * @param width the width
+         * @param height the height
+         * @param gravity the gravity
+         */
         public LayoutParams(int width, int height, int gravity) {
             super(width, height);
             this.gravity = gravity;
         }
 
-        public LayoutParams(int gravity) {
+        /**
+         * Instantiates a new layout params.
+         *
+         * @param gravity the gravity
+         */
+        @SuppressWarnings("deprecation")
+		public LayoutParams(int gravity) {
             this(WRAP_CONTENT, FILL_PARENT, gravity);
         }
 
+        /**
+         * Instantiates a new layout params.
+         *
+         * @param source the source
+         */
         public LayoutParams(LayoutParams source) {
             super(source);
 
             this.gravity = source.gravity;
         }
 
+        /**
+         * Instantiates a new layout params.
+         *
+         * @param source the source
+         */
         public LayoutParams(ViewGroup.LayoutParams source) {
             super(source);
         }

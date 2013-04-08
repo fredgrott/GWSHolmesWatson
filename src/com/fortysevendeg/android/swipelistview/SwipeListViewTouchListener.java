@@ -20,6 +20,7 @@
 
 package com.fortysevendeg.android.swipelistview;
 
+import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.view.*;
@@ -40,6 +41,7 @@ import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
 /**
  * Touch listener impl for the SwipeListView
  */
+@SuppressLint("Recycle")
 public class SwipeListViewTouchListener implements View.OnTouchListener {
 
     private int swipeMode = SwipeListView.SWIPE_MODE_BOTH;
@@ -74,7 +76,8 @@ public class SwipeListViewTouchListener implements View.OnTouchListener {
     private int downPosition;
     private View parentView;
     private View frontView;
-    private View backView;
+    @SuppressWarnings("unused")
+	private View backView;
     private boolean paused;
 
     private int swipeCurrentAction = SwipeListView.SWIPE_ACTION_NONE;

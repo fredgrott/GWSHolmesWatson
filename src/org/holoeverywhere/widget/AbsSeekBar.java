@@ -45,7 +45,7 @@ public abstract class AbsSeekBar extends ProgressBar {
         Drawable thumb = a.getDrawable(R.styleable.SeekBar_android_thumb);
         setThumb(thumb);
         int thumbOffset = a.getDimensionPixelOffset(
-                R.styleable.SeekBar_android_thumbOffset, getThumbOffset());
+                R.styleable.SeekBar_android_thumbOffset, mThumbOffset);
         setThumbOffset(thumbOffset);
         mDisabledAlpha = a.getFloat(R.styleable.SeekBar_android_disabledAlpha,
                 0.5f);

@@ -18,6 +18,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import com.actionbarsherlock.R;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -44,6 +45,7 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+@SuppressLint("HandlerLeak")
 public abstract class PreferenceActivity extends ListActivity implements
         PreferenceManager.OnPreferenceTreeClickListener,
         PreferenceFragment.OnPreferenceStartFragmentCallback {

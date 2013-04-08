@@ -6,7 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,52 +26,99 @@ import com.fima.cardsui.objects.AbstractCard;
 import com.fima.cardsui.objects.Card;
 import com.fima.cardsui.objects.CardStack;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CardUI.
+ */
 public class CardUI extends FrameLayout {
 
-	/**
-	 * Constants
-	 */
+	/** Constants. */
 
 	private static final int STATE_ONSCREEN = 0;
+	
+	/** The Constant STATE_OFFSCREEN. */
 	private static final int STATE_OFFSCREEN = 1;
+	
+	/** The Constant STATE_RETURNING. */
 	private static final int STATE_RETURNING = 2;
 
+	/**
+	 * The listener interface for receiving onRendered events.
+	 * The class that is interested in processing a onRendered
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addOnRenderedListener<code> method. When
+	 * the onRendered event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see OnRenderedEvent
+	 */
 	public interface OnRenderedListener {
+		
+		/**
+		 * On rendered.
+		 */
 		public void onRendered();
 	}
 
-	/********************************
-	 * Fields
-	 * 
-	 ********************************/
+	/** ****************************** Fields  ******************************. */
 
 	private ArrayList<AbstractCard> mStacks;
+	
+	/** The m context. */
 	private Context mContext;
+	
+	/** The m quick return view. */
 	private ViewGroup mQuickReturnView;
-	/**
-	 * The table layout to be used for multiple columns
-	 */
+	
+	/** The table layout to be used for multiple columns. */
 	private TableLayout mTableLayout;
-	/**
-	 * The number of columns, 1 by default
-	 */
+	
+	/** The number of columns, 1 by default. */
 	private int mColumnNumber = 1;
+	
+	/** The m placeholder view. */
 	private View mPlaceholderView;
+	
+	/** The m list view. */
 	private QuickReturnListView mListView;
+	
+	/** The m min raw y. */
 	private int mMinRawY = 0;
+	
+	/** The m state. */
 	private int mState = STATE_ONSCREEN;
+	
+	/** The m quick return height. */
 	private int mQuickReturnHeight;
+	
+	/** The m cached vertical scroll range. */
 	private int mCachedVerticalScrollRange;
+	
+	/** The m swipeable. */
 	private boolean mSwipeable = false;
+	
+	/** The on rendered listener. */
 	private OnRenderedListener onRenderedListener;
+	
+	/** The rendered cards stacks. */
 	protected int renderedCardsStacks = 0;
 
+	/** The m scroll y. */
 	protected int mScrollY;
+	
+	/** The m adapter. */
 	private StackAdapter mAdapter;
+	
+	/** The m header. */
 	private View mHeader;
 
 	/**
-	 * Constructor
+	 * Constructor.
+	 *
+	 * @param context the context
+	 * @param attrs the attrs
+	 * @param defStyle the def style
 	 */
 	public CardUI(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -81,7 +128,10 @@ public class CardUI extends FrameLayout {
 	}
 
 	/**
-	 * Constructor
+	 * Constructor.
+	 *
+	 * @param context the context
+	 * @param attrs the attrs
 	 */
 	public CardUI(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -91,13 +141,20 @@ public class CardUI extends FrameLayout {
 	}
 
 	/**
-	 * Constructor
+	 * Constructor.
+	 *
+	 * @param context the context
 	 */
 	public CardUI(Context context) {
 		super(context);
 		initData(context);
 	}
 
+	/**
+	 * Inits the data.
+	 *
+	 * @param context the context
+	 */
 	private void initData(Context context) {
 		mContext = context;
 		LayoutInflater inflater = LayoutInflater.from(context);
@@ -120,10 +177,20 @@ public class CardUI extends FrameLayout {
 
 	}
 
+	/**
+	 * Sets the swipeable.
+	 *
+	 * @param b the new swipeable
+	 */
 	public void setSwipeable(boolean b) {
 		mSwipeable = b;
 	}
 
+	/**
+	 * Sets the header.
+	 *
+	 * @param header the new header
+	 */
 	public void setHeader(View header) {
 
 		mPlaceholderView.setVisibility(View.VISIBLE);
@@ -224,6 +291,11 @@ public class CardUI extends FrameLayout {
 
 	}
 
+	/**
+	 * Scroll to card.
+	 *
+	 * @param pos the pos
+	 */
 	public void scrollToCard(int pos) {
 		// int y = 0;
 		try {
@@ -235,6 +307,11 @@ public class CardUI extends FrameLayout {
 		}
 	}
 
+	/**
+	 * Scroll to y.
+	 *
+	 * @param y the y
+	 */
 	public void scrollToY(int y) {
 
 		try {
@@ -245,21 +322,42 @@ public class CardUI extends FrameLayout {
 		}
 	}
 
+	/**
+	 * Gets the scroll view.
+	 *
+	 * @return the scroll view
+	 */
 	public QuickReturnListView getScrollView() {
 		return mListView;
 	}
 
+	/**
+	 * Gets the last card stack position.
+	 *
+	 * @return the last card stack position
+	 */
 	public int getLastCardStackPosition() {
 
 		return mStacks.size() - 1;
 	}
 
+	/**
+	 * Adds the card.
+	 *
+	 * @param card the card
+	 */
 	public void addCard(Card card) {
 
 		addCard(card, false);
 
 	}
 
+	/**
+	 * Adds the card.
+	 *
+	 * @param card the card
+	 * @param refresh the refresh
+	 */
 	public void addCard(Card card, boolean refresh) {
 
 		CardStack stack = new CardStack();
@@ -270,11 +368,22 @@ public class CardUI extends FrameLayout {
 
 	}
 
+	/**
+	 * Adds the card to last stack.
+	 *
+	 * @param card the card
+	 */
 	public void addCardToLastStack(Card card) {
 		addCardToLastStack(card, false);
 
 	}
 
+	/**
+	 * Adds the card to last stack.
+	 *
+	 * @param card the card
+	 * @param refresh the refresh
+	 */
 	public void addCardToLastStack(Card card, boolean refresh) {
 		if (mStacks.isEmpty()) {
 			addCard(card, refresh);
@@ -289,11 +398,22 @@ public class CardUI extends FrameLayout {
 
 	}
 
+	/**
+	 * Adds the stack.
+	 *
+	 * @param stack the stack
+	 */
 	public void addStack(CardStack stack) {
 		addStack(stack, false);
 
 	}
 
+	/**
+	 * Adds the stack.
+	 *
+	 * @param stack the stack
+	 * @param refresh the refresh
+	 */
 	public void addStack(CardStack stack, boolean refresh) {
 		mStacks.add(stack);
 		if (refresh)
@@ -301,6 +421,9 @@ public class CardUI extends FrameLayout {
 
 	}
 	//suppress this error message to be able to use spaces in higher api levels
+	/**
+	 * Refresh.
+	 */
 	@SuppressLint("NewApi")
 	public void refresh() {
 
@@ -353,12 +476,20 @@ public class CardUI extends FrameLayout {
 
 	}
 
+	/**
+	 * Clear cards.
+	 */
 	public void clearCards() {
 		mStacks = new ArrayList<AbstractCard>();
 		renderedCardsStacks = 0;
 		refresh();
 	}
 
+	/**
+	 * Sets the current stack title.
+	 *
+	 * @param title the new current stack title
+	 */
 	public void setCurrentStackTitle(String title) {
 		CardStack cardStack = (CardStack) mStacks
 				.get(getLastCardStackPosition());
@@ -366,10 +497,20 @@ public class CardUI extends FrameLayout {
 
 	}
 
+	/**
+	 * Gets the on rendered listener.
+	 *
+	 * @return the on rendered listener
+	 */
 	public OnRenderedListener getOnRenderedListener() {
 		return onRenderedListener;
 	}
 
+	/**
+	 * Sets the on rendered listener.
+	 *
+	 * @param onRenderedListener the new on rendered listener
+	 */
 	public void setOnRenderedListener(OnRenderedListener onRenderedListener) {
 		this.onRenderedListener = onRenderedListener;
 	}

@@ -31,9 +31,22 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DatePicker.
+ */
+@SuppressLint("SimpleDateFormat")
 public class DatePicker extends FrameLayout {
+    
+    /**
+     * The Class Callback.
+     */
     private final class Callback implements NumberPicker.OnValueChangeListener,
             CalendarView.OnDateChangeListener {
+        
+        /* (non-Javadoc)
+         * @see org.holoeverywhere.widget.CalendarView.OnDateChangeListener#onSelectedDayChange(org.holoeverywhere.widget.CalendarView, int, int, int)
+         */
         @Override
         public void onSelectedDayChange(CalendarView view, int year, int month,
                 int monthDay) {
@@ -42,6 +55,9 @@ public class DatePicker extends FrameLayout {
             notifyDateChanged();
         }
 
+        /* (non-Javadoc)
+         * @see org.holoeverywhere.widget.NumberPicker.OnValueChangeListener#onValueChange(org.holoeverywhere.widget.NumberPicker, int, int)
+         */
         @Override
         public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
             updateInputState();
@@ -78,12 +94,37 @@ public class DatePicker extends FrameLayout {
 
     }
 
+    /**
+     * The listener interface for receiving onDateChanged events.
+     * The class that is interested in processing a onDateChanged
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addOnDateChangedListener<code> method. When
+     * the onDateChanged event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see OnDateChangedEvent
+     */
     public interface OnDateChangedListener {
+        
+        /**
+         * On date changed.
+         *
+         * @param view the view
+         * @param year the year
+         * @param monthOfYear the month of year
+         * @param dayOfMonth the day of month
+         */
         void onDateChanged(DatePicker view, int year, int monthOfYear,
                 int dayOfMonth);
     }
 
+    /**
+     * The Class SavedState.
+     */
     private static class SavedState extends BaseSavedState {
+        
+        /** The Constant CREATOR. */
         @SuppressWarnings("all")
         public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
             public SavedState createFromParcel(Parcel in) {
@@ -95,8 +136,14 @@ public class DatePicker extends FrameLayout {
             }
         };
 
+        /** The day. */
         private final int year, month, day;
 
+        /**
+         * Instantiates a new saved state.
+         *
+         * @param in the in
+         */
         private SavedState(Parcel in) {
             super(in);
             year = in.readInt();
@@ -104,6 +151,14 @@ public class DatePicker extends FrameLayout {
             day = in.readInt();
         }
 
+        /**
+         * Instantiates a new saved state.
+         *
+         * @param superState the super state
+         * @param year the year
+         * @param month the month
+         * @param day the day
+         */
         private SavedState(Parcelable superState, int year, int month, int day) {
             super(superState);
             this.year = year;
@@ -111,6 +166,9 @@ public class DatePicker extends FrameLayout {
             this.day = day;
         }
 
+        /* (non-Javadoc)
+         * @see android.view.AbsSavedState#writeToParcel(android.os.Parcel, int)
+         */
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
@@ -120,9 +178,19 @@ public class DatePicker extends FrameLayout {
         }
     }
 
+    /** The Constant DATE_FORMAT. */
     private static final String DATE_FORMAT = "MM/dd/yyyy";
+    
+    /** The Constant LOG_TAG. */
     private static final String LOG_TAG = DatePicker.class.getSimpleName();
 
+    /**
+     * Gets the calendar for locale.
+     *
+     * @param oldCalendar the old calendar
+     * @param locale the locale
+     * @return the calendar for locale
+     */
     private static Calendar getCalendarForLocale(Calendar oldCalendar,
             Locale locale) {
         if (oldCalendar == null) {
@@ -135,6 +203,13 @@ public class DatePicker extends FrameLayout {
         }
     }
 
+    /**
+     * Sets the content description.
+     *
+     * @param parent the parent
+     * @param childId the child id
+     * @param textId the text id
+     */
     private static void setContentDescription(View parent, int childId,
             int textId) {
         if (parent == null) {
@@ -146,27 +221,66 @@ public class DatePicker extends FrameLayout {
         }
     }
 
+    /** The callback. */
     private final Callback callback = new Callback();
+    
+    /** The date format. */
     private final java.text.DateFormat dateFormat = new SimpleDateFormat(
             DatePicker.DATE_FORMAT);
+    
+    /** The year spinner. */
     private final NumberPicker daySpinner, monthSpinner, yearSpinner;
+    
+    /** The input method manager. */
     private final InputMethodManager inputMethodManager;
+    
+    /** The locale. */
     private Locale locale;
+    
+    /** The m calendar view. */
     private final CalendarView mCalendarView;
+    
+    /** The number of months. */
     private int numberOfMonths;
+    
+    /** The on date changed listener. */
     private OnDateChangedListener onDateChangedListener;
+    
+    /** The short months. */
     private String[] shortMonths;
+    
+    /** The spinners. */
     private final LinearLayout spinners;
+    
+    /** The current date. */
     private Calendar tempDate, minDate, maxDate, currentDate;
 
+    /**
+     * Instantiates a new date picker.
+     *
+     * @param context the context
+     */
     public DatePicker(Context context) {
         this(context, null);
     }
 
+    /**
+     * Instantiates a new date picker.
+     *
+     * @param context the context
+     * @param attrs the attrs
+     */
     public DatePicker(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.datePickerStyle);
     }
 
+    /**
+     * Instantiates a new date picker.
+     *
+     * @param context the context
+     * @param attrs the attrs
+     * @param defStyle the def style
+     */
     public DatePicker(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         TypedArray a = context.obtainStyledAttributes(attrs,
@@ -231,6 +345,11 @@ public class DatePicker extends FrameLayout {
         reorderSpinners();
     }
 
+    /**
+     * Check input state.
+     *
+     * @param spinners the spinners
+     */
     private void checkInputState(NumberPicker... spinners) {
         for (NumberPicker spinner : spinners) {
             NumberPickerEditText input = spinner.getInputField();
@@ -241,6 +360,9 @@ public class DatePicker extends FrameLayout {
         }
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#dispatchPopulateAccessibilityEvent(android.view.accessibility.AccessibilityEvent)
+     */
     @SuppressLint("NewApi")
     @Override
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
@@ -248,48 +370,104 @@ public class DatePicker extends FrameLayout {
         return true;
     }
 
+    /* (non-Javadoc)
+     * @see android.view.ViewGroup#dispatchRestoreInstanceState(android.util.SparseArray)
+     */
     @Override
     protected void dispatchRestoreInstanceState(
             SparseArray<Parcelable> container) {
         dispatchThawSelfOnly(container);
     }
 
+    /**
+     * Gets the calendar view.
+     *
+     * @return the calendar view
+     */
     public CalendarView getCalendarView() {
         return mCalendarView;
     }
 
+    /**
+     * Gets the calendar view shown.
+     *
+     * @return the calendar view shown
+     */
     public boolean getCalendarViewShown() {
         return mCalendarView.isShown();
     }
 
+    /**
+     * Gets the day of month.
+     *
+     * @return the day of month
+     */
     public int getDayOfMonth() {
         return currentDate.get(Calendar.DAY_OF_MONTH);
     }
 
+    /**
+     * Gets the max date.
+     *
+     * @return the max date
+     */
     public long getMaxDate() {
         return mCalendarView.getMaxDate();
     }
 
+    /**
+     * Gets the min date.
+     *
+     * @return the min date
+     */
     public long getMinDate() {
         return mCalendarView.getMinDate();
     }
 
+    /**
+     * Gets the month.
+     *
+     * @return the month
+     */
     public int getMonth() {
         return currentDate.get(Calendar.MONTH);
     }
 
+    /**
+     * Gets the on date changed listener.
+     *
+     * @return the on date changed listener
+     */
     public OnDateChangedListener getOnDateChangedListener() {
         return onDateChangedListener;
     }
 
+    /**
+     * Gets the spinners shown.
+     *
+     * @return the spinners shown
+     */
     public boolean getSpinnersShown() {
         return spinners.isShown();
     }
 
+    /**
+     * Gets the year.
+     *
+     * @return the year
+     */
     public int getYear() {
         return currentDate.get(Calendar.YEAR);
     }
 
+    /**
+     * Inits the.
+     *
+     * @param year the year
+     * @param monthOfYear the month of year
+     * @param dayOfMonth the day of month
+     * @param onDateChangedListener the on date changed listener
+     */
     public void init(int year, int monthOfYear, int dayOfMonth,
             OnDateChangedListener onDateChangedListener) {
         setOnDateChangedListener(onDateChangedListener);
@@ -298,12 +476,23 @@ public class DatePicker extends FrameLayout {
         updateCalendarView();
     }
 
+    /**
+     * Checks if is new date.
+     *
+     * @param year the year
+     * @param month the month
+     * @param dayOfMonth the day of month
+     * @return true, if is new date
+     */
     private boolean isNewDate(int year, int month, int dayOfMonth) {
         return currentDate.get(Calendar.YEAR) != year
                 || currentDate.get(Calendar.MONTH) != dayOfMonth
                 || currentDate.get(Calendar.DAY_OF_MONTH) != month;
     }
 
+    /**
+     * Notify date changed.
+     */
     private void notifyDateChanged() {
         sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
         if (onDateChangedListener != null) {
@@ -312,6 +501,9 @@ public class DatePicker extends FrameLayout {
         }
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#onConfigurationChanged(android.content.res.Configuration)
+     */
     @Override
     @SuppressLint("NewApi")
     protected void onConfigurationChanged(Configuration newConfig) {
@@ -319,6 +511,9 @@ public class DatePicker extends FrameLayout {
         setLocale(newConfig.locale);
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#onPopulateAccessibilityEvent(android.view.accessibility.AccessibilityEvent)
+     */
     @SuppressLint("NewApi")
     @Override
     public void onPopulateAccessibilityEvent(AccessibilityEvent event) {
@@ -332,6 +527,9 @@ public class DatePicker extends FrameLayout {
         event.getText().add(selectedDateUtterance);
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#onRestoreInstanceState(android.os.Parcelable)
+     */
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
         SavedState ss = (SavedState) state;
@@ -341,12 +539,22 @@ public class DatePicker extends FrameLayout {
         updateCalendarView();
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#onSaveInstanceState()
+     */
     @Override
     protected Parcelable onSaveInstanceState() {
         return new SavedState(super.onSaveInstanceState(), getYear(),
                 getMonth(), getDayOfMonth());
     }
 
+    /**
+     * Parses the date.
+     *
+     * @param date the date
+     * @param outDate the out date
+     * @return true, if successful
+     */
     private boolean parseDate(String date, Calendar outDate) {
         try {
             outDate.setTime(dateFormat.parse(date));
@@ -358,6 +566,13 @@ public class DatePicker extends FrameLayout {
         }
     }
 
+    /**
+     * Push spinner.
+     *
+     * @param spinner the spinner
+     * @param spinnerCount the spinner count
+     * @param i the i
+     */
     private void pushSpinner(NumberPicker spinner, int spinnerCount, int i) {
         if (spinner.getParent() != null
                 && spinner.getParent() instanceof ViewGroup) {
@@ -370,6 +585,9 @@ public class DatePicker extends FrameLayout {
         }
     }
 
+    /**
+     * Reorder spinners.
+     */
     private void reorderSpinners() {
         char[] order = DateFormat.getDateFormatOrder(getContext());
         final int spinnerCount = order.length;
@@ -388,10 +606,18 @@ public class DatePicker extends FrameLayout {
         }
     }
 
+    /**
+     * Sets the calendar view shown.
+     *
+     * @param shown the new calendar view shown
+     */
     public void setCalendarViewShown(boolean shown) {
         mCalendarView.setVisibility(shown ? View.VISIBLE : View.GONE);
     }
 
+    /**
+     * Sets the content descriptions.
+     */
     private void setContentDescriptions() {
         DatePicker.setContentDescription(daySpinner, R.id.increment,
                 R.string.date_picker_increment_day_button);
@@ -407,6 +633,13 @@ public class DatePicker extends FrameLayout {
                 R.string.date_picker_decrement_year_button);
     }
 
+    /**
+     * Sets the date.
+     *
+     * @param year the year
+     * @param month the month
+     * @param dayOfMonth the day of month
+     */
     private void setDate(int year, int month, int dayOfMonth) {
         currentDate.set(year, month, dayOfMonth);
         if (currentDate.before(minDate)) {
@@ -416,6 +649,9 @@ public class DatePicker extends FrameLayout {
         }
     }
 
+    /* (non-Javadoc)
+     * @see android.view.View#setEnabled(boolean)
+     */
     @Override
     public void setEnabled(boolean enabled) {
         if (isEnabled() == enabled) {
@@ -428,6 +664,13 @@ public class DatePicker extends FrameLayout {
         mCalendarView.setEnabled(enabled);
     }
 
+    /**
+     * Sets the ime options.
+     *
+     * @param spinner the spinner
+     * @param spinnerCount the spinner count
+     * @param spinnerIndex the spinner index
+     */
     private void setImeOptions(NumberPicker spinner, int spinnerCount,
             int spinnerIndex) {
         final int imeOptions;
@@ -439,7 +682,13 @@ public class DatePicker extends FrameLayout {
         spinner.getInputField().setImeOptions(imeOptions);
     }
 
-    public void setLocale(Locale locale) {
+    /**
+     * Sets the locale.
+     *
+     * @param locale the new locale
+     */
+    @SuppressWarnings("deprecation")
+	public void setLocale(Locale locale) {
         if (locale == null || locale.equals(this.locale)) {
             return;
         }
@@ -456,6 +705,11 @@ public class DatePicker extends FrameLayout {
         }
     }
 
+    /**
+     * Sets the max date.
+     *
+     * @param maxDateL the new max date
+     */
     public void setMaxDate(long maxDateL) {
         tempDate.setTimeInMillis(maxDateL);
         if (tempDate.get(Calendar.YEAR) == maxDate.get(Calendar.YEAR)
@@ -472,6 +726,11 @@ public class DatePicker extends FrameLayout {
         updateSpinners();
     }
 
+    /**
+     * Sets the min date.
+     *
+     * @param minDateL the new min date
+     */
     public void setMinDate(long minDateL) {
         tempDate.setTimeInMillis(minDateL);
         if (tempDate.get(Calendar.YEAR) == minDate.get(Calendar.YEAR)
@@ -488,19 +747,39 @@ public class DatePicker extends FrameLayout {
         updateSpinners();
     }
 
+    /**
+     * Sets the on date changed listener.
+     *
+     * @param onDateChangedListener the new on date changed listener
+     */
     public void setOnDateChangedListener(
             OnDateChangedListener onDateChangedListener) {
         this.onDateChangedListener = onDateChangedListener;
     }
 
+    /**
+     * Sets the spinners shown.
+     *
+     * @param shown the new spinners shown
+     */
     public void setSpinnersShown(boolean shown) {
         spinners.setVisibility(shown ? View.VISIBLE : View.GONE);
     }
 
+    /**
+     * Update calendar view.
+     */
     private void updateCalendarView() {
         mCalendarView.setDate(currentDate.getTimeInMillis(), false, false);
     }
 
+    /**
+     * Update date.
+     *
+     * @param year the year
+     * @param month the month
+     * @param dayOfMonth the day of month
+     */
     public void updateDate(int year, int month, int dayOfMonth) {
         if (!isNewDate(year, month, dayOfMonth)) {
             return;
@@ -511,12 +790,18 @@ public class DatePicker extends FrameLayout {
         notifyDateChanged();
     }
 
+    /**
+     * Update input state.
+     */
     private void updateInputState() {
         if (inputMethodManager != null) {
             checkInputState(yearSpinner, monthSpinner, daySpinner);
         }
     }
 
+    /**
+     * Update spinners.
+     */
     private void updateSpinners() {
         monthSpinner.setDisplayedValues(null);
         if (currentDate.equals(minDate)) {

@@ -132,7 +132,7 @@ public abstract class DialogPreference extends Preference implements
     protected void onBindDialogView(View view) {
         View dialogMessageView = view.findViewById(R.id.message);
         if (dialogMessageView != null) {
-            final CharSequence message = getDialogMessage();
+            final CharSequence message = mDialogMessage;
             int newVisibility = View.GONE;
             if (!TextUtils.isEmpty(message)) {
                 if (dialogMessageView instanceof TextView) {

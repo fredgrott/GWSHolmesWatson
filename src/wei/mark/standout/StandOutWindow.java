@@ -633,6 +633,7 @@ public abstract class StandOutWindow extends Service {
 	 * @return The {@link Notification} corresponding to the id, or null if
 	 *         you've previously returned a notification.
 	 */
+	@SuppressWarnings("deprecation")
 	public Notification getPersistentNotification(int id) {
 		// basic notification stuff
 		// http://developer.android.com/guide/topics/ui/notifiers/notifications.html
@@ -680,6 +681,7 @@ public abstract class StandOutWindow extends Service {
 	 *            The id of the window.
 	 * @return The {@link Notification} corresponding to the id or null.
 	 */
+	@SuppressWarnings("deprecation")
 	public Notification getHiddenNotification(int id) {
 		// same basics as getPersistentNotification()
 		int icon = getHiddenIcon();
@@ -1862,6 +1864,7 @@ public abstract class StandOutWindow extends Service {
 		 * @param ypos
 		 *            The y position of the window.
 		 */
+		@SuppressWarnings("deprecation")
 		public StandOutLayoutParams(int id, int w, int h, int xpos, int ypos) {
 			this(id, w, h);
 
@@ -1940,6 +1943,7 @@ public abstract class StandOutWindow extends Service {
 		}
 
 		// helper to create cascading windows
+		@SuppressWarnings("deprecation")
 		private int getX(int id, int width) {
 			Display display = mWindowManager.getDefaultDisplay();
 			int displayWidth = display.getWidth();
@@ -1954,6 +1958,7 @@ public abstract class StandOutWindow extends Service {
 		}
 
 		// helper to create cascading windows
+		@SuppressWarnings("deprecation")
 		private int getY(int id, int height) {
 			Display display = mWindowManager.getDefaultDisplay();
 			int displayWidth = display.getWidth();

@@ -284,7 +284,8 @@ public class TimePicker extends FrameLayout {
         setCurrentLocale(newConfig.locale);
     }
 
-    @SuppressLint("NewApi")
+    @SuppressWarnings("deprecation")
+	@SuppressLint("NewApi")
     @Override
     public void onPopulateAccessibilityEvent(AccessibilityEvent event) {
         super.onPopulateAccessibilityEvent(event);

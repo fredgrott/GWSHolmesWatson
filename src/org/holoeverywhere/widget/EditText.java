@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 
 import com.actionbarsherlock.internal.view.menu.ContextMenuCallbackGetter;
 
+@SuppressLint("DefaultLocale")
 public class EditText extends android.widget.EditText implements ContextMenuCallbackGetter {
     private boolean allCaps = false;
     private OnCreateContextMenuListener mOnCreateContextMenuListener;

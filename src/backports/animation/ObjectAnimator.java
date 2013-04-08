@@ -247,7 +247,8 @@ public final class ObjectAnimator extends ValueAnimator {
      * @param values A set of values that the animation will animate between over time.
      * @return An ObjectAnimator object that is set up to animate between the given values.
      */
-    public static ObjectAnimator ofObject(Object target, String propertyName,
+    @SuppressWarnings("rawtypes")
+	public static ObjectAnimator ofObject(Object target, String propertyName,
             TypeEvaluator evaluator, Object... values) {
         ObjectAnimator anim = new ObjectAnimator(target, propertyName);
         anim.setObjectValues(values);
@@ -319,7 +320,8 @@ public final class ObjectAnimator extends ValueAnimator {
         }
     }
 
-    @Override
+    @SuppressWarnings({ "unchecked" })
+	@Override
     public void setFloatValues(float... values) {
         if (mValues == null || mValues.length == 0) {
             // No values yet - this animator is being constructed piecemeal. Init the values with
@@ -334,7 +336,8 @@ public final class ObjectAnimator extends ValueAnimator {
         }
     }
 
-    @Override
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
     public void setObjectValues(Object... values) {
         if (mValues == null || mValues.length == 0) {
             // No values yet - this animator is being constructed piecemeal. Init the values with

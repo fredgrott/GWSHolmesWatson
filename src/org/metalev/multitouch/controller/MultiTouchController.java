@@ -281,7 +281,8 @@ public class MultiTouchController<T> {
     private static final int[] pointerIds = new int[MAX_TOUCH_POINTS];
 
     /** Process incoming touch events */
-    public boolean onTouchEvent(MotionEvent event) {
+    @SuppressWarnings("unused")
+	public boolean onTouchEvent(MotionEvent event) {
         try {
             int pointerCount = multiTouchSupported ?
                     (Integer) m_getPointerCount.invoke(event) : 1;
