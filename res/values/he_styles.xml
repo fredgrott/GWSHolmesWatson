@@ -343,7 +343,7 @@
         <item name="thumb">@drawable/he_switch_inner_holo_dark</item>
         <item name="thumbTextPadding">12dp</item>
         <item name="toggleWhenClick">true</item>
-        <item name="track">@drawable/switch_track_holo_dark</item>
+        <item name="track">@drawable/he_switch_track_holo_dark</item>
     </style>
     <style name="Holo.Switch.Light">
         <item name="switchTextAppearance">@style/Holo.Switch.TextAppearance.Light</item>

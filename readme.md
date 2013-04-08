@@ -232,7 +232,14 @@ Apache License 2.0
 ## AsyncTaskExecutor
 [AsyncTaskExecutor-]('https://github.com/artem-zinnatullin/Android-AsyncTask-Executor')
 
+## Salvage
+[Salvage-Jake Wharton]('https://github.com/JakeWharton/salvage')
 
+## Snooker
+[Snooker-jake Wharton]('https://github.com/JakeWharton/snooker')
+
+## HoloEverywhere
+[HoloEverywhere-]('https://github.com/Prototik/HoloEverywhere')
 
 
 # Credits

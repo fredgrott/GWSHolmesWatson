@@ -83,13 +83,13 @@ public class SwitchPreference extends TwoStatePreference {
 
 		TypedArray a = context.obtainStyledAttributes(attrs,
 				R.styleable.SwitchPreference, R.attr.switchPreferenceStyle, 0);
-		setSummaryOn(a.getString(R.styleable.SwitchPreference_summaryOn));
-		setSummaryOff(a.getString(R.styleable.SwitchPreference_summaryOff));
+		setSummaryOn(a.getString(R.styleable.SwitchPreference_mysummaryOn));
+		setSummaryOff(a.getString(R.styleable.SwitchPreference_mysummaryOff));
 		setSwitchTextOn(a.getString(R.styleable.SwitchPreference_switchTextOn));
 		setSwitchTextOff(a
 				.getString(R.styleable.SwitchPreference_switchTextOff));
 		setDisableDependentsState(a.getBoolean(
-				R.styleable.SwitchPreference_disableDependentsState, false));
+				R.styleable.SwitchPreference_mydisableDependentsState, false));
 		a.recycle();
 	}
 
