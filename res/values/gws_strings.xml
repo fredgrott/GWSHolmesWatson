@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gws_eula_title">EULA title.</string>
+    <string name="gws_eula_text">EULA goes here.</string>
+    <string name="gws_accept">Accept</string>
+    <string name="gws_decline">Decline</string>
+</resources>

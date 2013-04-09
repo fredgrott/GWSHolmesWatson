@@ -3,6 +3,8 @@ package gws.grottworkshop.gwsholmeswatson;
 
 
 import org.holoeverywhere.app.Activity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import android.os.Bundle;
@@ -15,7 +17,7 @@ import android.os.Bundle;
  */
 public class GWSActivity extends Activity {
 	
-	
+	private boolean eulaAccpeted;
     
 	/** 
 	 * 
@@ -24,9 +26,12 @@ public class GWSActivity extends Activity {
 	 */
 	@Override
 	protected Holo onCreateConfig(Bundle savedInstanceState) {
+		Logger GWSLOG = LoggerFactory.getLogger(GWSActivity.class);
+		GWSLOG.info("GWSActivity created");
+		
 		// for performance set customviews through a factory
 		setCustomViews();
-		
+		EULAHelper.showEula(eulaAccpeted, GWSActivity.this);
 		// TODO Auto-generated method stub
 		return super.onCreateConfig(savedInstanceState);
 	}

@@ -31,6 +31,7 @@ public class GWSApplication extends Application {
 	
 	private HashMap<String, WeakReference<Context>> contextObjects = new HashMap<String, WeakReference<Context>>();
 
+	private static Context context;
 	
 	
     /**
@@ -39,7 +40,7 @@ public class GWSApplication extends Application {
      * @param className the class name
      * @return the active context
      */
-    public synchronized Context getActiveContext(String className) {
+    public synchronized  Context getActiveContext(String className) {
         WeakReference<Context> ref = contextObjects.get(className);
         if (ref == null) {
             return null;
@@ -67,6 +68,13 @@ public class GWSApplication extends Application {
 		return super.getApplicationInfo();
 	}
 	
+	public static Context getAppContext() {
+		
+		 return GWSApplication.context;
+	}
+	
+	
+	
 	@Override
 	public void onLowMemory() {
 		// TODO Auto-generated method stub
@@ -91,6 +99,7 @@ public class GWSApplication extends Application {
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
+		GWSApplication.context = getApplicationContext();
 		Logger GWSLOG = LoggerFactory.getLogger(GWSApplication.class);
 		GWSLOG.info("GWSApplicaiton class created");
 		setCaches();

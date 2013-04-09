@@ -46,6 +46,23 @@ public class GWSPreferences {
 		return pref;
 	}
 	
+	public static boolean getEULAAcceptState(Context context){
+		SharedPreferences prefReader =
+	            PreferenceManager.getDefaultSharedPreferences(context);
+		boolean pref = prefReader.getBoolean("hasEULAAccept", false);
+		return pref;
+	}
+	
+	public static void setEULAAcceptState(Context context, boolean hazEULAAcceptState){
+		Editor prefEditor =
+	            PreferenceManager.getDefaultSharedPreferences(context).edit();
+		prefEditor.putBoolean(
+                "true",
+                hazEULAAcceptState);
+        prefEditor.commit();
+	}
+	
+	
 	public static void setEULAState(Context context, boolean hazEULAState) {
 		Editor prefEditor =
 	            PreferenceManager.getDefaultSharedPreferences(context).edit();

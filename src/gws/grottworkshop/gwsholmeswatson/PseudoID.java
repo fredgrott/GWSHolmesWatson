@@ -41,6 +41,7 @@ public class PseudoID {
 	private static MessageDigest mDigest;
 	
 
+	@SuppressWarnings("unused")
 	private String computeUnencryptedPseudoIMEI(){
 		
 		psdeuoIMEIString =
