@@ -1,6 +1,8 @@
 package gws.grottworkshop.gwsholmeswatson;
 
 import java.security.MessageDigest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.security.NoSuchAlgorithmException;
 
 
@@ -58,7 +60,8 @@ public class PseudoID {
 		try {
 			mDigest = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
-			Log.e("gws", "nomd5");
+			Logger GWSLOG = LoggerFactory.getLogger(PseudoID.class);
+			GWSLOG.error("no md5 math found");
 		}
 		mDigest.update(psdeuoIMEIString.getBytes(),0,psdeuoIMEIString.length());
 		

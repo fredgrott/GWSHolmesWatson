@@ -4,7 +4,8 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
 import org.holoeverywhere.app.Application;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
@@ -30,6 +31,7 @@ public class GWSApplication extends Application {
 	
 	private HashMap<String, WeakReference<Context>> contextObjects = new HashMap<String, WeakReference<Context>>();
 
+	
 	
     /**
      * Gets the active context.
@@ -89,7 +91,8 @@ public class GWSApplication extends Application {
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
-		
+		Logger GWSLOG = LoggerFactory.getLogger(GWSApplication.class);
+		GWSLOG.info("GWSApplicaiton class created");
 		setCaches();
 		setID();
 		
