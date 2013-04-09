@@ -2,14 +2,16 @@ package gws.grottworkshop.gwsholmeswatson;
 
 
 
+import org.holoeverywhere.preference.PreferenceManager;
+import org.holoeverywhere.preference.SharedPreferences;
+import org.holoeverywhere.preference.SharedPreferences.Editor;
+
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.preference.PreferenceManager;
 
 /**
  * The Class GWSPreferences.
- * You will extend this to add your stuff.
+ * You will extend this to add your stuff andif extending its 
+ * classes in org.holoeverwyhere not the defaul android ones
  * 
  * @author fredgrott
  */
@@ -42,6 +44,15 @@ public class GWSPreferences {
 	            PreferenceManager.getDefaultSharedPreferences(context);
 		boolean pref = prefReader.getBoolean("hasEULAShown", false);
 		return pref;
+	}
+	
+	public static void setEULAState(Context context, boolean hazEULAState) {
+		Editor prefEditor =
+	            PreferenceManager.getDefaultSharedPreferences(context).edit();
+		prefEditor.putBoolean(
+                "true",
+                hazEULAState);
+        prefEditor.commit();
 	}
 	
 	public static void setIDState(Context context, boolean hazIDState) {

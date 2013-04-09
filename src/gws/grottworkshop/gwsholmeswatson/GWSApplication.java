@@ -3,17 +3,19 @@ package gws.grottworkshop.gwsholmeswatson;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
+import org.holoeverywhere.app.Application;
 
 
 
 
-import android.app.Application;
+
+
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
+
+
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
-import android.preference.PreferenceManager;
+
 
 /**
  * The Class GWSApplication,ie on main thread, 
