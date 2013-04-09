@@ -28,9 +28,7 @@ public class GWSApplication extends Application {
 	
 	private HashMap<String, WeakReference<Context>> contextObjects = new HashMap<String, WeakReference<Context>>();
 
-	public static String aID;
 	
-	public SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     /**
      * Gets the active context.
      *
@@ -117,19 +115,19 @@ public class GWSApplication extends Application {
 	 */
 	public void setID() {
 		
-		boolean idHasBeenGenerated = prefs.getBoolean("idgenerated", false);
 		
-		if(!idHasBeenGenerated){
-			Editor editor=prefs.edit();
-			editor.putBoolean("idgenerated", true);
-			editor.putString("ID", PseudoID.ePseudoID);
-			editor.commit();
+		
+		if(!GWSPreferences.getIDState(getApplicationContext())){
+			GWSPreferences.setIDState(getApplicationContext(), true);
+			GWSPreferences.setIDString(getApplicationContext(), PseudoID.ePseudoID);
+			
 		} else{          
-		    aID = prefs.getString("ID", "false");
+			GWSPreferences.setIDState(getApplicationContext(), false);
 		}
 		
 		
 	}
+	
 	
 
 
