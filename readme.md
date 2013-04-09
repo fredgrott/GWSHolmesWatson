@@ -241,6 +241,11 @@ Apache License 2.0
 ## HoloEverywhere
 [HoloEverywhere-]('https://github.com/Prototik/HoloEverywhere')
 
+## okhttp
+[okhttp -Square]('https://github.com/square/okhttp')
+
+## Android Asynch Http
+[AndroidAsynchHttp-Loopj]('https://github.com/loopj/android-async-http')
 
 # Credits
 
