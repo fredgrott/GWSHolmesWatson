@@ -26,8 +26,7 @@ public class GWSActivity extends Activity {
 	protected Holo onCreateConfig(Bundle savedInstanceState) {
 		// for performance set customviews through a factory
 		setCustomViews();
-		// set up caches
-		setCaches();
+		
 		// TODO Auto-generated method stub
 		return super.onCreateConfig(savedInstanceState);
 	}
@@ -59,11 +58,5 @@ public class GWSActivity extends Activity {
 		
 	}
 	
-	/**
-	 * Sets the caches, normally we overrride this 
-	 * method.
-	 */
-	public void setCaches(){
-		
-	}
+	
 }

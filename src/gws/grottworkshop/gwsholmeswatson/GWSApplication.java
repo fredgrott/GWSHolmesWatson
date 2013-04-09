@@ -3,10 +3,17 @@ package gws.grottworkshop.gwsholmeswatson;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
+
+
+
+
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
+import android.preference.PreferenceManager;
 
 /**
  * The Class GWSApplication,ie on main thread, 
@@ -21,6 +28,9 @@ public class GWSApplication extends Application {
 	
 	private HashMap<String, WeakReference<Context>> contextObjects = new HashMap<String, WeakReference<Context>>();
 
+	public static String aID;
+	
+	public SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     /**
      * Gets the active context.
      *
@@ -79,6 +89,11 @@ public class GWSApplication extends Application {
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
+		
+		setCaches();
+		setID();
+		
+		
 		super.onCreate();
 	}
 	
@@ -87,5 +102,35 @@ public class GWSApplication extends Application {
 		// TODO Auto-generated method stub
 		super.onTerminate();
 	}
+	
+	/**
+	 * Sets the caches, normally we overrride this 
+	 * method.
+	 */
+	public void setCaches(){
+		
+	}
+	
+	/**
+	 * Set theID if its not stored yet in shared prefs or if
+	 * in shared prefs than set to that value.
+	 */
+	public void setID() {
+		
+		boolean idHasBeenGenerated = prefs.getBoolean("idgenerated", false);
+		
+		if(!idHasBeenGenerated){
+			Editor editor=prefs.edit();
+			editor.putBoolean("idgenerated", true);
+			editor.putString("ID", PseudoID.ePseudoID);
+			editor.commit();
+		} else{          
+		    aID = prefs.getString("ID", "false");
+		}
+		
+		
+	}
+	
+
 
 }
