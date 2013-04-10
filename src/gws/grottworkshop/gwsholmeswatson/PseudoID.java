@@ -9,7 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import android.annotation.SuppressLint;
 import android.os.Build;
 
-import android.util.Log;
 
 /**
  * The Class PsdeudoID, UUID for tracking has 
@@ -40,6 +39,8 @@ public class PseudoID {
 	
 	private static MessageDigest mDigest;
 	
+	private static Logger GWSLOG = LoggerFactory.getLogger(PseudoID.class);
+	
 
 	@SuppressWarnings("unused")
 	private String computeUnencryptedPseudoIMEI(){
@@ -61,7 +62,7 @@ public class PseudoID {
 		try {
 			mDigest = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
-			Logger GWSLOG = LoggerFactory.getLogger(PseudoID.class);
+			
 			GWSLOG.error("no md5 math found");
 		}
 		mDigest.update(psdeuoIMEIString.getBytes(),0,psdeuoIMEIString.length());

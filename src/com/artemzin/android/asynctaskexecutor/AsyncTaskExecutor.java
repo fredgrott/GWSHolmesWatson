@@ -28,8 +28,8 @@ public class AsyncTaskExecutor {
 	private static final BlockingQueue<Runnable> concurrentPoolWorkQueue;
 	private static final ThreadFactory concurrentThreadFactory;
     private static final ThreadPoolExecutor concurrentExecutor;
-    
-    private AsyncTaskExecutor() {}
+    //change to a visible constructor so that I could do a wrapper
+    public AsyncTaskExecutor() {}
     
     static {
     	CORE_POOL_SIZE = 5;

@@ -167,9 +167,9 @@ public abstract class _HoloFragment extends android.support.v4.app.Fragment impl
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
     }
-
+    // cannot override if final, needed for my Fragment wrappers
     @Override
-    public final View onCreateView(android.view.LayoutInflater inflater,
+    public View onCreateView(android.view.LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
         return prepareDecorView(onCreateView(getLayoutInflater(),
                 container, savedInstanceState));
