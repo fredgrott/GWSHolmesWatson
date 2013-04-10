@@ -1,6 +1,6 @@
 package gws.grottworkshop.gwsholmeswatson.graphics;
 
-import gws.grottworkshop.gwsholmeswatson.GWSApplication;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,8 +13,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
-import android.provider.SyncStateContract.Constants;
+
 
 public class ImageHelper {
 

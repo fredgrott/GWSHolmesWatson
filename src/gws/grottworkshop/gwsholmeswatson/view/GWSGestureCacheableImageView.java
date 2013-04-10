@@ -4,7 +4,7 @@ import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.AttributeSet;
+
 
 import com.polites.android.GestureImageView;
 
