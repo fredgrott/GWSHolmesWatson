@@ -247,5 +247,9 @@ Apache License 2.0
 ## Android Asynch Http
 [AndroidAsynchHttp-Loopj]('https://github.com/loopj/android-async-http')
 
+## Gesture ImageView
+[Gesture ImageView-JasonPolites]('https://github.com/jasonpolites/gesture-imageview')
+
+
 # Credits
 

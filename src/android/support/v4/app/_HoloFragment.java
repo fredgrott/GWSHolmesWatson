@@ -167,9 +167,16 @@ public abstract class _HoloFragment extends android.support.v4.app.Fragment impl
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
     }
-    // cannot override if final, needed for my Fragment wrappers
+    
+    /**
+     * Modification by @author fredgrott changed from 
+     * final to non-final as certain Fragment constructs need to 
+     * overrride this method when extending org.holoeverywhere.app.Fragment.
+     * 
+     * 
+     */
     @Override
-    public View onCreateView(android.view.LayoutInflater inflater,
+    public  View onCreateView(android.view.LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
         return prepareDecorView(onCreateView(getLayoutInflater(),
                 container, savedInstanceState));
