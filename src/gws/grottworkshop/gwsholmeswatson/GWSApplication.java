@@ -112,6 +112,8 @@ public class GWSApplication extends Application {
             mExecutorService = Executors.newFixedThreadPool(CORE_POOL_SIZE, sThreadFactory);
         }
         return mExecutorService;
+        
+        
     }
 	
     /**
@@ -363,6 +365,10 @@ public class GWSApplication extends Application {
 	public void clearCaches() {
 		//clears mCache of all bitmaps that are not displayed.
 		mCache.trimMemory();
+	}
+	
+	public BitmapLruCache getBitmapCache() {
+		return mCache;
 	}
 	
 	/**
