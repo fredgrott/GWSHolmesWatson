@@ -18,14 +18,22 @@ import org.apache.commons.io.IOUtils;
 /**
  * AbstracTwoLevelCache using LruCache  and DiskLruCache. 
  * 
+ * LruCache parameters tocreate are:
+ * final int maxSize
+ * 
+ * DIskLruCache paramateres to create are:
+ * 
+ * File directory, int appVersion, int valueCount, long maxSize
+ * 
+ * 
  * 
  * @author fredgrott
  *
  * 
  */
-public  class AbstractTwoLevelCache<String, V> {
+public  class AbstractTwoLevelCache<V> {
 	
-	private final LruCache<String, V> mMemCache;
+	private final LruCache<V> mMemCache;
 	private final DiskLruCache mDiskCache;
 	private final Converter<V> mConverter;
 	
