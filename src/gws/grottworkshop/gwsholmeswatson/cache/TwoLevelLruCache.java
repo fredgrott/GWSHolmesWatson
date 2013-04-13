@@ -44,7 +44,7 @@ import android.support.v4.util.LruCache;
  *
  * @param <V>
  */
-public class TwoLevelLruCache<V> {
+public class TwoLevelLruCache<K,V> {
 
 	private static final int INDEX_VALUE = 0; // allow only one value per entry
 
