@@ -3,6 +3,9 @@ package gws.grottworkshop.gwsholmeswatson.cache;
 import java.io.File;
 import java.io.IOException;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 public class ImageCache extends TwoLevelLruCache<String, byte[]> {
 
 	public ImageCache(
@@ -16,5 +19,12 @@ public class ImageCache extends TwoLevelLruCache<String, byte[]> {
 		// TODO Auto-generated constructor stub
 	}
 
+	public synchronized Bitmap getBitmap(String elementKey) {
+        byte[] imageData = super.get(elementKey);
+        if (imageData == null) {
+            return null;
+        }
+        return BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+    }
 	
 }

@@ -250,6 +250,9 @@ Apache License 2.0
 ## Gesture ImageView
 [Gesture ImageView-JasonPolites]('https://github.com/jasonpolites/gesture-imageview')
 
+## HttpResponseCache
+[HttpResponseCache-Craig]('https://github.com/candrews/HttpResponseCache')
+
 
 # Credits
 

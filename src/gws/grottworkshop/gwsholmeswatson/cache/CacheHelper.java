@@ -1,7 +1,6 @@
 package gws.grottworkshop.gwsholmeswatson.cache;
 
-import java.io.File;
-import java.io.FilenameFilter;
+
 
 public class CacheHelper {
 

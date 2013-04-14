@@ -28,6 +28,7 @@ import com.jakewharton.DiskLruCache;
 import com.jakewharton.DiskLruCache.Editor;
 import com.jakewharton.DiskLruCache.Snapshot;
 
+
 import android.support.v4.util.LruCache;
 
 /**
@@ -51,6 +52,9 @@ public class TwoLevelLruCache<K,V> {
     private final LruCache<String, V> mMemCache;
     private final DiskLruCache mDiskCache;
     private final Converter<V> mConverter;
+    
+    
+
 
     /**
      * Constructor for TwoLevelLruCache. Use this constructor if only the first
@@ -138,7 +142,17 @@ public class TwoLevelLruCache<K,V> {
         };
         mDiskCache = DiskLruCache.open(directory, appVersion, 1, maxSizeDisk);
     }
-
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * Returns the value for {@code key} if it exists in the cache or can be
      * created by {@code #create(String)}.
@@ -146,7 +160,6 @@ public class TwoLevelLruCache<K,V> {
      * @param key
      * @return value
      */
-    @SuppressWarnings("unchecked")
     public final V get(String key) {
         V value = mMemCache.get(key);
         if (mDiskCache != null && value == null) {

@@ -42,7 +42,8 @@ public class GWSScreens {
         return (int) (dip * displayMetrics.density + 0.5f);
     }
 
-    public static Drawable scaleDrawable(Context context, int drawableResourceId, int width,
+    @SuppressWarnings("deprecation")
+	public static Drawable scaleDrawable(Context context, int drawableResourceId, int width,
             int height) {
         Bitmap sourceBitmap = BitmapFactory.decodeResource(context.getResources(),
                 drawableResourceId);

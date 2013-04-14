@@ -329,7 +329,8 @@ public class Platform {
           && args.length == 1
           && (args[0] == null || args[0] instanceof List)) {
         // TODO: use OpenSSL's algorithm which uses both lists
-        List<?> serverProtocols = (List) args[0];
+        @SuppressWarnings({ "rawtypes", "unused" })
+		List<?> serverProtocols = (List) args[0];
         this.selected = protocols.get(0);
         return selected;
       } else if (methodName.equals("protocolSelected") && args.length == 1) {

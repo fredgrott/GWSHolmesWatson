@@ -279,12 +279,11 @@ public final class HttpResponseCache extends ResponseCache {
     RawHeaders varyHeaders =
         httpEngine.getRequestHeaders().getHeaders().getAll(response.getVaryFields());
     Entry entry = new Entry(uri, varyHeaders, httpConnection);
-    DiskLruCache.Snapshot snapshot = (conditionalCacheHit instanceof EntryCacheResponse)
-        ? ((EntryCacheResponse) conditionalCacheHit).snapshot
-        : ((EntrySecureCacheResponse) conditionalCacheHit).snapshot;
     DiskLruCache.Editor editor = null;
     try {
-      editor = snapshot.edit(); // returns null if snapshot is not current
+      editor = ((conditionalCacheHit instanceof EntryCacheResponse)
+        ? ((EntryCacheResponse) conditionalCacheHit).snapshot
+        : ((EntrySecureCacheResponse) conditionalCacheHit).snapshot).edit(); // returns null if snapshot is not current
       if (editor != null) {
         entry.writeTo(editor);
         editor.commit();

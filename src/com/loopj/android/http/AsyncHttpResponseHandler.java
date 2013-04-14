@@ -18,6 +18,7 @@
 
 package com.loopj.android.http;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -30,9 +31,7 @@ import org.apache.http.client.HttpResponseException;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.util.EntityUtils;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
+
 
 /**
  * Used to intercept and handle the responses from requests made using 
@@ -69,6 +68,7 @@ import android.os.Message;
  * });
  * </pre>
  */
+@SuppressLint({ "UseValueOf", "HandlerLeak" })
 public class AsyncHttpResponseHandler {
     protected static final int SUCCESS_MESSAGE = 0;
     protected static final int FAILURE_MESSAGE = 1;
