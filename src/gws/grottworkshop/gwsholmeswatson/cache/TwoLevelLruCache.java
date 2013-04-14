@@ -528,5 +528,14 @@ public class TwoLevelLruCache<K,V> {
         /** Converts o to bytes written to the specified stream. */
         void toStream(T o, OutputStream bytes) throws IOException;
     }
+    
+    public synchronized boolean containsKey(Object key) {
+    	V mString = this.get(key.toString());
+    	if(mString != null){
+    		return true;
+    	}
+    	
+        return false;
+    }
 
 }
