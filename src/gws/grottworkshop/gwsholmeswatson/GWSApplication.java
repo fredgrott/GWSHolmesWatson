@@ -17,6 +17,12 @@ import org.holoeverywhere.app.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.android.LogcatAppender;
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.FileAppender;
+
 
 
 import uk.co.senab.bitmapcache.BitmapLruCache;
@@ -60,21 +66,31 @@ public class GWSApplication extends Application {
 	/** The context. */
 	private static Context context;
 	
+	/** The m executor service. */
 	private ExecutorService mExecutorService;
 	
 	/** The m low memory listeners. */
 	private ArrayList<WeakReference<OnLowMemoryListener>> mLowMemoryListeners;
 	
+	/** The gwslog. */
 	private Logger GWSLOG = LoggerFactory.getLogger(GWSApplication.class);
 	
+	/** The is landscape. */
 	public static boolean isLandscape;
 	
+	/** The m cache. */
 	private BitmapLruCache mCache;
+	
+	/** The i cache. */
 	public static ImageCache iCache;
 	
+	/** The m converter. */
 	private Converter<byte[]> mConverter;
 	
+	/** The max mem size. */
 	public static int maxMemSize;
+	
+	/** The max disk size. */
 	public static long maxDiskSize;
 	
 	
@@ -107,8 +123,10 @@ public class GWSApplication extends Application {
         return null;
     }
 
+	/** The Constant CORE_POOL_SIZE. */
 	private static final int CORE_POOL_SIZE = 5;
 
+    /** The Constant sThreadFactory. */
     private static final ThreadFactory sThreadFactory = new ThreadFactory() {
         private final AtomicInteger mCount = new AtomicInteger(1);
 
@@ -249,6 +267,7 @@ public class GWSApplication extends Application {
 	/**
 	 * Gets the application info.
 	 *
+	 * @param packageName the package name
 	 * @return the application info
 	 * @see android.content.ContextWrapper#getApplicationInfo()
 	 */
@@ -329,7 +348,7 @@ public class GWSApplication extends Application {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		GWSApplication.context = getApplicationContext();
-		
+		configureLogbackDirectly();
 		GWSLOG.info("GWSApplicaiton class created");
 		setCachePrep();
 		setCaches();
@@ -351,6 +370,11 @@ public class GWSApplication extends Application {
 		super.onTerminate();
 	}
 	
+	/**
+	 * Gets the app name.
+	 *
+	 * @return the app name
+	 */
 	public String getAppName() {
 		final PackageManager pm = getApplicationContext().getPackageManager();
 		ApplicationInfo ai;
@@ -363,6 +387,11 @@ public class GWSApplication extends Application {
 		return applicationName;
 	}
 	
+	/**
+	 * Gets the app version.
+	 *
+	 * @return the app version
+	 */
 	public String getAppVersion() {
 		PackageInfo pInfo;
 		String version;
@@ -378,6 +407,9 @@ public class GWSApplication extends Application {
 		return version;
 	}
 	
+	/**
+	 * Sets the cache prep.
+	 */
 	public void setCachePrep() {
 		maxMemSize = 3072000;
 		maxDiskSize= 10240000L;
@@ -426,10 +458,20 @@ public class GWSApplication extends Application {
 		
 	}
 	
+	/**
+	 * Gets the bitmap cache.
+	 *
+	 * @return the bitmap cache
+	 */
 	public BitmapLruCache getBitmapCache() {
 		return mCache;
 	}
 	
+	/**
+	 * Gets the image cache.
+	 *
+	 * @return the image cache
+	 */
 	public static ImageCache getImageCache(){
 		return iCache;
 	}
@@ -453,7 +495,44 @@ public class GWSApplication extends Application {
 		
 	}
 	
-	
+	/**
+	 * Configure logback directly.
+	 */
+	private void configureLogbackDirectly() {
+	    // reset the default context (which may already have been initialized)
+	    // since we want to reconfigure it
+	    LoggerContext lc = (LoggerContext)LoggerFactory.getILoggerFactory();
+	    lc.reset();
+
+	    // setup FileAppender
+	    PatternLayoutEncoder encoder1 = new PatternLayoutEncoder();
+	    encoder1.setContext(lc);
+	    encoder1.setPattern("%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n");
+	    encoder1.start();
+
+	    FileAppender<ILoggingEvent> fileAppender = new FileAppender<ILoggingEvent>();
+	    fileAppender.setContext(lc);
+	    fileAppender.setFile(this.getFileStreamPath("app.log").getAbsolutePath());
+	    fileAppender.setEncoder(encoder1);
+	    fileAppender.start();
+
+	    // setup LogcatAppender
+	    PatternLayoutEncoder encoder2 = new PatternLayoutEncoder();
+	    encoder2.setContext(lc);
+	    encoder2.setPattern("[%thread] %msg%n");
+	    encoder2.start();
+
+	    LogcatAppender logcatAppender = new LogcatAppender();
+	    logcatAppender.setContext(lc);
+	    logcatAppender.setEncoder(encoder2);
+	    logcatAppender.start();
+
+	    // add the newly created appenders to the root logger;
+	    // qualify Logger to disambiguate from org.slf4j.Logger
+	    ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+	    root.addAppender(fileAppender);
+	    root.addAppender(logcatAppender);
+	  }
 
 
 }
