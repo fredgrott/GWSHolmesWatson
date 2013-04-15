@@ -1,6 +1,7 @@
 package gws.grottworkshop.gwsholmeswatson.view;
 
 import gws.grottworkshop.gwsholmeswatson.GWSHolmesWatson;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -12,26 +13,49 @@ import android.view.Gravity;
 import android.widget.ProgressBar;
 import android.widget.ViewSwitcher;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RemoteImageView.
+ */
 public class RemoteImageView extends ViewSwitcher {
+	
+	/** The Constant DEFAULT_ERROR_DRAWABLE_RES_ID. */
 	public static final int DEFAULT_ERROR_DRAWABLE_RES_ID = android.R.drawable.ic_dialog_alert;
 
+    /** The Constant ATTR_AUTO_LOAD. */
     private static final String ATTR_AUTO_LOAD = "autoLoad";
+    
+    /** The Constant ATTR_IMAGE_URL. */
     private static final String ATTR_IMAGE_URL = "imageUrl";
+    
+    /** The Constant ATTR_ERROR_DRAWABLE. */
     private static final String ATTR_ERROR_DRAWABLE = "errorDrawable";
 
+    /** The Constant ANDROID_VIEW_ATTRS. */
     private static final int[] ANDROID_VIEW_ATTRS = { android.R.attr.indeterminateDrawable };
+    
+    /** The Constant ATTR_INDET_DRAWABLE. */
     private static final int ATTR_INDET_DRAWABLE = 0;
 
-    private String imageUrl;
+    /** The image url. */
+    private  String imageUrl;
 
-    private boolean autoLoad, isLoaded;
+    /** The is loaded. */
+    private  boolean autoLoad, isLoaded;
 
+    /** The loading spinner. */
     private ProgressBar loadingSpinner;
-    private GWSGestureCacheableImageView imageView;
+    
+    /** The image view. */
+    private  GWSGestureCacheableImageView imageView;
 
-    private Drawable progressDrawable, errorDrawable;
+    /** The error drawable. */
+    private  Drawable progressDrawable, errorDrawable;
 
+    /** The image loader. */
     private RemoteImageLoader imageLoader;
+    
+    /** The shared image loader. */
     private static RemoteImageLoader sharedImageLoader;
 
     /**
@@ -47,13 +71,12 @@ public class RemoteImageView extends ViewSwitcher {
     }
 
     /**
-     * @param context
-     *            the view's current context
-     * @param imageUrl
-     *            the URL of the image to download and show
-     * @param autoLoad
-     *            Whether the download should start immediately after creating the view. If set to
-     *            false, use {@link #loadImage()} to manually trigger the image download.
+     * Instantiates a new remote image view.
+     *
+     * @param context the view's current context
+     * @param imageUrl the URL of the image to download and show
+     * @param autoLoad Whether the download should start immediately after creating the view. If set to
+     * false, use {@link #loadImage()} to manually trigger the image download.
      */
     public RemoteImageView(Context context, String imageUrl, boolean autoLoad) {
         super(context);
@@ -61,18 +84,15 @@ public class RemoteImageView extends ViewSwitcher {
     }
 
     /**
-     * @param context
-     *            the view's current context
-     * @param imageUrl
-     *            the URL of the image to download and show
-     * @param progressDrawable
-     *            the drawable to be used for the {@link ProgressBar} which is displayed while the
-     *            image is loading
-     * @param errorDrawable
-     *            the drawable to be used if a download error occurs
-     * @param autoLoad
-     *            Whether the download should start immediately after creating the view. If set to
-     *            false, use {@link #loadImage()} to manually trigger the image download.
+     * Instantiates a new remote image view.
+     *
+     * @param context the view's current context
+     * @param imageUrl the URL of the image to download and show
+     * @param progressDrawable the drawable to be used for the {@link ProgressBar} which is displayed while the
+     * image is loading
+     * @param errorDrawable the drawable to be used if a download error occurs
+     * @param autoLoad Whether the download should start immediately after creating the view. If set to
+     * false, use {@link #loadImage()} to manually trigger the image download.
      */
     public RemoteImageView(Context context, String imageUrl, Drawable progressDrawable,
             Drawable errorDrawable, boolean autoLoad) {
@@ -80,6 +100,12 @@ public class RemoteImageView extends ViewSwitcher {
         initialize(context, imageUrl, progressDrawable, errorDrawable, autoLoad, null);
     }
 
+    /**
+     * Instantiates a new remote image view.
+     *
+     * @param context the context
+     * @param attributes the attributes
+     */
     public RemoteImageView(Context context, AttributeSet attributes) {
         super(context, attributes);
 
@@ -107,6 +133,16 @@ public class RemoteImageView extends ViewSwitcher {
         initialize(context, imageUrl, progressDrawable, errorDrawable, autoLoad, attributes);
     }
 
+    /**
+     * Initialize.
+     *
+     * @param context the context
+     * @param imageUrl the image url
+     * @param progressDrawable the progress drawable
+     * @param errorDrawable the error drawable
+     * @param autoLoad the auto load
+     * @param attributes the attributes
+     */
     private void initialize(Context context, String imageUrl, Drawable progressDrawable,
             Drawable errorDrawable, boolean autoLoad, AttributeSet attributes) {
         this.imageUrl = imageUrl;
@@ -138,6 +174,11 @@ public class RemoteImageView extends ViewSwitcher {
         }
     }
 
+    /**
+     * Adds the loading spinner view.
+     *
+     * @param context the context
+     */
     private void addLoadingSpinnerView(Context context) {
         loadingSpinner = new ProgressBar(context);
         loadingSpinner.setIndeterminate(true);
@@ -157,6 +198,12 @@ public class RemoteImageView extends ViewSwitcher {
         addView(loadingSpinner, 0, lp);
     }
 
+    /**
+     * Adds the image view.
+     *
+     * @param context the context
+     * @param attributes the attributes
+     */
     private void addImageView(Context context, AttributeSet attributes) {
         if (attributes != null) {
             // pass along any view attribtues inflated from XML to the image view
@@ -181,10 +228,20 @@ public class RemoteImageView extends ViewSwitcher {
         imageLoader.loadImage(imageUrl, imageView, new DefaultImageLoaderHandler());
     }
 
+    /**
+     * Checks if is loaded.
+     *
+     * @return true, if is loaded
+     */
     public boolean isLoaded() {
         return isLoaded;
     }
 
+    /**
+     * Sets the image url.
+     *
+     * @param imageUrl the new image url
+     */
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
@@ -201,6 +258,11 @@ public class RemoteImageView extends ViewSwitcher {
         setDisplayedChild(1);
     }
 
+    /**
+     * Reset.
+     *
+     * @see android.widget.ViewSwitcher#reset()
+     */
     @Override
     public void reset() {
         super.reset();
@@ -208,12 +270,27 @@ public class RemoteImageView extends ViewSwitcher {
         this.setDisplayedChild(0);
     }
 
-    private class DefaultImageLoaderHandler extends RemoteImageLoaderHandler {
+    /**
+     * The Class DefaultImageLoaderHandler.
+     */
+    @SuppressLint("HandlerLeak")
+	private  class DefaultImageLoaderHandler extends RemoteImageLoaderHandler {
 
-        public DefaultImageLoaderHandler() {
+        /**
+         * Instantiates a new default image loader handler.
+         */
+        public  DefaultImageLoaderHandler() {
             super(imageView, imageUrl, errorDrawable);
         }
 
+        /**
+         * Handle image loaded.
+         *
+         * @param bitmap the bitmap
+         * @param msg the msg
+         * @return true, if successful
+         * @see gws.grottworkshop.gwsholmeswatson.view.RemoteImageLoaderHandler#handleImageLoaded(android.graphics.Bitmap, android.os.Message)
+         */
         @Override
         protected boolean handleImageLoaded(Bitmap bitmap, Message msg) {
             boolean wasUpdated = super.handleImageLoaded(bitmap, msg);

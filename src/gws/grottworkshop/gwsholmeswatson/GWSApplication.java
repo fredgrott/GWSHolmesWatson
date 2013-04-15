@@ -1,6 +1,10 @@
 package gws.grottworkshop.gwsholmeswatson;
 
+import gws.grottworkshop.gwsholmeswatson.cache.ImageCache;
+import gws.grottworkshop.gwsholmeswatson.cache.TwoLevelLruCache.Converter;
+
 import java.io.File;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +17,8 @@ import org.holoeverywhere.app.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+
 import uk.co.senab.bitmapcache.BitmapLruCache;
 
 
@@ -24,6 +30,8 @@ import android.content.Intent;
 
 
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.os.Environment;
@@ -62,6 +70,13 @@ public class GWSApplication extends Application {
 	public static boolean isLandscape;
 	
 	private BitmapLruCache mCache;
+	public static ImageCache iCache;
+	
+	private Converter<byte[]> mConverter;
+	
+	public static int maxMemSize;
+	public static long maxDiskSize;
+	
 	
 	/**
      * Return the class of the home Activity. The home Activity is the main
@@ -316,6 +331,7 @@ public class GWSApplication extends Application {
 		GWSApplication.context = getApplicationContext();
 		
 		GWSLOG.info("GWSApplicaiton class created");
+		setCachePrep();
 		setCaches();
 		setID();
 		
@@ -335,20 +351,55 @@ public class GWSApplication extends Application {
 		super.onTerminate();
 	}
 	
+	public String getAppName() {
+		final PackageManager pm = getApplicationContext().getPackageManager();
+		ApplicationInfo ai;
+		try {
+		    ai = pm.getApplicationInfo( this.getPackageName(), 0);
+		} catch (final NameNotFoundException e) {
+		    ai = null;
+		}
+		final String applicationName = (String) (ai != null ? pm.getApplicationLabel(ai) : "(unknown)");
+		return applicationName;
+	}
+	
+	public String getAppVersion() {
+		PackageInfo pInfo;
+		String version;
+		try {
+			pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+			version= pInfo.versionName;
+		} catch (NameNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			version = "namenotfound";
+		}
+		
+		return version;
+	}
+	
+	public void setCachePrep() {
+		maxMemSize = 6556566;
+		maxDiskSize= 656666L;
+	}
+	
 	/**
 	 * Sets the caches, normally we overrride this 
 	 * method.
 	 */
 	public void setCaches(){
 		File cacheLocation;
+		File cacheMeLocation;
 
         // If we have external storage use it for the disk cache. Otherwise we use
         // the cache dir
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             cacheLocation = new File(
-                    Environment.getExternalStorageDirectory() + "/Android-BitmapCache");
+                    Environment.getExternalStorageDirectory() + "/" + getAppName() + "-Android-BitmapCache");
+            cacheMeLocation= new File(Environment.getExternalStorageDirectory() + "/" + getAppName() + "-GWSCache");
         } else {
-            cacheLocation = new File(getFilesDir() + "/Android-BitmapCache");
+            cacheLocation = new File(getFilesDir() + "/" + getAppName() + "-Android-BitmapCache");
+            cacheMeLocation = new File(getFilesDir() + "/" + getAppName() + "-GWSCache");
         }
         cacheLocation.mkdirs();
 
@@ -357,6 +408,13 @@ public class GWSApplication extends Application {
         builder.setDiskCacheEnabled(true).setDiskCacheLocation(cacheLocation);
 
         mCache = builder.build();
+        
+        try {
+			iCache = new ImageCache(cacheMeLocation, Integer.parseInt(getAppVersion()), maxMemSize, maxDiskSize, mConverter);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -365,10 +423,15 @@ public class GWSApplication extends Application {
 	public void clearCaches() {
 		//clears mCache of all bitmaps that are not displayed.
 		mCache.trimMemory();
+		
 	}
 	
 	public BitmapLruCache getBitmapCache() {
 		return mCache;
+	}
+	
+	public static ImageCache getImageCache(){
+		return iCache;
 	}
 	
 	/**

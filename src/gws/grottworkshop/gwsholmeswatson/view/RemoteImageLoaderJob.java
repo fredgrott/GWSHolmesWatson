@@ -1,6 +1,7 @@
 package gws.grottworkshop.gwsholmeswatson.view;
 
 
+import gws.grottworkshop.gwsholmeswatson.GWSApplication;
 import gws.grottworkshop.gwsholmeswatson.cache.ImageCache;
 
 import java.io.BufferedInputStream;
@@ -18,6 +19,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.os.SystemClock;
 
+// TODO: Auto-generated Javadoc
 /**
  * Modified from paginatedgallery touse logback as logger 
  * and a modified imagecache.
@@ -27,15 +29,33 @@ import android.os.SystemClock;
  */
 public class RemoteImageLoaderJob implements Runnable {
 
+	/** The gwslog. */
 	private Logger GWSLOG = LoggerFactory.getLogger(RemoteImageLoaderJob.class);
 
+    /** The Constant DEFAULT_RETRY_HANDLER_SLEEP_TIME. */
     private static final int DEFAULT_RETRY_HANDLER_SLEEP_TIME = 1000;
 
+    /** The image url. */
     private String imageUrl;
+    
+    /** The handler. */
     private RemoteImageLoaderHandler handler;
-    private ImageCache imageCache;
+    
+    /** The image cache. */
+    private ImageCache imageCache = GWSApplication.getImageCache();
+    
+    /** The default buffer size. */
     private int numRetries, defaultBufferSize;
 
+    /**
+     * Instantiates a new remote image loader job.
+     *
+     * @param imageUrl the image url
+     * @param handler the handler
+     * @param imageCache the image cache
+     * @param numRetries the num retries
+     * @param defaultBufferSize the default buffer size
+     */
     public RemoteImageLoaderJob(String imageUrl, RemoteImageLoaderHandler handler, ImageCache imageCache,
             int numRetries, int defaultBufferSize) {
         this.imageUrl = imageUrl;
@@ -66,6 +86,11 @@ public class RemoteImageLoaderJob implements Runnable {
 
     // TODO: we could probably improve performance by re-using connections instead of closing them
     // after each and every download
+    /**
+     * Download image.
+     *
+     * @return the bitmap
+     */
     protected Bitmap downloadImage() {
         int timesTried = 1;
 
@@ -94,6 +119,12 @@ public class RemoteImageLoaderJob implements Runnable {
         return null;
     }
 
+    /**
+     * Retrieve image data.
+     *
+     * @return the byte[]
+     * @throws IOException Signals that an I/O exception has occurred.
+     */
     protected byte[] retrieveImageData() throws java.io.IOException {
         URL url = new URL(imageUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -126,6 +157,12 @@ public class RemoteImageLoaderJob implements Runnable {
         return imageData;
     }
 
+    /**
+     * Notify image loaded.
+     *
+     * @param url the url
+     * @param bitmap the bitmap
+     */
     protected void notifyImageLoaded(String url, Bitmap bitmap) {
         Message message = new Message();
         message.what = RemoteImageLoaderHandler.HANDLER_MESSAGE_ID;
