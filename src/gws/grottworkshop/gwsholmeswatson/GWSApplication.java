@@ -379,8 +379,8 @@ public class GWSApplication extends Application {
 	}
 	
 	public void setCachePrep() {
-		maxMemSize = 6556566;
-		maxDiskSize= 656666L;
+		maxMemSize = 3072000;
+		maxDiskSize= 10240000L;
 	}
 	
 	/**
